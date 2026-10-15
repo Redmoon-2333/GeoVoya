@@ -1,0 +1,45 @@
+# Only publish the application and its documentation.
+/*
+!/.gitignore
+!/README.md
+!/platform/
+
+# Local dependencies, output, and personal records.
+node_modules/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+dist/
+.runtime/
+test-results/
+playwright-report/
+*.log
+*.sqlite*
+*.db
+.env*
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store
+Thumbs.db
+
+# Local tools, editor settings, plans, and reference materials.
+.claude/
+.codex/
+.agents/
+.omc/
+.opencode/
+.reasonix/
+.trae/
+.idea/
+.vscode/
+CLAUDE.md
+AGENTS.md
+plans/
+drafts/
+*.pdf
+*.docx
+*.pptx

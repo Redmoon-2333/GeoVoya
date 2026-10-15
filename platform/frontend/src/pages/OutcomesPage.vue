@@ -1,0 +1,86 @@
+<script setup lang="ts">
+import { computed, reactive, ref } from 'vue'
+import { Archive, ArrowRight, Check, Download, FilePlus2, FileText, History, Paperclip, Save, Upload } from 'lucide-vue-next'
+import { useFieldworkStore } from '../stores/fieldwork'
+import { formatDate, request } from '../api'
+import { notify, reportError } from '../notice'
+import { useUnsaved } from '../useUnsaved'
+import type { Artifact, ArtifactFields, Attachment } from '../types'
+
+const store = useFieldworkStore()
+const selectedId = ref('')
+const saving = ref(false)
+const uploading = ref(false)
+const detailsLoading = ref(false)
+const detailsError = ref('')
+const fileInput = ref<HTMLInputElement>()
+const revisions = ref<Artifact[]>([])
+const attachments = ref<Attachment[]>([])
+const form = reactive<ArtifactFields>({ theme_id: 'cryptomeria', title: '', summary: '', content: '', evidence_ids: [], status: 'draft' })
+const baseline = ref(JSON.stringify(form))
+const dirty = computed(() => JSON.stringify(form) !== baseline.value)
+const confirmLeave = useUnsaved(dirty)
+const current = computed(() => store.artifacts.find((item) => item.id === selectedId.value))
+const cited = computed(() => store.board.filter((item) => item.theme_id === form.theme_id))
+const removedCitations = computed(() => form.evidence_ids.filter((id) => !cited.value.some((item) => item.id === id)))
+
+async function loadDetails(id: string) {
+  detailsLoading.value = true
+  detailsError.value = ''
+  try {
+    const result = await Promise.all([request<Artifact[]>(`/artifacts/${id}/versions`), request<Attachment[]>(`/artifacts/${id}/attachments`)])
+    if (selectedId.value === id) [revisions.value, attachments.value] = result
+  } catch (cause) { if (selectedId.value === id) detailsError.value = cause instanceof Error ? cause.message : '附加资料读取失败。' }
+  finally { if (selectedId.value === id) detailsLoading.value = false }
+}
+function load(item?: Artifact) {
+  selectedId.value = item?.id || ''
+  Object.assign(form, { theme_id: item?.theme_id || 'cryptomeria', title: item?.title || '', summary: item?.summary || '', content: item?.content || '', evidence_ids: [...(item?.evidence_ids || [])], status: item?.status || 'draft' })
+  baseline.value = JSON.stringify(form)
+  revisions.value = []; attachments.value = []; detailsError.value = ''; detailsLoading.value = false
+  if (item) void loadDetails(item.id)
+}
+function select(item?: Artifact) { if (confirmLeave()) load(item) }
+if (store.artifacts[0]) load(store.artifacts[0])
+async function save(status: 'draft' | 'archived') {
+  saving.value = true
+  const values = { ...form, evidence_ids: [...form.evidence_ids], status }
+  try {
+    const result = await store.saveArtifact(values, selectedId.value || undefined)
+    selectedId.value = result.id
+    form.status = status
+    baseline.value = JSON.stringify(values)
+    await loadDetails(result.id)
+    notify(status === 'archived' ? '个人成果已归档，修订版本已保留。' : '成果草稿已保存。')
+  } catch (cause) { reportError(cause) }
+  finally { saving.value = false }
+}
+async function upload(event: Event) {
+  const input = event.target as HTMLInputElement
+  const file = input.files?.[0]
+  if (!file || !selectedId.value) return
+  if (file.size > 10 * 1024 * 1024) { notify('附件不能超过 10 MB。', true); input.value = ''; return }
+  uploading.value = true
+  const id = selectedId.value
+  try {
+    const body = new FormData(); body.append('file', file)
+    await request(`/artifacts/${id}/attachments`, { method: 'POST', body })
+    if (selectedId.value === id) await loadDetails(id)
+    notify('附件已保存在本机。')
+  } catch (cause) { reportError(cause) }
+  finally { uploading.value = false; input.value = '' }
+}
+</script>
+
+<template>
+  <div class="page-heading"><div><span class="eyebrow">RESEARCH OUTCOMES</span><h1>成果交流</h1><p>让你的研究问题、证据与解释彼此呼应。</p></div><span class="status-tag"><FileText :size="14" />个人成果空间</span></div>
+  <div class="scope-notice"><span class="context-dot" /><p>当前为个人档案。班级共享、同伴互评与教师评价尚未接入。</p></div>
+  <div class="outcomes-layout"><aside class="outcome-list"><div class="section-heading"><h2>我的成果</h2><button class="icon-button" title="新建成果" aria-label="新建成果" :disabled="saving || uploading" @click="select()"><FilePlus2 :size="20" /></button></div><button v-for="item in store.artifacts" :key="item.id" class="outcome-list-item" :class="{ active: item.id === selectedId }" :disabled="saving || uploading" @click="select(item)"><FileText :size="19" /><span><strong>{{ item.title }}</strong><small>{{ item.status === 'archived' ? '个人归档' : '草稿' }} · v{{ item.version }} · {{ formatDate(item.updated_at) }}</small></span></button><div v-if="!store.artifacts.length" class="list-empty"><FileText :size="27" /><p>还没有保存的成果</p></div><button class="button subtle full" :disabled="saving || uploading" @click="select()"><FilePlus2 :size="16" />新建研究成果</button></aside>
+    <section class="outcome-editor"><div class="section-heading"><div><span class="eyebrow">MY RESEARCH</span><h2>{{ current ? '完善研究成果' : '新的研究成果' }}</h2></div><span v-if="dirty" class="status-tag amber">未保存</span><span v-else-if="current" class="status-tag green"><Check :size="13" />v{{ current.version }} 已保存</span></div>
+      <form @submit.prevent="save('draft')"><fieldset :disabled="saving"><label class="field-label" for="outcome-title">成果标题<span class="required-mark"> *</span></label><input id="outcome-title" v-model="form.title" required maxlength="120" placeholder="为你的研究拟一个明确的标题" /><label class="field-label" for="outcome-summary">核心观点</label><textarea id="outcome-summary" v-model="form.summary" rows="2" maxlength="500" placeholder="你目前的主要判断是什么？" /><label class="field-label" for="outcome-content">研究正文</label><textarea id="outcome-content" v-model="form.content" class="outcome-content" rows="12" maxlength="30000" placeholder="研究问题&#10;&#10;观察与证据&#10;&#10;解释与论证&#10;&#10;局限及进一步调查" />
+        <div class="section-heading evidence-heading"><h3>关联论证板证据</h3><RouterLink to="/archive?tab=board" class="text-link small">回看论证板<ArrowRight :size="14" /></RouterLink></div><div v-if="!cited.length" class="inline-empty"><FileText :size="20" /><span>尚无论证板证据。草稿可先保存，归档前需关联证据。</span></div><label v-for="item in cited" :key="item.id" class="evidence-choice"><input v-model="form.evidence_ids" type="checkbox" :value="item.id" /><span><strong>{{ store.resource(item.favorite_id).title }}</strong><small>{{ item.observed }}</small></span></label><p v-if="form.evidence_ids.some((id) => !cited.some((item) => item.id === id))" class="validation-note">部分引用已移出论证板。再次保存前，请先在工作台恢复该证据。</p>
+        <label v-for="id in removedCitations" :key="id" class="evidence-choice"><input v-model="form.evidence_ids" type="checkbox" :value="id" /><span><strong>{{ store.resource(id)?.title || id }}</strong><small>已移出论证板，可取消引用或回工作台恢复。</small></span></label>
+      </fieldset><div class="form-actions outcome-actions"><button type="submit" class="button secondary" :disabled="saving || !form.title.trim()"><Save :size="16" />保存草稿</button><button type="button" class="button primary" :disabled="saving || !form.title.trim() || !form.content.trim() || !form.evidence_ids.length" @click="save('archived')"><Archive :size="16" />保存并归档</button><a v-if="current" :href="`/api/v1/artifacts/${current.id}/export`" class="button subtle" download><Download :size="16" />导出已保存版本</a></div><p class="save-caption">{{ current ? `上次保存 ${formatDate(current.updated_at)} · ${current.status === 'archived' ? '已归档' : '草稿'}` : '尚未保存' }}</p></form>
+      <div v-if="current" class="outcome-extra"><section><div class="section-heading"><h3><Paperclip :size="17" />成果附件</h3><button class="text-link" :disabled="uploading" @click="fileInput?.click()"><Upload :size="15" />{{ uploading ? '上传中…' : '添加附件' }}</button><input ref="fileInput" type="file" hidden accept=".pdf,.png,.jpg,.jpeg,.webp,.md,.txt,.docx,.pptx" @change="upload" /></div><p v-if="detailsLoading" class="muted small">正在读取附件和修订记录…</p><p v-if="detailsError" class="validation-note">{{ detailsError }}<button class="text-link" @click="loadDetails(selectedId)">重试</button></p><p v-if="!attachments.length && !detailsLoading" class="muted small">暂无附件 · 单个文件不超过 10 MB</p><a v-for="item in attachments" :key="item.id" :href="`/api/v1/attachments/${item.id}`" class="attachment-row" download><Paperclip :size="15" /><span>{{ item.filename }}</span><small>{{ Math.max(1, Math.round(item.size / 1024)) }} KB</small><Download :size="15" /></a></section><section><div class="section-heading"><h3><History :size="17" />修订记录</h3><span class="muted small">{{ revisions.length }} 个已保存版本</span></div><details v-for="item in revisions" :key="item.version" class="revision-row"><summary><strong>v{{ item.version }}</strong><span>{{ item.title }}</span><time>{{ formatDate(item.updated_at) }}</time></summary><div class="revision-content"><p>{{ item.summary }}</p><p>{{ item.content || '该版本尚未填写正文。' }}</p><span class="muted small">{{ item.status === 'archived' ? '个人归档' : '草稿' }} · {{ item.evidence_ids.length }} 条证据引用</span></div></details></section></div>
+    </section></div>
+</template>
