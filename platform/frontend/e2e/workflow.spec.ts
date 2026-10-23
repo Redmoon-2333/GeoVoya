@@ -84,16 +84,21 @@ test('observation to archived outcome persists with real feedback and exports', 
   expect(errors).toEqual([])
 })
 
-test('unconfirmed capabilities stay empty and the guide stays explicitly scripted', async ({ page }) => {
+test('local panorama, sandbox, and knowledge guide stay within the verified scope', async ({ page }) => {
   await page.goto('/explore')
   await expect(page.locator('.photo-viewer img')).toBeVisible()
   await expect(page.locator('.guide-panel')).toHaveCount(0)
-  await page.getByRole('button', { name: /打开小天课程提示/ }).click()
-  await expect(page.locator('.guide-panel')).toContainText('固定脚本')
-  await page.getByRole('button', { name: '收起小天', exact: true }).click()
-  await page.getByRole('tab', { name: /地形沙盘/ }).click()
-  await expect(page.locator('.spatial-empty')).toContainText('地形沙盘待接入')
-  await expect(page.locator('canvas')).toHaveCount(0)
+  await page.getByRole('button', { name: /打开小目导学/ }).click()
+  await expect(page.locator('.guide-panel')).toContainText('本地知识包')
+  await page.getByRole('button', { name: '垂直地带性？', exact: false }).click()
+  await expect(page.locator('.guide-chat-message.guide')).toContainText('山地中')
+  await page.getByRole('button', { name: '收起小目', exact: true }).click()
+  await page.getByRole('tab', { name: /本地全景/ }).click()
+  await expect(page.locator('.local-panorama')).toBeVisible()
+  await expect(page.locator('.panorama-hotspot-button')).toHaveCount(3)
+  await page.getByRole('tab', { name: /带谱沙盘/ }).click()
+  await expect(page.locator('.sandbox-panel')).toContainText('植被垂直带谱沙盘')
+  await expect(page.locator('.zone-map-band')).toHaveCount(4)
   await page.getByRole('tab', { name: /海拔剖面/ }).click()
   await expect(page.locator('.spatial-empty')).toContainText('海拔剖面待接入')
   await navigate(page, '专题探究')
@@ -108,6 +113,8 @@ test('unconfirmed capabilities stay empty and the guide stays explicitly scripte
     expect(node.panorama_url).toBeNull()
   }
   expect(data.catalog.capabilities.generative_ai).toBe(false)
+  expect(data.catalog.capabilities.local_panorama).toBe(true)
+  expect(data.catalog.capabilities.sandbox_2d).toBe(true)
 })
 
 test('failed save preserves input and unsaved navigation can be cancelled', async ({ page }) => {
@@ -144,7 +151,7 @@ test('six views render with real images and no horizontal overflow', async ({ pa
     await page.evaluate(() => window.scrollTo(0, 0))
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
     if (testInfo.project.name === 'mobile') {
-      const launcher = await page.getByRole('button', { name: '打开小天课程提示', exact: true }).boundingBox()
+      const launcher = await page.getByRole('button', { name: '打开小目导学', exact: true }).boundingBox()
       const header = await page.locator('.app-header').boundingBox()
       expect(launcher).toBeTruthy()
       expect(header).toBeTruthy()

@@ -12,6 +12,8 @@
     "prepare:assets": "node ../tools/prepare-assets.mjs"
   },
   "dependencies": {
+    "@photo-sphere-viewer/core": "^5.15.1",
+    "@photo-sphere-viewer/markers-plugin": "^5.15.1",
     "lucide-vue-next": "^0.468.0",
     "pinia": "^3.0.0",
     "vue": "^3.5.0",
