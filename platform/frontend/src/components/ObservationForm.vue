@@ -12,6 +12,7 @@ const fact = ref('')
 const evidence = ref('')
 const question = ref('')
 const saving = ref(false)
+const saveError = ref('')
 const baseline = ref('')
 const saved = computed(() => store.observations.find((item) => item.node_id === props.nodeId))
 const snapshot = computed(() => JSON.stringify([fact.value, evidence.value, question.value]))
@@ -27,12 +28,14 @@ watch(dirty, (value) => emit('dirty', value))
 
 async function save() {
   saving.value = true
+  saveError.value = ''
   const values = { node_id: props.nodeId, fact: fact.value, evidence: evidence.value, question: question.value }
   try {
     await store.saveObservation(values)
     if (props.nodeId === values.node_id) baseline.value = JSON.stringify([values.fact, values.evidence, values.question])
     notify('观察记录已保存，可继续补充。')
   } catch (cause) {
+    saveError.value = cause instanceof Error ? cause.message : '保存未完成，请重试。'
     reportError(cause)
   } finally {
     saving.value = false
@@ -52,6 +55,7 @@ async function save() {
     <label class="field-label" for="observation-question">03 <span>我的疑问与初步解释</span></label>
     <textarea id="observation-question" v-model="question" rows="3" maxlength="4000" placeholder="哪些还不能确定？想进一步比较什么？" />
     </fieldset>
+    <p v-if="saveError" class="form-error" role="alert">{{ saveError }} 输入已保留，可再次保存。</p>
     <button class="button primary full" type="submit" :disabled="saving || !fact.trim()"><Save :size="16" />{{ saving ? '保存中…' : '保存观察' }}</button>
     <p class="save-caption"><CheckCircle2 :size="14" /><span>{{ saved ? `上次保存 ${formatDate(saved.updated_at)}` : '保存后可在档案馆中回看' }}</span></p>
   </form>

@@ -37,3 +37,19 @@ for (const [filename, name] of photos) {
     .toFile(path.join(destination, `${name}-thumb.webp`))
 }
 console.log(`Prepared ${photos.length} photographs (${(await readdir(destination)).length} files). Originals unchanged.`)
+
+const panoramaSource = process.env.GEOVR_PANORAMA_DIR
+  ? path.resolve(process.env.GEOVR_PANORAMA_DIR)
+  : path.resolve(source, '../../天目山全景图片-202608/CAM_001')
+const panoramas = ['CAM_20260818103558_0030_D.JPG', 'CAM_20260818103703_0032_D.JPG', 'CAM_20260818103812_0034_D.JPG']
+for (const [index, filename] of panoramas.entries()) {
+  const input = path.join(panoramaSource, filename)
+  try { await access(input) } catch {
+    console.log(`Panorama ${index + 1} unavailable. Set GEOVR_PANORAMA_DIR to the authorized CAM_001 folder.`)
+    continue
+  }
+  const metadata = await sharp(input).metadata()
+  if (metadata.width !== metadata.height * 2) throw new Error(`${filename} is not a full 2:1 equirectangular panorama.`)
+  await sharp(input).resize({ width: 4096, withoutEnlargement: true }).webp({ quality: 84 }).toFile(path.join(destination, `panorama-${index + 1}.webp`))
+}
+console.log('Panorama previews prepared when available. Original photos and previews stay outside Git.')

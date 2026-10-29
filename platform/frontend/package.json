@@ -9,6 +9,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test:e2e": "playwright test",
+    "test:frontend": "playwright test --config playwright.frontend.config.ts",
     "prepare:assets": "node ../tools/prepare-assets.mjs"
   },
   "dependencies": {

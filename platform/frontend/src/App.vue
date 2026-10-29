@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   ArrowRight, BookOpen, Check, CheckCircle2, ChevronRight, Compass, FileText,
@@ -9,11 +9,25 @@ import {
 import { useFieldworkStore } from './stores/fieldwork'
 import { notice } from './notice'
 import GuidePanel from './components/GuidePanel.vue'
+import { demoMode } from './demo'
 
 const store = useFieldworkStore()
 const route = useRoute()
 const router = useRouter()
 const sidebarOpen = ref(false)
+const sidebar = ref<HTMLElement>(), menuButton = ref<HTMLButtonElement>()
+watch(sidebarOpen, async open => { await nextTick(); if (open) requestAnimationFrame(() => { if (sidebarOpen.value) sidebar.value?.querySelector<HTMLAnchorElement>('a')?.focus() }); else menuButton.value?.focus() })
+function trapNavigation(event: KeyboardEvent) {
+  if (!sidebarOpen.value) return
+  if (event.key === 'Escape') { event.preventDefault(); sidebarOpen.value = false; return }
+  if (event.key !== 'Tab') return
+  const elements = sidebar.value?.querySelectorAll<HTMLElement>('a, button')
+  if (!elements?.length) return
+  const first = elements[0], last = elements[elements.length - 1]
+  if (!sidebar.value?.contains(document.activeElement)) { event.preventDefault(); first?.focus(); return }
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+  if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+}
 const navigation = [
   { path: '/', title: '项目总览', icon: Compass },
   { path: '/explore', title: '空间探索', icon: Map },
@@ -30,14 +44,15 @@ function isActiveStep(href: string) {
   const tab = ['workbench', 'board'].includes(String(route.query.tab)) ? String(route.query.tab) : 'collection'
   return tab === (target.query.tab || 'collection')
 }
-onMounted(() => store.initialize())
+onMounted(() => { store.initialize(); document.addEventListener('keydown', trapNavigation) })
+onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
 </script>
 
 <template>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
   <header class="app-header">
     <div class="brand-wrap">
-      <button class="icon-button mobile-menu" title="打开研学导航" aria-label="打开研学导航" @click="sidebarOpen = !sidebarOpen">
+      <button ref="menuButton" class="icon-button mobile-menu" title="打开研学导航" aria-label="打开研学导航" :aria-expanded="sidebarOpen" aria-controls="study-navigation" @click="sidebarOpen = !sidebarOpen">
         <Menu :size="21" />
       </button>
       <RouterLink to="/" class="brand" aria-label="天目寻境，项目总览">
@@ -50,19 +65,21 @@ onMounted(() => store.initialize())
         <component :is="item.icon" :size="16" /><span>{{ item.title }}</span>
       </RouterLink>
     </nav>
-    <div class="header-account"><span class="local-mode"><i />本地试学</span><div class="guide-header-slot"><GuidePanel /></div><span class="account-icon" title="当前为个人研学档案"><UserRound :size="19" /></span></div>
+    <div class="header-account"><RouterLink to="/review" class="review-entry" aria-label="地理组对接清单"><FileText :size="16"/><span>地理组对接</span></RouterLink><div class="guide-header-slot"><GuidePanel /></div><span class="account-icon" :title="demoMode ? '前端演示 · 浏览器独立档案' : '本地服务 · 个人研学档案'"><UserRound :size="19" /></span></div>
   </header>
 
   <div v-if="store.loading" class="app-status"><RotateCw class="spin" :size="28" /><h1>正在打开研学档案</h1></div>
   <div v-else-if="store.error" class="app-status" role="alert">
     <Mountain :size="40" /><h1>暂时无法打开档案</h1><p>{{ store.error }}</p>
     <button class="button primary" @click="store.initialize()"><RotateCw :size="16" />重新连接</button>
+    <a href="/?demo=1" class="button secondary">进入前端演示</a>
   </div>
   <div v-else class="app-layout">
     <div v-if="sidebarOpen" class="sidebar-backdrop" @click="sidebarOpen = false" />
-    <aside class="study-sidebar" :class="{ open: sidebarOpen }">
+    <aside id="study-navigation" ref="sidebar" class="study-sidebar" :class="{ open: sidebarOpen }" :role="sidebarOpen ? 'dialog' : undefined" :aria-modal="sidebarOpen || undefined" aria-label="研学导航">
       <div class="sidebar-heading"><span>我的研学旅程</span><button class="icon-button mobile-menu" aria-label="收起研学导航" @click="sidebarOpen = false"><PanelLeftClose :size="18" /></button></div>
-      <div class="course-label"><span class="tiny-label">FIELD STUDY / 01</span><h2>观察自然<br />建立自己的解释</h2></div>
+      <div class="course-label"><span class="tiny-label">FIELD STUDY / 01</span><h2>西天目山<br />自然地理考察</h2><span class="sidebar-course-tag">高中地理 · 个人研学</span></div>
+      <nav class="mobile-section-nav" aria-label="页面导航"><RouterLink v-for="item in navigation" :key="item.path" :to="item.path" :class="{ active: route.path === item.path }" @click="sidebarOpen = false"><component :is="item.icon" :size="17"/>{{ item.title }}<ChevronRight :size="14"/></RouterLink></nav>
       <nav class="journey-nav" aria-label="研学流程">
         <RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href"
           :class="{ active: isActiveStep(step.href), complete: step.done }"
@@ -79,13 +96,14 @@ onMounted(() => store.initialize())
       <RouterLink v-if="currentStep" :to="currentStep.href" class="sidebar-next" @click="sidebarOpen = false">
         <span>下一步</span><strong>{{ currentStep.title }}<ArrowRight :size="16" /></strong>
       </RouterLink>
-      <div class="sidebar-bottom"><ShieldCheck :size="18" /><div><strong>个人研学档案</strong><p>记录保存在本机<br />当前浏览器独立访问</p></div></div>
+      <div class="sidebar-utilities"><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink><RouterLink to="/review" @click="sidebarOpen = false"><FileText :size="17"/>地理组对接清单<ChevronRight :size="14"/></RouterLink></div><div class="sidebar-bottom"><ShieldCheck :size="18" /><div><strong>{{ demoMode ? '前端演示档案' : '个人研学档案' }}</strong><p>{{ demoMode ? '演示记录保存在浏览器' : '记录保存在本机服务' }}<br />当前浏览器独立访问</p></div></div>
     </aside>
 
-    <main id="main-content" class="main-content">
-      <div class="context-bar"><span><span class="context-dot" />西天目山自然地理考察</span><span>高中地理<span class="context-separator">/</span>个人试学</span></div>
+    <main id="main-content" class="main-content" :inert="sidebarOpen">
+      <div class="context-bar"><span><span class="context-dot" />西天目山<span class="context-separator">/</span>{{ route.meta.title }}</span><span>{{ demoMode ? '前端演示 · 浏览器保存' : '本地服务 · 个人试学' }}</span></div>
+      <div v-if="demoMode" class="demo-notice"><span>交流演示版</span><p>可体验并保存完整学习流程；课程草案与空间数据待地理组核验。</p><RouterLink to="/review">查看待确认内容<ChevronRight :size="14"/></RouterLink></div>
       <RouterView />
-      <footer class="page-footer"><span><Leaf :size="13" />天目·寻境</span><span>让观察留下依据，让解释可以追溯。</span><span class="prototype-label">本地原型 0.1</span></footer>
+      <footer class="page-footer"><span><Leaf :size="13" />天目·寻境</span><span>观察有依据，解释可追溯。</span><span class="prototype-label">课程交流版 0.2</span></footer>
     </main>
   </div>
   <Transition name="toast">

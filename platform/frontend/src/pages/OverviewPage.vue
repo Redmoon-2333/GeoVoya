@@ -1,46 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ArrowRight, Check, Compass, FileStack, FolderOpen, NotebookPen, Sprout } from 'lucide-vue-next'
+import { ArrowRight, Check, Compass, FileStack, FolderOpen, NotebookPen, Sprout, Map, BookOpen, Mountain, Leaf, CloudSun, Trees } from 'lucide-vue-next'
 import { useFieldworkStore } from '../stores/fieldwork'
 import { formatDate } from '../api'
-
 const store = useFieldworkStore()
-const next = computed(() => store.feedback?.steps.find((step) => !step.done))
+const next = computed(() => store.feedback?.steps.find(step => !step.done))
+const icons = [Trees, Sprout, Leaf, CloudSun]
 const stats = computed(() => [
   { title: '观察记录', value: store.observations.length, icon: NotebookPen, href: '/explore' },
   { title: '发现收藏', value: store.favorites.length, icon: FolderOpen, href: '/archive' },
   { title: '论证板证据', value: store.board.length, icon: FileStack, href: '/archive?tab=board' },
 ])
 </script>
-
 <template>
-  <section class="overview-banner">
-    <img src="/media/forest-floor.webp" alt="团队拍摄的天目山林下植被、树干与地表" />
-    <div class="overview-banner-content">
-      <span class="overline">西天目山 · 自然地理考察</span>
-      <h1>走进森林，寻找证据</h1>
-      <p>柳杉衰退、群落变化与自然环境之间，<br class="desktop-break" />有怎样值得追问的联系？</p>
-      <RouterLink :to="`/explore?node=${store.lastNode}`" class="button light"><Compass :size="17" />{{ store.observations.length ? '继续我的考察' : '开始实景观察' }}<ArrowRight :size="17" /></RouterLink>
-    </div>
-    <span class="photo-credit">团队实拍 · 普通照片</span>
-  </section>
-  <div class="overview-title"><div><span class="eyebrow">MY FIELD NOTES</span><h2>我的研学工作台</h2></div><span class="muted small">个人试学 · 本机保存</span></div>
-  <div class="stats-row">
-    <RouterLink v-for="stat in stats" :key="stat.title" :to="stat.href" class="stat-item"><span class="stat-icon"><component :is="stat.icon" :size="22" /></span><div><strong>{{ stat.value }}<small> 条</small></strong><span>{{ stat.title }}</span></div><ArrowRight :size="17" /></RouterLink>
-  </div>
-  <section class="section-band">
-    <div class="section-heading"><div><span class="eyebrow">STUDY PATH</span><h2>从观察走向解释</h2></div><RouterLink to="/feedback" class="text-link">查看学习记录<ArrowRight :size="15" /></RouterLink></div>
-    <div class="path-grid"><RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href" class="path-step" :class="{ done: step.done }"><span class="path-index"><Check v-if="step.done" :size="17" /><template v-else>{{ String(index + 1).padStart(2, '0') }}</template></span><h3>{{ step.title }}</h3><p>{{ step.description }}</p><span class="path-state">{{ step.done ? '已有记录' : '待记录' }}<ArrowRight :size="14" /></span></RouterLink></div>
-    <div class="next-action"><Compass :size="22" /><div><strong>{{ next ? `下一步 · ${next.title}` : '回看并完善你的解释' }}</strong><p>{{ next?.description || '检查证据与结论的关系，记录解释的变化。' }}</p></div><RouterLink :to="next?.href || '/feedback'" class="button secondary">前往<ArrowRight :size="16" /></RouterLink></div>
-  </section>
-  <section class="section-band">
-    <div class="section-heading"><div><span class="eyebrow">RESEARCH TOPICS</span><h2>发现一个值得研究的问题</h2></div><span class="status-tag">1 个专题样板</span></div>
-    <div class="topic-grid">
-      <article v-for="(theme, index) in store.catalog?.themes" :key="theme.id" class="topic-card" :class="{ 'topic-pending': theme.status !== 'prototype' }">
-        <span class="topic-number">0{{ index + 1 }}</span><Sprout :size="23" /><h3>{{ theme.title }}</h3><p>{{ theme.subtitle }}</p>
-        <RouterLink v-if="theme.status === 'prototype'" to="/inquiry" class="text-link">进入专题<ArrowRight :size="15" /></RouterLink><span v-else class="muted small">课程资料待补充</span>
-      </article>
-    </div>
-  </section>
-  <section v-if="store.observations.length" class="section-band recent-notes"><div class="section-heading"><h2>最近的观察</h2><RouterLink to="/archive" class="text-link">全部档案<ArrowRight :size="15" /></RouterLink></div><RouterLink v-for="item in store.observations.slice(0, 2)" :key="item.id" :to="`/explore?node=${item.node_id}`" class="note-row"><NotebookPen :size="20" /><div><h3>{{ store.node(item.node_id).title }}</h3><p>{{ item.fact }}</p></div><time>{{ formatDate(item.updated_at) }}</time><ArrowRight :size="16" /></RouterLink></section>
+  <div class="page-heading overview-heading"><div><span class="eyebrow">TIANMU MOUNTAIN / FIELD STUDY</span><h1>我的研学项目</h1></div><RouterLink to="/library" class="text-link"><BookOpen :size="16" />课程资料库<ArrowRight :size="15" /></RouterLink></div>
+  <section class="expedition-hero"><img :src="'/media/forest-floor.webp'" alt="团队拍摄的西天目山林下、倒木与地表植被" /><div class="hero-copy"><span class="hero-kicker"><span class="live-dot" />西天目山 · 自然地理考察</span><h2>走进森林，<br/>读懂山地的层次。</h2><p>自然环境与人类活动，<br/>如何共同塑造山地植被格局？</p><RouterLink to="/explore?view=terrain" class="button light"><Compass :size="18" />{{ store.observations.length ? '继续我的考察' : '开始垂直样带考察' }}<ArrowRight :size="17" /></RouterLink></div><div class="hero-index"><span>01 / 共同考察</span><strong>垂直地带性</strong><small>团队实拍 · 普通照片</small></div></section>
+  <div class="overview-two-column"><section class="common-mission"><span class="eyebrow">THE SHARED EXPEDITION</span><h2>先完成共同考察</h2><p>比较不同海拔的植被特征，重建带谱，再用多源资料解释差异。</p><div class="mission-links"><RouterLink to="/explore?view=terrain"><Map :size="20" /><span><strong>数字沙盘</strong><small>从整山尺度定位观察带</small></span><ArrowRight :size="17" /></RouterLink><RouterLink to="/explore?view=panorama"><Compass :size="20" /><span><strong>全景观察</strong><small>环视真实影像，留下发现</small></span><ArrowRight :size="17" /></RouterLink><RouterLink to="/explore?view=profile"><Mountain :size="20" /><span><strong>带谱重建</strong><small>排序、检查并修正解释</small></span><ArrowRight :size="17" /></RouterLink></div></section><section class="field-notebook"><div class="section-heading"><span class="eyebrow">MY FIELD NOTEBOOK</span><NotebookPen :size="20" /></div><h2>让每个发现，都有迹可循</h2><div class="notebook-stats"><RouterLink v-for="stat in stats" :key="stat.title" :to="stat.href"><strong>{{ stat.value.toString().padStart(2, '0') }}</strong><span>{{ stat.title }}</span></RouterLink></div><RouterLink :to="next?.href || '/feedback'" class="notebook-next"><span><small>下一步</small><strong>{{ next?.title || '回看我的解释' }}</strong></span><ArrowRight :size="19" /></RouterLink></section></div>
+  <section class="section-band"><div class="section-heading"><div><span class="eyebrow">CHOOSE A QUESTION</span><h2>四个专题，一条探究主线</h2></div><span class="muted small">共同考察后，选择一个问题深入研究</span></div><div class="research-topic-grid"><RouterLink v-for="(theme, index) in store.catalog?.themes" :key="theme.id" :to="`/inquiry?theme=${theme.id}`" class="research-topic"><div class="topic-art" :class="`topic-art-${theme.id}`"><component :is="icons[index]" :size="48" :stroke-width="1"/><span>0{{ index + 1 }}</span></div><div class="topic-body"><span class="eyebrow">{{ theme.status === 'prototype' ? '柳杉专题样板' : '课程草案 · 待地理组核验' }}</span><h3>{{ theme.title }}<ArrowRight :size="17" /></h3><p>{{ theme.subtitle }}</p></div></RouterLink></div></section>
+  <section class="section-band"><div class="section-heading"><div><span class="eyebrow">FROM OBSERVATION TO EXPLANATION</span><h2>我的考察足迹</h2></div><RouterLink to="/feedback" class="text-link">回看学习过程<ArrowRight :size="15" /></RouterLink></div><div class="path-grid"><RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href" class="path-step" :class="{ done: step.done }"><span class="path-index"><Check v-if="step.done" :size="17"/><template v-else>{{ String(index + 1).padStart(2, '0') }}</template></span><h3>{{ step.title }}</h3><p>{{ step.description }}</p><span class="path-state">{{ step.done ? '已有记录' : '待记录' }}<ArrowRight :size="14"/></span></RouterLink></div></section>
+  <section v-if="store.observations.length" class="section-band"><div class="section-heading"><h2>最近的观察</h2><RouterLink to="/archive" class="text-link">全部档案<ArrowRight :size="15"/></RouterLink></div><RouterLink v-for="item in store.observations.slice(0, 2)" :key="item.id" :to="`/explore?node=${item.node_id}`" class="note-row"><NotebookPen :size="20"/><div><h3>{{ store.node(item.node_id).title }}</h3><p>{{ item.fact }}</p></div><time>{{ formatDate(item.updated_at) }}</time><ArrowRight :size="16"/></RouterLink></section>
 </template>

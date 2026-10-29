@@ -8,15 +8,18 @@ const webPort = Number(process.env.GEOVR_TEST_WEB_PORT || 5174)
 
 export default defineConfig({
   testDir: './e2e',
+  outputDir: 'test-results/service',
+  testIgnore: '**/demo.spec.ts',
   fullyParallel: false,
   workers: 1,
   timeout: 60000,
   expect: { timeout: 10000 },
-  reporter: [['list'], ['html', { open: 'never' }]],
+  reporter: [['list'], ['html', { outputFolder: 'playwright-report/service', open: 'never' }]],
   use: {
     baseURL: `http://127.0.0.1:${webPort}`,
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
+    channel: process.env.PLAYWRIGHT_CHANNEL,
   },
   projects: [
     { name: 'desktop', use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } } },
@@ -32,7 +35,7 @@ export default defineConfig({
       timeout: 30000,
     },
     {
-      command: `pnpm dev --port ${webPort} --strictPort`,
+      command: `node node_modules/vite/bin/vite.js --host 127.0.0.1 --port ${webPort} --strictPort`,
       cwd: root,
       env: { GEOVR_API_URL: `http://127.0.0.1:${apiPort}` },
       url: `http://127.0.0.1:${webPort}`,

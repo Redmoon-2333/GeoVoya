@@ -1,4 +1,7 @@
+import { demoMode, demoRequest } from './demo'
+
 export async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
+  if (demoMode) return await demoRequest(path, options) as T
   const headers = new Headers(options.headers)
   if (options.body && !(options.body instanceof FormData)) {
     headers.set('Content-Type', 'application/json')

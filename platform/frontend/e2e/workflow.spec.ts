@@ -2,7 +2,8 @@ import { test, expect, type Page } from '@playwright/test'
 import { readFile } from 'node:fs/promises'
 
 async function navigate(page: Page, title: string) {
-  await page.locator('.main-nav').getByRole('link', { name: title, exact: true }).click()
+  if (await page.locator('.main-nav').isVisible()) await page.locator('.main-nav').getByRole('link', { name: title, exact: true }).click()
+  else { await page.getByRole('button', { name: '打开研学导航', exact: true }).click(); await page.locator('.mobile-section-nav').getByRole('link', { name: title, exact: true }).click() }
 }
 
 test('observation to archived outcome persists with real feedback and exports', async ({ page }) => {
@@ -84,21 +85,21 @@ test('observation to archived outcome persists with real feedback and exports', 
   expect(errors).toEqual([])
 })
 
-test('unconfirmed capabilities stay empty and the guide stays explicitly scripted', async ({ page }) => {
+test('spatial teaching diagrams stay labelled and the guide stays explicitly scripted', async ({ page }) => {
   await page.goto('/explore')
   await expect(page.locator('.photo-viewer img')).toBeVisible()
   await expect(page.locator('.guide-panel')).toHaveCount(0)
   await page.getByRole('button', { name: /打开小天课程提示/ }).click()
   await expect(page.locator('.guide-panel')).toContainText('固定脚本')
   await page.getByRole('button', { name: '收起小天', exact: true }).click()
-  await page.getByRole('tab', { name: /地形沙盘/ }).click()
-  await expect(page.locator('.spatial-empty')).toContainText('地形沙盘待接入')
+  await page.getByRole('tab', { name: /数字沙盘/ }).click()
+  await expect(page.locator('.spatial-heading')).toContainText('教学示意 · 非实测地形')
   await expect(page.locator('canvas')).toHaveCount(0)
-  await page.getByRole('tab', { name: /海拔剖面/ }).click()
-  await expect(page.locator('.spatial-empty')).toContainText('海拔剖面待接入')
+  await page.getByRole('tab', { name: /山地剖面/ }).click()
+  await expect(page.locator('.mountain-canvas')).toHaveClass(/profile/)
   await navigate(page, '专题探究')
   await page.getByRole('tab', { name: /毛竹扩张/ }).click()
-  await expect(page.locator('.theme-empty')).toContainText('专题课程资料待补充')
+  await expect(page.locator('.draft-inquiry')).toContainText('课程讨论草案')
   await expect(page.locator('.resource-card')).toHaveCount(0)
   const data = await (await page.request.get('/api/v1/bootstrap')).json()
   for (const node of data.catalog.nodes) {
@@ -121,6 +122,9 @@ test('failed save preserves input and unsaved navigation can be cancelled', asyn
   await page.locator('.node-strip button').nth(1).click()
   await expect(page.locator('#observation-fact')).toHaveValue('测试输入：连接失败后不能丢失。')
   await expect(page.locator('.photo-toolbar h2')).toHaveText('林下与地表')
+  page.once('dialog', (dialog) => dialog.dismiss())
+  await page.getByRole('tab', { name: '数字沙盘', exact: true }).click()
+  await expect(page.locator('#observation-fact')).toHaveValue('测试输入：连接失败后不能丢失。')
   await page.unroute('**/api/v1/observations/**')
   await page.getByRole('button', { name: '保存观察', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('观察记录已保存')
@@ -134,7 +138,7 @@ test('six views render with real images and no horizontal overflow', async ({ pa
   const views = [['/', 'overview'], ['/explore', 'explore'], ['/inquiry', 'inquiry'], ['/archive', 'archive'], ['/outcomes', 'outcomes'], ['/feedback', 'feedback']]
   for (const [url, name] of views) {
     await page.goto(url!)
-    await expect(page.locator('.main-content h1')).toBeVisible()
+    await expect(page.locator('.main-content h1:visible')).toBeVisible()
     const images = page.locator('.main-content img:visible')
     for (const image of await images.all()) {
       await image.scrollIntoViewIfNeeded()
