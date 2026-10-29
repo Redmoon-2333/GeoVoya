@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUp, ArrowRight, Check, RotateCcw } from 'lucide-vue-nex
 import { bands, downloadText } from '../curriculum'
 import { localState } from '../localState'
 const props = defineProps<{ mode: 'terrain' | 'profile' }>()
-const selected = ref(0), reveal = ref(false), submitted = ref(false), checked = ref(false)
+const selected = ref(0), reveal = ref(false), submitted = ref(false)
 const notes = localState<Record<string, string>>('band-notes', {})
 const order = localState<string[]>('band-order', ['mixed', 'dwarf', 'evergreen', 'deciduous'])
 const attempts = localState<number>('band-attempts', 0)
@@ -18,7 +18,7 @@ function submit() { attempts.value++; submitted.value = true; lastCheck.value = 
 </script>
 
 <template>
-  <div class="spatial-heading"><div><span class="eyebrow">{{ props.mode === 'terrain' ? 'DIGITAL SANDBOX' : 'MOUNTAIN TRANSECT' }}</span><h2>{{ props.mode === 'terrain' ? '沿山地，寻找植被的变化' : '重建你理解的垂直带谱' }}</h2></div><span class="status-tag amber">教学示意 · 非实测地形</span></div>
+  <div class="spatial-heading"><div><span class="eyebrow">{{ props.mode === 'terrain' ? 'DIGITAL SANDBOX' : 'MOUNTAIN TRANSECT' }}</span><h2>{{ props.mode === 'terrain' ? '沿山地，寻找植被的变化' : '重建你理解的垂直带谱' }}</h2></div><span class="status-tag amber">植被带示意</span></div>
   <div class="mountain-canvas" :class="{ profile: mode === 'profile' }">
     <svg viewBox="0 0 800 440" role="img" aria-label="四个植被带的海拔分布示意，非真实路线或DEM">
       <defs><linearGradient id="mountain-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#9db5a1"/><stop offset="1" stop-color="#2e6550"/></linearGradient><linearGradient id="sky-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e6efeb"/><stop offset="1" stop-color="#f8faf6"/></linearGradient></defs>
@@ -34,10 +34,10 @@ function submit() { attempts.value++; submitted.value = true; lastCheck.value = 
     <span class="map-legend"><i />示意样带 <i class="outlined" />可选观察带</span>
   </div>
   <div class="band-detail"><span class="status-tag green">观察带 {{ selected + 1 }}</span><div><h3>{{ reveal ? bands[selected]?.title : '先观察，再判断植被类型' }}</h3><p>{{ bands[selected]?.range }} · {{ bands[selected]?.note }}</p></div><button class="text-link" :aria-expanded="reveal" @click="reveal = !reveal">{{ reveal ? '隐藏参考名称' : '查看参考名称' }}</button></div>
-  <p class="source-line">依据《天目山土壤与气候的垂直地带性》§1。700–850 m 按过渡区理解；边界并非骤变。节点仅表示教学海拔带，不对应现有照片的采集位置。</p>
-  <label class="field-label" :for="`band-note-${mode}`">我的带谱笔记 · 浏览器自动保存</label><textarea :id="`band-note-${mode}`" v-model="notes[bands[selected]!.id]" rows="3" maxlength="2000" placeholder="我依据哪些特征判断？还需要哪些观察？" />
+  <p class="source-line">来源：《天目山土壤与气候的垂直地带性》§1。700–850 m 为过渡区，带谱边界并非骤变。</p>
+  <label class="field-label" :for="`band-note-${mode}`">我的带谱笔记</label><textarea :id="`band-note-${mode}`" v-model="notes[bands[selected]!.id]" rows="3" maxlength="2000" placeholder="我依据哪些特征判断？还需要哪些观察？" />
   <div class="form-actions"><button class="button secondary" @click="downloadText('垂直带谱笔记.md', '# 我的垂直带谱笔记\n\n'+bands.map(b => `## ${b.range}\n${notes[b.id] || '尚无记录'}`).join('\n\n'))">导出带谱笔记</button><RouterLink to="/explore?view=panorama" class="text-link">去全景中观察<ArrowRight :size="16" /></RouterLink></div>
   <section class="band-challenge"><div class="section-heading"><div><span class="eyebrow">REBUILD THE VEGETATION BELTS</span><h2>共同任务 · 带谱重建</h2></div><span class="muted small">已提交 {{ attempts }} 次</span></div><p>按海拔由低到高排列；用上下按钮调整，键盘也可操作。</p><ol class="sort-list"><li v-for="(id, i) in order" :key="id"><span>{{ i + 1 }}</span><strong>{{ bands.find(b => b.id === id)?.title }}</strong><button class="icon-button" :disabled="i === 0" :aria-label="`上移${bands.find(b => b.id === id)?.title}`" @click="move(i, -1)"><ArrowUp :size="17" /></button><button class="icon-button" :disabled="i === 3" :aria-label="`下移${bands.find(b => b.id === id)?.title}`" @click="move(i, 1)"><ArrowDown :size="17" /></button></li></ol><div class="form-actions"><button class="button primary" @click="submit"><Check :size="16" />检查带谱</button><button class="button secondary" @click="order = ['mixed', 'dwarf', 'evergreen', 'deciduous']; submitted = false; lastCheck = null"><RotateCcw :size="16" />重新排列</button></div><div v-if="submitted" class="inline-feedback" :class="{ success: correct }" role="status">{{ correct ? '排列正确。继续思考：水热条件和坡向如何影响这个分布？' : '还有位置需要调整。先找出低海拔的常绿阔叶林与高海拔的落叶矮林，再判断中间两带。' }}</div>
-    <details class="source-details"><summary>继续追问：带谱边界一定是清晰的线吗？</summary><p>植被分布具有过渡性；海拔还与坡向、母质及人类活动共同影响生境。课堂中的四带划分是概括，不能直接替代具体样地调查。</p><label class="check-row"><input v-model="checked" type="checkbox"/>我能区分教学带谱与真实样地的差异</label></details>
+    <details class="source-details"><summary>继续追问：带谱边界一定是清晰的线吗？</summary><p>植被分布具有过渡性；海拔还与坡向、母质及人类活动共同影响生境。课堂中的四带划分是概括，不能直接替代具体样地调查。</p></details>
   </section>
 </template>

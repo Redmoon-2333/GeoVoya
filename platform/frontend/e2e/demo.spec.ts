@@ -7,15 +7,16 @@ async function navigate(page: Page, title: string) {
   else { await page.getByRole('button', { name: '打开研学导航', exact: true }).click(); await page.locator('.mobile-section-nav').getByRole('link', { name: title, exact: true }).click() }
 }
 
-test('eight views render without a backend, with usable images and narrow layouts', async ({ page }, info) => {
+test('seven views render without a backend, with usable images and narrow layouts', async ({ page }, info) => {
   const errors: string[] = [], api: string[] = []
   page.on('pageerror', e => errors.push(e.message))
   page.on('request', r => { if (r.url().includes('/api/v1')) api.push(r.url()) })
   const widths = info.project.name.startsWith('mobile') ? [390, 320] : [1440, 1024, 768]
   for (const width of widths) {
     await page.setViewportSize({ width, height: 1000 })
-    for (const url of ['/', '/explore', '/inquiry', '/archive', '/outcomes', '/feedback', '/library', '/review']) {
+    for (const url of ['/', '/explore', '/inquiry', '/archive', '/outcomes', '/feedback', '/library']) {
       await visit(page, url)
+      await expect(page.locator('body')).not.toContainText(/地理组|对接|交流演示|前端演示|待接入|课程草案/)
       for (const img of await page.locator('.main-content img:visible').all()) {
         await expect(img).toHaveJSProperty('complete', true)
         expect(await img.evaluate(el => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
@@ -77,7 +78,7 @@ test('demo observation, evidence, outcome, revision, attachment and export survi
 
 test('band reconstruction gives real feedback and preserves notes', async ({ page }, info) => {
   await visit(page, '/explore?view=terrain')
-  await expect(page.locator('.spatial-heading')).toContainText('非实测地形')
+  await expect(page.locator('.spatial-heading')).toContainText('植被带示意')
   await page.getByRole('button', { name: '选择第2海拔带' }).click()
   await page.getByRole('button', { name: '查看参考名称', exact: true }).click()
   await expect(page.locator('.band-detail')).toContainText('常绿—落叶阔叶混交林')
@@ -126,7 +127,7 @@ test('real panorama renders, changes with keyboard and switches source', async (
 test('missing panorama can recover after the asset becomes available', async ({ page }) => {
   await page.route('**/media/panorama-1.webp', route => route.fulfill({ status: 404, body: '' }))
   await visit(page, '/explore?view=panorama')
-  await expect(page.locator('.viewer-message')).toContainText('全景素材未就绪')
+  await expect(page.locator('.viewer-message')).toContainText('全景暂时无法加载')
   await page.unroute('**/media/panorama-1.webp')
   await page.getByRole('button', { name: '重新加载', exact: true }).click()
   await expect(page.locator('.viewer-message')).toHaveCount(0)
@@ -163,14 +164,9 @@ test('library search, guide answers, research drafts and dialog keyboard paths w
   await expect(page.locator('#research-plan')).toHaveValue('收集多期遥感影像和经营记录。')
 })
 
-test('discussion records export and mobile navigation traps focus', async ({ page }, info) => {
-  await visit(page, '/review')
-  await page.locator('#review-nodes').fill('地理组确认全景归属与负责人。')
-  await page.locator('.review-list input[type=checkbox]').first().check()
-  const download = page.waitForEvent('download')
-  await page.getByRole('button', { name: '导出讨论记录', exact: true }).click()
-  expect(await readFile((await (await download).path())!, 'utf8')).toContain('[已讨论] 全景与采集点对应')
-  await page.reload(); await expect(page.locator('#review-nodes')).toHaveValue('地理组确认全景归属与负责人。')
+test('mobile navigation closes with Escape and can open again', async ({ page }, info) => {
+  await visit(page, '/')
+  await expect(page.getByRole('link', { name: /对接|反馈渠道|演示/ })).toHaveCount(0)
   if (info.project.name.startsWith('mobile')) {
     await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
     await expect(page.locator('.study-sidebar')).toHaveClass(/open/)

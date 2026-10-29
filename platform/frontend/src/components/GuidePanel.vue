@@ -15,7 +15,7 @@ function ask(value = input.value) {
   const text = value.trim(); if (!text) return
   const matches = knowledge.map(item => ({ item, score: item.tags.reduce((n, tag) => n + (text.includes(tag) ? 2 : 0), 0) + (text.includes(item.category) ? 1 : 0) })).sort((a, b) => b.score - a.score)
   const item = matches[0]?.score ? matches[0].item : undefined
-  answers.value.push({ question: text, text: item?.text || '当前课程资料没有匹配到这个问题。可以尝试“海拔与带谱”“土壤含水率”或“怎样记录观察”，也可以把问题加入研究计划，请地理组补充资料。', source: item?.source || '' }); input.value = ''
+  answers.value.push({ question: text, text: item?.text || '当前课程资料没有匹配到这个问题。可以尝试“海拔与带谱”“土壤含水率”或“怎样记录观察”，也可以把问题加入研究计划。', source: item?.source || '' }); input.value = ''
   nextTick(() => { questionInput.value?.focus(); questionInput.value?.scrollIntoView({ block: 'nearest' }) })
 }
 const hint = computed(() => {
@@ -33,10 +33,10 @@ const hint = computed(() => {
 <template>
   <button v-if="!open" ref="launcher" class="guide-launcher" title="打开小天课程提示" aria-label="打开小天课程提示" @click="show"><Bot :size="21" /><span>小天</span><span class="guide-launch-label">研学助手</span></button>
   <section v-else class="guide-panel" aria-label="小天课程提示" role="dialog" @keydown.esc.stop="close">
-    <div class="guide-panel-head"><span class="guide-avatar"><Bot :size="24" /></span><div><h2>小天 · 研学助手</h2><p>本地资料问答 / 固定脚本导学</p></div><button class="icon-button" aria-label="收起小天" @click="close"><X :size="19" /></button></div>
+    <div class="guide-panel-head"><span class="guide-avatar"><Bot :size="24" /></span><div><h2>小天 · 研学助手</h2><p>课程资料与观察方法</p></div><button class="icon-button" aria-label="收起小天" @click="close"><X :size="19" /></button></div>
     <div class="guide-message"><Lightbulb :size="20" /><p>{{ hint[0] }}</p></div>
     <p v-if="expanded" class="guide-detail">{{ hint[1] }}</p>
     <button class="button subtle full" @click="expanded = !expanded"><MessageCircle :size="16" />{{ expanded ? '收起方法提示' : '展开方法提示' }}<ChevronDown :size="15" /></button>
-    <div class="guide-suggestions"><button v-for="q in ['海拔与带谱', '土壤含水率', '怎样记录观察']" :key="q" @click="ask(q)">{{ q }}<ArrowRight :size="12"/></button></div><div class="guide-conversation" aria-live="polite"><div v-for="(answer, i) in answers" :key="i" class="guide-answer"><strong>{{ answer.question }}</strong><p>{{ answer.text }}</p><small v-if="answer.source">资料来源：{{ answer.source }}</small></div></div><form class="guide-input" @submit.prevent="ask()"><label for="guide-question">向课程资料提问</label><div><input id="guide-question" ref="questionInput" v-model="input" maxlength="200" placeholder="例如：海拔与植被有什么关系？"/><button type="submit" class="icon-button" aria-label="提交课程问题" :disabled="!input.trim()"><Send :size="18"/></button></div></form><p class="guide-boundary">依据资料关键词返回摘要，尚未接入生成式模型。</p><RouterLink to="/explore" class="text-link" @click="open = false"><Compass :size="16" />回到实景观察<ArrowRight :size="16" /></RouterLink>
+    <div class="guide-suggestions"><button v-for="q in ['海拔与带谱', '土壤含水率', '怎样记录观察']" :key="q" @click="ask(q)">{{ q }}<ArrowRight :size="12"/></button></div><div class="guide-conversation" aria-live="polite"><div v-for="(answer, i) in answers" :key="i" class="guide-answer"><strong>{{ answer.question }}</strong><p>{{ answer.text }}</p><small v-if="answer.source">资料来源：{{ answer.source }}</small></div></div><form class="guide-input" @submit.prevent="ask()"><label for="guide-question">向课程资料提问</label><div><input id="guide-question" ref="questionInput" v-model="input" maxlength="200" placeholder="例如：海拔与植被有什么关系？"/><button type="submit" class="icon-button" aria-label="提交课程问题" :disabled="!input.trim()"><Send :size="18"/></button></div></form><RouterLink to="/explore" class="text-link" @click="open = false"><Compass :size="16" />回到实景观察<ArrowRight :size="16" /></RouterLink>
   </section>
 </template>

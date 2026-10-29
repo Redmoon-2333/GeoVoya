@@ -23,7 +23,7 @@ function feedback(d: DemoData): Bootstrap['feedback'] {
     ['create', '形成成果', d.artifacts.some(a => a.status === 'archived'), '完成带有证据引用的个人成果', '/outcomes'],
   ] as const
   const steps = definitions.map(([id, title, done, description, href]) => ({ id, title, done, description, href }))
-  return { steps, completed_steps: steps.filter(s => s.done).length, counts: { observations: d.observations.length, favorites: d.favorites.length, analyses: d.analyses.length, board: board.length, artifacts: d.artifacts.length }, teacher_status: 'not_connected', dimensions: ['信息搜集与处理', '实践观察', '合作探究', '分析解释', '成果表达'].map((title, i) => ({ title, status: i === 2 ? '待接入课堂' : steps[i]?.done ? '已有过程材料' : '待补充', note: i === 2 ? '个人演示记录不作为合作表现依据' : '仅检查材料是否齐全，科学解释待教师评价' })) }
+  return { steps, completed_steps: steps.filter(s => s.done).length, counts: { observations: d.observations.length, favorites: d.favorites.length, analyses: d.analyses.length, board: board.length, artifacts: d.artifacts.length }, teacher_status: 'not_connected', dimensions: ['信息搜集与处理', '实践观察', '合作探究', '分析解释', '成果表达'].map((title, i) => ({ title, status: i === 2 ? '暂无记录' : steps[i]?.done ? '已有过程材料' : '待补充', note: i === 2 ? '暂无合作记录' : '依据已保存的学习材料' })) }
 }
 function record<T extends { id: string; created_at: string; updated_at: string }>(items: T[], values: object, id: string) {
   const old = items.find(i => i.id === id)
@@ -70,7 +70,7 @@ export async function demoRequest(path: string, options: RequestInit = {}): Prom
       return { title: source.title, filename: source.filename, observed: evidence.observed, meaning: evidence.meaning, missing: evidence.missing }
     })
     d.revisions.unshift({ ...(result as Artifact), artifact_id: (result as Artifact).id, snapshots })
-  } else throw new Error('演示暂不支持此操作。')
+  } else throw new Error('操作未完成，请重试。')
   try { localStorage.setItem(key, JSON.stringify(d)) } catch { throw new Error('浏览器存储空间不足，未保存。请缩小附件或导出已有成果。') }
   return result
 }
@@ -88,6 +88,6 @@ export function handleDemoDownload(event: MouseEvent) {
     const a = d.artifacts.find(a => a.id === parts[4]); if (!a) return
     const revision = d.revisions.find(r => r.artifact_id === a.id && r.version === a.version)
     const snapshots = revision?.snapshots || a.evidence_ids.map(id => { const e = d.analyses.find(e => e.id === id); const r = demoCatalog.resources.find(r => r.id === e?.favorite_id); return { title: r?.title || '', filename: r?.filename || '', observed: e?.observed || '', meaning: e?.meaning || '', missing: e?.missing || '' } })
-    downloadText('天目寻境-成果.md', `# ${a.title}\n\n前端演示 · v${a.version}\n\n${revision?.summary ?? a.summary}\n\n${revision?.content ?? a.content}\n\n## 证据引用\n${snapshots.map(e => `### ${e.title}\n${e.filename}\n${e.observed}\n${e.meaning}\n局限：${e.missing}`).join('\n\n')}`)
-  } else downloadText('天目寻境-过程记录.md', `# 个人研学过程记录\n\n前端演示 · 教师尚未评价\n\n${d.observations.map(o => `## ${demoCatalog.nodes.find(n => n.id === o.node_id)?.title}\n${o.fact}\n${o.evidence}\n${o.question}`).join('\n\n')}\n\n## 我的反思\n${d.reflection?.text || ''}`)
+    downloadText('天目寻境-成果.md', `# ${a.title}\n\n版本 v${a.version}\n\n${revision?.summary ?? a.summary}\n\n${revision?.content ?? a.content}\n\n## 证据引用\n${snapshots.map(e => `### ${e.title}\n${e.filename}\n${e.observed}\n${e.meaning}\n局限：${e.missing}`).join('\n\n')}`)
+  } else downloadText('天目寻境-过程记录.md', `# 个人研学过程记录\n\n\n\n${d.observations.map(o => `## ${demoCatalog.nodes.find(n => n.id === o.node_id)?.title}\n${o.fact}\n${o.evidence}\n${o.question}`).join('\n\n')}\n\n## 我的反思\n${d.reflection?.text || ''}`)
 }

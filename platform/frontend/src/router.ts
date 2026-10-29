@@ -12,7 +12,6 @@ export const router = createRouter({
     { path: '/outcomes', component: () => import('./pages/OutcomesPage.vue'), meta: { title: '成果交流' } },
     { path: '/feedback', component: () => import('./pages/FeedbackPage.vue'), meta: { title: '学习反馈' } },
     { path: '/library', component: () => import('./pages/LibraryPage.vue'), meta: { title: '课程资料库' } },
-    { path: '/review', component: () => import('./pages/ReviewPage.vue'), meta: { title: '地理组对接清单' } },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })

@@ -57,7 +57,7 @@ async function save(onBoard: boolean) {
 </script>
 
 <template>
-  <div class="page-heading"><div><span class="eyebrow">FIELDWORK ARCHIVE</span><h1>科考档案馆</h1><p>从发现到证据，再到有依据的解释。</p></div><RouterLink to="/explore" class="button secondary">继续观察<ArrowRight :size="16" /></RouterLink></div>
+  <div class="page-heading"><div><span class="eyebrow">FIELDWORK ARCHIVE</span><h1>科考档案馆</h1></div><RouterLink to="/explore" class="button secondary">继续观察<ArrowRight :size="16" /></RouterLink></div>
   <div class="archive-tabs tab-bar" role="tablist" aria-label="档案馆分区"><button role="tab" :aria-selected="tab === 'collection'" :class="{ active: tab === 'collection' }" @click="setTab('collection')"><Bookmark :size="18" />发现收藏<span class="count-badge">{{ store.favorites.length }}</span></button><button role="tab" :aria-selected="tab === 'workbench'" :class="{ active: tab === 'workbench' }" @click="setTab('workbench')"><ClipboardList :size="18" />证据工作台</button><button role="tab" :aria-selected="tab === 'board'" :class="{ active: tab === 'board' }" @click="setTab('board')"><FileStack :size="18" />研究论证板<span class="count-badge">{{ store.board.length }}</span></button></div>
   <template v-if="tab === 'collection'">
     <section class="section-band"><div class="section-heading"><h2>我的发现收藏</h2><label class="search-field"><Search :size="17" /><input v-model="search" aria-label="搜索收藏" placeholder="搜索资料名称" /></label></div>

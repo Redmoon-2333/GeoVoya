@@ -31,7 +31,7 @@ function load(index: number) {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
     loading.value = false; draw()
   }
-  image.onerror = () => { loading.value = false; error.value = '全景素材未就绪，请先运行素材准备脚本。' }
+  image.onerror = () => { loading.value = false; error.value = '全景暂时无法加载，请重试或切换影像。' }
   image.src = `/media/panorama-${index + 1}.webp`
 }
 function move(event: PointerEvent) {
@@ -90,5 +90,5 @@ onBeforeUnmount(() => { disposed = true; observer?.disconnect(); if (image) { im
     <div class="panorama-controls"><button class="icon-button" aria-label="缩小全景" @click="zoom(.15)"><Minus :size="18" /></button><button class="icon-button" aria-label="放大全景" @click="zoom(-.15)"><Plus :size="18" /></button><button class="icon-button" aria-label="重置全景视角" @click="yaw = 0; pitch = 0; fov = 1.35; draw()"><RotateCcw :size="18" /></button><button class="icon-button" aria-label="全屏全景" @click="fullscreen"><Maximize2 :size="18" /></button></div>
   </div>
   <div class="viewer-bottom"><button class="button secondary compact" :disabled="scene === 0" @click="load(scene - 1)"><ChevronLeft :size="16" />上一处影像</button><span>素材序号不代表地理路线</span><button class="button secondary compact" :disabled="scene === 2" @click="load(scene + 1)">下一处影像<ChevronRight :size="16" /></button></div>
-  <details class="source-details"><summary>全景来源与点位说明</summary><p>团队素材 / 天目山全景图片-202608 / CAM_001 / {{ sources[scene] }}</p><p>本地全景播放器；采集点、海拔和植被带归属待核验。当前不与下方普通照片绑定，也不读取 720 云内部事件。</p></details>
+  <details class="source-details"><summary>全景来源</summary><p>团队素材 / 天目山全景图片-202608 / CAM_001 / {{ sources[scene] }}</p><p>采集地点与海拔未标注。</p></details>
 </template>

@@ -4,12 +4,11 @@ import { useRoute, useRouter } from 'vue-router'
 import {
   ArrowRight, BookOpen, Check, CheckCircle2, ChevronRight, Compass, FileText,
   FolderOpen, Leaf, Map, Menu, Mountain, PanelLeftClose, RotateCw,
-  ShieldCheck, Sprout, UserRound, X,
+  Sprout, X,
 } from 'lucide-vue-next'
 import { useFieldworkStore } from './stores/fieldwork'
 import { notice } from './notice'
 import GuidePanel from './components/GuidePanel.vue'
-import { demoMode } from './demo'
 
 const store = useFieldworkStore()
 const route = useRoute()
@@ -65,14 +64,13 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
         <component :is="item.icon" :size="16" /><span>{{ item.title }}</span>
       </RouterLink>
     </nav>
-    <div class="header-account"><RouterLink to="/review" class="review-entry" aria-label="地理组对接清单"><FileText :size="16"/><span>地理组对接</span></RouterLink><div class="guide-header-slot"><GuidePanel /></div><span class="account-icon" :title="demoMode ? '前端演示 · 浏览器独立档案' : '本地服务 · 个人研学档案'"><UserRound :size="19" /></span></div>
+    <div class="header-account"><div class="guide-header-slot"><GuidePanel /></div></div>
   </header>
 
   <div v-if="store.loading" class="app-status"><RotateCw class="spin" :size="28" /><h1>正在打开研学档案</h1></div>
   <div v-else-if="store.error" class="app-status" role="alert">
     <Mountain :size="40" /><h1>暂时无法打开档案</h1><p>{{ store.error }}</p>
     <button class="button primary" @click="store.initialize()"><RotateCw :size="16" />重新连接</button>
-    <a href="/?demo=1" class="button secondary">进入前端演示</a>
   </div>
   <div v-else class="app-layout">
     <div v-if="sidebarOpen" class="sidebar-backdrop" @click="sidebarOpen = false" />
@@ -96,14 +94,13 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
       <RouterLink v-if="currentStep" :to="currentStep.href" class="sidebar-next" @click="sidebarOpen = false">
         <span>下一步</span><strong>{{ currentStep.title }}<ArrowRight :size="16" /></strong>
       </RouterLink>
-      <div class="sidebar-utilities"><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink><RouterLink to="/review" @click="sidebarOpen = false"><FileText :size="17"/>地理组对接清单<ChevronRight :size="14"/></RouterLink></div><div class="sidebar-bottom"><ShieldCheck :size="18" /><div><strong>{{ demoMode ? '前端演示档案' : '个人研学档案' }}</strong><p>{{ demoMode ? '演示记录保存在浏览器' : '记录保存在本机服务' }}<br />当前浏览器独立访问</p></div></div>
+      <div class="sidebar-utilities"><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink></div>
     </aside>
 
     <main id="main-content" class="main-content" :inert="sidebarOpen">
-      <div class="context-bar"><span><span class="context-dot" />西天目山<span class="context-separator">/</span>{{ route.meta.title }}</span><span>{{ demoMode ? '前端演示 · 浏览器保存' : '本地服务 · 个人试学' }}</span></div>
-      <div v-if="demoMode" class="demo-notice"><span>交流演示版</span><p>可体验并保存完整学习流程；课程草案与空间数据待地理组核验。</p><RouterLink to="/review">查看待确认内容<ChevronRight :size="14"/></RouterLink></div>
+      <div class="context-bar"><span><span class="context-dot" />西天目山<span class="context-separator">/</span>{{ route.meta.title }}</span><span>高中地理 · 个人研学</span></div>
       <RouterView />
-      <footer class="page-footer"><span><Leaf :size="13" />天目·寻境</span><span>观察有依据，解释可追溯。</span><span class="prototype-label">课程交流版 0.2</span></footer>
+      <footer class="page-footer"><span><Leaf :size="13" />天目·寻境</span></footer>
     </main>
   </div>
   <Transition name="toast">

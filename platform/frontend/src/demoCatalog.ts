@@ -13,7 +13,7 @@ export const demoCatalog = {
       "longitude": null,
       "panorama_url": null,
       "status": "photo_only",
-      "location_status": "待地理组核验采集点"
+      "location_status": "采集地点未标注"
     },
     {
       "id": "sample-02",
@@ -25,7 +25,7 @@ export const demoCatalog = {
       "longitude": null,
       "panorama_url": null,
       "status": "photo_only",
-      "location_status": "待地理组核验采集点"
+      "location_status": "采集地点未标注"
     },
     {
       "id": "sample-03",
@@ -37,7 +37,7 @@ export const demoCatalog = {
       "longitude": null,
       "panorama_url": null,
       "status": "photo_only",
-      "location_status": "待地理组核验采集点"
+      "location_status": "采集地点未标注"
     }
   ],
   "resources": [
