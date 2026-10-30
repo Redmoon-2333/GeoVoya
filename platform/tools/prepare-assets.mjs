@@ -53,3 +53,5 @@ for (const [index, filename] of panoramas.entries()) {
   await sharp(input).resize({ width: 4096, withoutEnlargement: true }).webp({ quality: 84 }).toFile(path.join(destination, `panorama-${index + 1}.webp`))
 }
 console.log('Panorama previews prepared when available. Original photos and previews stay outside Git.')
+const primaryPanorama = process.env.GEOVR_PANORAMA_PATH || path.join(panoramaSource, panoramas[0])
+await sharp(primaryPanorama).resize({ width: 4096, withoutEnlargement: true }).webp({ quality: 84 }).toFile(path.join(destination, 'tianmu-panorama.webp'))

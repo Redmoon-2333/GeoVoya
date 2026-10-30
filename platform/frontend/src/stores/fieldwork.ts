@@ -1,7 +1,15 @@
 import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
 import { request } from '../api'
-import type { Analysis, AnalysisFields, Artifact, ArtifactFields, Bootstrap, Observation } from '../types'
+import type {
+  Analysis,
+  AnalysisFields,
+  Artifact,
+  ArtifactFields,
+  Bootstrap,
+  GuideReply,
+  Observation,
+} from '../types'
 
 export const useFieldworkStore = defineStore('fieldwork', () => {
   const data = ref<Bootstrap | null>(null)
@@ -72,6 +80,18 @@ export const useFieldworkStore = defineStore('fieldwork', () => {
     await refresh()
   }
 
+  async function askGuide(question: string, page: string, nodeId?: string) {
+    return request<GuideReply>('/guide/ask', {
+      method: 'POST',
+      body: JSON.stringify({
+        question,
+        page,
+        node_id: nodeId || null,
+        theme_id: 'cryptomeria',
+      }),
+    })
+  }
+
   async function saveAnalysis(values: AnalysisFields) {
     const result = await request<Analysis>(`/analyses/${values.favorite_id}`, {
       method: 'PUT',
@@ -94,5 +114,6 @@ export const useFieldworkStore = defineStore('fieldwork', () => {
     data, loading, error, catalog, feedback, resources, nodes, observations, favorites, analyses,
     board, artifacts, theme, lastNode, initialize, refresh, resource, node, isFavorite, rememberNode,
     saveObservation, collect, saveAnalysis, saveArtifact,
+    askGuide,
   }
 })

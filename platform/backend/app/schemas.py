@@ -51,3 +51,10 @@ class ProgressInput(InputModel):
 
 class ReflectionInput(InputModel):
     text: str = Field(default="", max_length=5000)
+
+
+class GuideInput(InputModel):
+    question: str = Field(min_length=1, max_length=1200)
+    page: str = Field(default="unknown", max_length=80)
+    node_id: str | None = None
+    theme_id: str = "cryptomeria"

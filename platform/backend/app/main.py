@@ -11,11 +11,19 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
 from starlette.exceptions import HTTPException
 
-from app.catalog import CATALOG, NODE_IDS, QUESTION_IDS, RESOURCE_BY_ID, THEME_BY_ID
+from app.catalog import (
+    CATALOG,
+    NODE_IDS,
+    QUESTION_IDS,
+    RESOURCE_BY_ID,
+    THEME_BY_ID,
+    answer_guide,
+)
 from app.schemas import (
     AnalysisInput,
     ArtifactInput,
     FavoriteInput,
+    GuideInput,
     ObservationInput,
     ProgressInput,
     ReflectionInput,
@@ -195,6 +203,22 @@ def create_app(data_dir: Path | None = None) -> FastAPI:
     @app.get("/api/v1/health")
     def health():
         return {"status": "ok", "mode": "local_prototype"}
+
+    @app.post("/api/v1/guide/ask")
+    def ask_guide(data: GuideInput, owner: Owner):
+        if data.node_id is not None and data.node_id not in NODE_IDS:
+            fail(422, "当前观察节点不存在。")
+        if data.theme_id not in THEME_BY_ID:
+            fail(422, "当前专题不存在。")
+        answer = answer_guide(data.question)
+        return {
+            **answer,
+            "question": data.question,
+            "page": data.page,
+            "node_id": data.node_id,
+            "theme_id": data.theme_id,
+            "disclaimer": "当前回答来自审核后的本地知识包，不是生成式模型，也不替代教师判断。",
+        }
 
     @app.get("/api/v1/bootstrap")
     def bootstrap(request: Request, response: Response):

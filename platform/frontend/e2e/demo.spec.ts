@@ -7,14 +7,14 @@ async function navigate(page: Page, title: string) {
   else { await page.getByRole('button', { name: '打开研学导航', exact: true }).click(); await page.locator('.mobile-section-nav').getByRole('link', { name: title, exact: true }).click() }
 }
 
-test('seven views render without a backend, with usable images and narrow layouts', async ({ page }, info) => {
+test('eight views render without a backend, with usable images and narrow layouts', async ({ page }, info) => {
   const errors: string[] = [], api: string[] = []
   page.on('pageerror', e => errors.push(e.message))
   page.on('request', r => { if (r.url().includes('/api/v1')) api.push(r.url()) })
   const widths = info.project.name.startsWith('mobile') ? [390, 320] : [1440, 1024, 768]
   for (const width of widths) {
     await page.setViewportSize({ width, height: 1000 })
-    for (const url of ['/', '/explore', '/inquiry', '/archive', '/outcomes', '/feedback', '/library']) {
+    for (const url of ['/', '/explore', '/inquiry', '/archive', '/outcomes', '/feedback', '/library', '/methods']) {
       await visit(page, url)
       await expect(page.locator('body')).not.toContainText(/地理组|对接|交流演示|前端演示|待接入|课程草案/)
       for (const img of await page.locator('.main-content img:visible').all()) {
@@ -103,34 +103,33 @@ test('band reconstruction gives real feedback and preserves notes', async ({ pag
 test('real panorama renders, changes with keyboard and switches source', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message))
   await visit(page, '/explore?view=panorama')
-  await expect(page.locator('.viewer-message')).toHaveCount(0, { timeout: 20000 })
+  await expect(page.locator('.panorama-container')).toHaveAttribute('data-loaded', 'true', { timeout: 20000 })
   const canvas = page.locator('canvas')
-  const before = await canvas.evaluate(el => (el as HTMLCanvasElement).toDataURL())
+  const before = await canvas.screenshot()
   expect(before.length).toBeGreaterThan(5000)
   await canvas.focus(); await page.keyboard.press('ArrowRight')
-  const after = await canvas.evaluate(el => (el as HTMLCanvasElement).toDataURL())
-  expect(after).not.toBe(before)
+  const after = await canvas.screenshot()
+  expect(after.equals(before)).toBe(false)
   const bounds = (await canvas.boundingBox())!
   await page.mouse.move(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2)
   await page.mouse.down(); await page.mouse.move(bounds.x + bounds.width / 2 + 70, bounds.y + bounds.height / 2 + 20, { steps: 5 }); await page.mouse.up()
-  const dragged = await canvas.evaluate(el => (el as HTMLCanvasElement).toDataURL())
-  expect(dragged).not.toBe(after)
+  const dragged = await canvas.screenshot()
+  expect(dragged.equals(after)).toBe(false)
   await page.getByRole('button', { name: '下一处影像', exact: true }).click()
-  await expect(page.locator('.panorama-caption')).toContainText('2 / 3')
-  await expect(page.locator('.viewer-message')).toHaveCount(0)
-  await page.locator('.source-details summary').click()
-  await expect(page.locator('.source-details')).toContainText('CAM_20260818103703_0032_D.JPG')
+  await expect(page.locator('.viewer-bottom')).toContainText('2 / 3')
+  await expect(page.locator('.panorama-container')).toHaveAttribute('data-loaded', 'true')
+  await expect(page.locator('.panorama-caption')).toContainText('CAM_20260818103703_0032_D.JPG')
   await page.screenshot({ path: info.outputPath('panorama.png'), fullPage: true })
   expect(errors).toEqual([])
 })
 
 test('missing panorama can recover after the asset becomes available', async ({ page }) => {
-  await page.route('**/media/panorama-1.webp', route => route.fulfill({ status: 404, body: '' }))
+  await page.route('**/media/tianmu-panorama.webp', route => route.fulfill({ status: 404, body: '' }))
   await visit(page, '/explore?view=panorama')
-  await expect(page.locator('.viewer-message')).toContainText('全景暂时无法加载')
-  await page.unroute('**/media/panorama-1.webp')
+  await expect(page.locator('.panorama-fallback')).toContainText('全景暂时无法加载')
+  await page.unroute('**/media/tianmu-panorama.webp')
   await page.getByRole('button', { name: '重新加载', exact: true }).click()
-  await expect(page.locator('.viewer-message')).toHaveCount(0)
+  await expect(page.locator('.panorama-container')).toHaveAttribute('data-loaded', 'true')
 })
 
 test('library search, guide answers, research drafts and dialog keyboard paths work', async ({ page }) => {
@@ -142,16 +141,16 @@ test('library search, guide answers, research drafts and dialog keyboard paths w
   await expect(page.locator('.knowledge-card')).toHaveCount(2)
   await page.getByRole('button', { name: /加入我的待读/ }).first().click()
   await page.reload(); await expect(page.locator('.library-toolbar')).toContainText('1 份待读')
-  await page.getByRole('button', { name: '打开小天课程提示', exact: true }).click()
-  await expect(page.locator('#guide-question')).toBeFocused()
-  await page.getByRole('button', { name: '土壤含水率', exact: true }).click()
-  await expect(page.locator('.guide-answer')).toContainText('27.36%')
-  await expect(page.locator('.guide-answer')).toContainText('资料来源')
-  await page.locator('#guide-question').fill('测试未收录的问题')
-  await page.getByRole('button', { name: '提交课程问题', exact: true }).click()
-  await expect(page.locator('.guide-answer').last()).toContainText('没有匹配')
+  await page.getByRole('button', { name: '打开小目导学', exact: true }).click()
+  await expect(page.getByRole('textbox', { name: '向小目提问' })).toBeFocused()
+  await page.getByRole('button', { name: '什么是植被垂直地带性？', exact: true }).click()
+  await expect(page.locator('.guide-chat-message.guide')).toContainText('山地中')
+  await expect(page.locator('.guide-chat-message.guide')).toContainText('依据')
+  await page.getByRole('textbox', { name: '向小目提问' }).fill('测试未收录的问题')
+  await page.getByRole('button', { name: '发送问题', exact: true }).click()
+  await expect(page.locator('.guide-chat-message.guide').last()).toContainText('没有匹配')
   await page.keyboard.press('Escape')
-  await expect(page.getByRole('button', { name: '打开小天课程提示', exact: true })).toBeFocused()
+  await expect(page.getByRole('button', { name: '打开小目导学', exact: true })).toBeFocused()
   await visit(page, '/inquiry?theme=bamboo')
   await expect(page.locator('.draft-inquiry')).toContainText('识别毛竹分布')
   await page.locator('#draft-idea').fill('先对比不同时期的竹林边界。')

@@ -1,4 +1,4 @@
-import { demoCatalog } from './demoCatalog'
+import { demoCatalog, demoGuideCards } from './demoCatalog'
 import type { Analysis, Artifact, Attachment, Bootstrap, Favorite, Observation } from './types'
 import { downloadText } from './curriculum'
 
@@ -38,6 +38,12 @@ export async function demoRequest(path: string, options: RequestInit = {}): Prom
   let result: unknown
   if (path === '/bootstrap') return { ...d, catalog: demoCatalog, feedback: feedback(d) }
   if (path === '/feedback') return feedback(d)
+  if (path === '/guide/ask') {
+    const text = String(body.question || '').trim()
+    const ranked = demoGuideCards.map(card => ({ card, score: card.keywords.filter(key => text.toLowerCase().includes(key.toLowerCase())).length })).sort((a, b) => b.score - a.score)
+    const card = ranked[0]?.score ? ranked[0].card : undefined
+    return { mode: 'knowledge_pack', question: text, answer: card?.answer || '当前课程资料没有匹配到这个问题，请尝试垂直地带性、植物观察、柳杉研究或沙盘。', sources: card?.sources || ['课程资料'], matched_card_id: card?.id || null, page: body.page, node_id: body.node_id, theme_id: body.theme_id }
+  }
   if (kind === 'progress') { d.progress = body; result = body }
   else if (kind === 'reflection') { d.reflection = body; result = body }
   else if (kind === 'observations' && method === 'PUT') {

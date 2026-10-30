@@ -94,7 +94,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
       <RouterLink v-if="currentStep" :to="currentStep.href" class="sidebar-next" @click="sidebarOpen = false">
         <span>下一步</span><strong>{{ currentStep.title }}<ArrowRight :size="16" /></strong>
       </RouterLink>
-      <div class="sidebar-utilities"><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink></div>
+      <div class="sidebar-utilities"><RouterLink to="/methods" @click="sidebarOpen = false"><Sprout :size="17"/>望闻问切<ChevronRight :size="14"/></RouterLink><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink></div>
     </aside>
 
     <main id="main-content" class="main-content" :inert="sidebarOpen">

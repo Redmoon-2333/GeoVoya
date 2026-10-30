@@ -9,7 +9,7 @@ const webPort = Number(process.env.GEOVR_TEST_WEB_PORT || 5174)
 export default defineConfig({
   testDir: './e2e',
   outputDir: 'test-results/service',
-  testIgnore: '**/demo.spec.ts',
+  testIgnore: ['**/demo.spec.ts', '**/methods.spec.ts'],
   fullyParallel: false,
   workers: 1,
   timeout: 60000,

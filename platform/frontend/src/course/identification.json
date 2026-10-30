@@ -1,0 +1,1721 @@
+{
+  "version": "3.0",
+  "date": "2026-10-30",
+  "audience": "高中生",
+  "scope": "望闻问切先导学习；柳杉衰退议题转后续专题",
+  "default_route": [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "H1",
+    "H2",
+    "Q1",
+    "Q2",
+    "C1",
+    "C2"
+  ],
+  "case_tabs": [
+    {
+      "name": "柳杉",
+      "role": "示范",
+      "questions": [
+        "L1",
+        "L2",
+        "L3",
+        "L4"
+      ]
+    },
+    {
+      "name": "枫香",
+      "role": "比较",
+      "questions": [
+        "F1",
+        "F2",
+        "F3",
+        "F4"
+      ]
+    },
+    {
+      "name": "鹅掌楸",
+      "role": "迁移",
+      "questions": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ]
+    },
+    {
+      "name": "银杏",
+      "role": "新增典型案例",
+      "questions": [
+        "Y1",
+        "Y2",
+        "Y3",
+        "Y4"
+      ]
+    },
+    {
+      "name": "天目铁木",
+      "role": "新增典型案例",
+      "questions": [
+        "T1",
+        "T2",
+        "T3",
+        "T4"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "card_id": "B01",
+      "module": "望",
+      "title": "根系怎么观察",
+      "body": "直根系的主根与侧根区别明显；须根系由多条粗细相近的根构成。根常在地下，不能凭树冠照片推断根系类型。只观察自然暴露的根，不挖掘活体植物。",
+      "asset_ids": [
+        "B-ROOT-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "找主根与侧根；区分地上所见与地下未知。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "B02",
+      "module": "望",
+      "title": "茎与枝条",
+      "body": "先分乔木、灌木、草本或藤本，再看主干、枝条、节与芽。地下茎也具有节、芽等结构，不能把所有地下器官都叫根。树木高大只是线索，不能单独定种。",
+      "asset_ids": [
+        "B-STEM-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "观察整体，再看枝条上的节与芽。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "B03",
+      "module": "望",
+      "title": "单叶还是复叶",
+      "body": "一个叶柄上只有一片叶片的是单叶；复叶的叶轴上有多片小叶。掌状分裂的单叶仍是一片叶。结合叶柄、叶轴及腋芽位置判断，不能只数裂片。",
+      "asset_ids": [
+        "B-LEAF-01",
+        "B-COMPOUND-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S10"
+      ],
+      "observation_prompt": "区分叶片、裂片与小叶。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "B04",
+      "module": "望",
+      "title": "叶序要连着枝条看",
+      "body": "互生通常每节一片叶；对生同节相对两片叶；轮生同节三片或更多叶。观察连续几个节位；一张脱离枝条的叶片照片不能证明叶序。",
+      "asset_ids": [
+        "B-PHYL-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S10"
+      ],
+      "observation_prompt": "沿枝条连续观察，不按画面左右位置猜。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "B05",
+      "module": "望",
+      "title": "叶形叶缘与叶脉",
+      "body": "叶形是整体轮廓，叶缘是边缘形态，叶脉是叶片内的脉络。可依次比较扇形或钻形、全缘或锯齿、网状脉或叉状脉；优先看正常成熟叶。",
+      "asset_ids": [
+        "B-SHAPE-01",
+        "B-MARGIN-01",
+        "B-VEIN-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S10"
+      ],
+      "observation_prompt": "先看轮廓，再放大边缘和叶脉。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "B06",
+      "module": "望",
+      "title": "花果与种子",
+      "body": "被子植物有花，果实内含种子。裸子植物不形成真正的果实。柳杉观察球果，银杏观察种子；两者不套用被子植物的花和果实结构。花果缺失时应保留判断。",
+      "asset_ids": [
+        "B-FLOWER-01",
+        "B-FRUIT-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "先确认器官类型，不机械凑齐根茎叶花果。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "L01",
+      "module": "望",
+      "title": "柳杉 先看整体",
+      "body": "先观察主干、树冠及在林中的位置。柳杉为常绿乔木；古树与年轻个体的树形可能不同。高大和常绿只能帮助缩小范围，还要查看枝叶、树皮与球果。",
+      "asset_ids": [
+        "W-LS-WHO-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S03"
+      ],
+      "observation_prompt": "点击整株图，找树干与树冠。",
+      "role": "知识卡",
+      "display_note": "外部参考照片 非天目山实拍"
+    },
+    {
+      "card_id": "L02",
+      "module": "望",
+      "title": "柳杉 再看枝叶",
+      "body": "叶片细长，呈钻形至线形，在小枝上螺旋排列。放大后比较叶片形状与着生位置，不把柳杉叶当作松树那样成束的针叶。",
+      "asset_ids": [
+        "W-LS-LEAF-01"
+      ],
+      "source_ids": [
+        "S03"
+      ],
+      "observation_prompt": "放大叶端和叶片在小枝上的排列。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "L03",
+      "module": "望",
+      "title": "柳杉 观察树皮",
+      "body": "树皮常呈红褐色至灰褐色，具有纤维性，可纵向条状剥落。先看裂纹方向和剥落方式；树龄与环境会影响外观，不能只凭树皮定种。",
+      "asset_ids": [
+        "W-LS-BARK-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S03"
+      ],
+      "observation_prompt": "找纵向纹理，不剥取树皮。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "L04",
+      "module": "望",
+      "title": "柳杉 球果不是果实",
+      "body": "柳杉的成熟球果近球形，由多枚木质化种鳞组成。它是裸子植物的繁殖结构，不能称为果实。结合枝叶和树皮信息，形成初步识别结果。",
+      "asset_ids": [
+        "W-LS-CONE-01"
+      ],
+      "source_ids": [
+        "S03"
+      ],
+      "observation_prompt": "看种鳞结构；图片区分球果和散出的种子。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "F01",
+      "module": "望",
+      "title": "枫香 叶片分裂不等于复叶",
+      "body": "枫香的典型成熟叶常呈掌状三裂，具有掌状脉，仍属于单叶。先沿叶片轮廓看裂片，再看共同的叶柄；秋叶颜色不作为定种依据。",
+      "asset_ids": [
+        "W-FX-LEAF-01",
+        "B-COMPOUND-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S06"
+      ],
+      "observation_prompt": "找完整叶片，区分裂片和独立小叶。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "F02",
+      "module": "望",
+      "title": "枫香 用叶序与果序补充判断",
+      "body": "枫香叶互生，球形果序由多枚蒴果聚集。对照图1为枫香，2为北美枫香。与部分叶形相似的槭树比较时，应核对叶序和繁殖结构，不能仅凭掌裂叶或红叶判断。",
+      "asset_ids": [
+        "W-FX-FRUIT-01",
+        "B-PHYL-01"
+      ],
+      "source_ids": [
+        "S02",
+        "S06"
+      ],
+      "observation_prompt": "叶序用连续枝条核验；果序照片只引用编号1，不考近缘种辨别。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "E01",
+      "module": "望",
+      "title": "鹅掌楸 看独特的叶片轮廓",
+      "body": "鹅掌楸叶片具有特征性的侧裂片，叶先端常平截或凹缺。先看轮廓，再比较叶尖与叶基；仍是一片单叶，不是多片小叶拼成。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S05"
+      ],
+      "observation_prompt": "比较叶片顶部与两侧裂片。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "E02",
+      "module": "望",
+      "title": "鹅掌楸 留意相似种与材料不足",
+      "body": "特殊叶形可提示鹅掌楸属，但北美鹅掌楸和杂交类型也可能相似。单张叶片不足以排除相似类群时，应结合完整枝条、花果及可靠记录核验。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "source_ids": [
+        "S05"
+      ],
+      "observation_prompt": "选择下一步需要的材料，而非强行定种。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "Y01",
+      "module": "望",
+      "title": "银杏 扇形叶与叉状脉",
+      "body": "银杏叶片呈扇形，叶脉反复作二叉分枝。叶端有的分裂、有的不明显，不能把是否二裂作为唯一依据。短枝上的叶常密集，观察时结合枝条。",
+      "asset_ids": [
+        "W-YX-LEAF-01",
+        "B-VEIN-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "看叶形，再用图示理解叉状脉。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "Y02",
+      "module": "望",
+      "title": "银杏 白果实际是种子",
+      "body": "银杏是裸子植物，不形成真正的果实。图中外层肉质结构属于种皮；不能因外观像小果子就称其为果实。识别时把器官名称和可见结构对应起来。",
+      "asset_ids": [
+        "W-YX-SEED-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "对照剖面，区分种皮与果皮。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "T01",
+      "module": "望",
+      "title": "天目铁木 观察叶缘与侧脉",
+      "body": "天目铁木叶片为椭圆状长圆形至狭长圆形，叶缘有不规则重锯齿，多对侧脉较明显。先记录这些可见特征，再查阅植物志；一张叶片图不能单独确定物种。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "source_ids": [
+        "S04"
+      ],
+      "observation_prompt": "点击叶缘和侧脉区域放大。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "T02",
+      "module": "望",
+      "title": "天目铁木 需要补充哪些证据",
+      "body": "核验铁木属植物还应比较枝条、毛被及果苞等结构。天目铁木的小坚果外有囊状果苞。当前参考照片只支持枝叶观察，不展示或考查照片中看不到的果苞。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "source_ids": [
+        "S04"
+      ],
+      "observation_prompt": "点击还需果苞与枝条资料，不强行下结论。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "H01",
+      "module": "闻",
+      "title": "香樟 气味只是辅助线索",
+      "body": "香樟枝叶揉搓后通常具有樟脑样芳香。气味可帮助缩小范围，还需结合叶序、叶脉等特征。网页不能传递真实气味，本环节通过图片与文字学习如何使用这一线索。",
+      "asset_ids": [
+        "H-XZ-LEAF-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S07",
+        "S08"
+      ],
+      "observation_prompt": "点击气味线索后阅读描述，不显示已闻到气味。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "H02",
+      "module": "闻",
+      "title": "闻什么 怎样记录",
+      "body": "记录产生气味的器官、材料是否新鲜，以及是否揉搓后才明显。不同器官和状态的气味可能不同，未闻到气味也不能证明植物一定没有气味。现场材料由教师确认后提供。",
+      "asset_ids": [
+        "H-XZ-LEAF-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "选择器官与状态标签；虚拟操作不要求采摘。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "Q01",
+      "module": "问",
+      "title": "问老师 也问资料",
+      "body": "不确定时，询问植物名称、生长地点、拍摄季节和材料来源，再查植物志或可靠图鉴核验。识别软件的结果是候选答案；物种结论需要与可见特征一致。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "依次点开形态记录 来源记录 植物志摘要。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "Q02",
+      "module": "问",
+      "title": "银杏 古树不等于野生证明",
+      "body": "某处有古银杏，只能说明这里存在这些个体，不能单凭树龄证明其为天然残存种群。还需结合栽培历史、自然更新和研究资料，区分观察事实与进一步解释。",
+      "asset_ids": [
+        "W-YX-BRAN-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S09"
+      ],
+      "observation_prompt": "比较两张说法卡，选出证据能够支持的一张。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "C01",
+      "module": "切",
+      "title": "柳杉 看纹理 学描述",
+      "body": "切在这里指了解质地与表面结构，不是切割植物。放大柳杉树皮，描述纵向裂纹和纤维性剥落；图像可展示纹理，但不能代替真实触觉。",
+      "asset_ids": [
+        "W-LS-BARK-01"
+      ],
+      "source_ids": [
+        "S01",
+        "S03"
+      ],
+      "observation_prompt": "点击局部放大，再选择有图像依据的描述。",
+      "role": "知识卡",
+      "display_note": ""
+    },
+    {
+      "card_id": "C02",
+      "module": "切",
+      "title": "纸质革质与毛被要分开",
+      "body": "纸质、革质描述叶片整体质地；有毛、光滑描述表面特征，二者不能混为一类。纸张、皮革、绒布仅作语言类比，不能据此认定某种植物的真实叶片质地。",
+      "asset_ids": [
+        "C-MATERIAL-AI-01"
+      ],
+      "source_ids": [
+        "S01"
+      ],
+      "observation_prompt": "看材质类比后，把整体质地与表面特征分栏。",
+      "role": "知识卡",
+      "display_note": "AI生成材质类比 非真实叶片"
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "L1",
+      "module": "望",
+      "type": "single",
+      "prompt": "先观察哪里？",
+      "options": [
+        {
+          "id": "A",
+          "text": "先看整体树形与生长位置"
+        },
+        {
+          "id": "B",
+          "text": "只猜名字"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "先整体，再局部；树形不能单独定种。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-LS-WHO-01"
+      ],
+      "card_ids": [
+        "L01"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "L2",
+      "module": "望",
+      "type": "single",
+      "prompt": "柳杉枝叶最符合哪种描述？",
+      "options": [
+        {
+          "id": "A",
+          "text": "细长钻形至线形叶"
+        },
+        {
+          "id": "B",
+          "text": "宽阔掌裂叶"
+        },
+        {
+          "id": "C",
+          "text": "羽状复叶"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "先看叶片形状，再看排列。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-LS-LEAF-01"
+      ],
+      "card_ids": [
+        "L02"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "L3",
+      "module": "望",
+      "type": "match",
+      "prompt": "将名称与照片配对。",
+      "options": [
+        {
+          "id": "leaf",
+          "text": "枝叶图"
+        },
+        {
+          "id": "bark",
+          "text": "树皮图"
+        },
+        {
+          "id": "cone",
+          "text": "球果图"
+        }
+      ],
+      "answer_keys": {
+        "leaf": "W-LS-LEAF-01",
+        "bark": "W-LS-BARK-01",
+        "cone": "W-LS-CONE-01"
+      },
+      "feedback_correct": "柳杉球果不称果实。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-LS-LEAF-01",
+        "W-LS-BARK-01",
+        "W-LS-CONE-01"
+      ],
+      "card_ids": [
+        "L02",
+        "L03",
+        "L04"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "L4",
+      "module": "望",
+      "type": "multi",
+      "prompt": "哪些组合证据有助于初步判断柳杉？",
+      "options": [
+        {
+          "id": "A",
+          "text": "只看树高"
+        },
+        {
+          "id": "B",
+          "text": "枝叶形态"
+        },
+        {
+          "id": "C",
+          "text": "成熟球果"
+        },
+        {
+          "id": "D",
+          "text": "树皮纹理"
+        }
+      ],
+      "answer_keys": [
+        "B",
+        "C",
+        "D"
+      ],
+      "feedback_correct": "枝叶、球果与树皮相互印证，仍需资料核验。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-LS-LEAF-01",
+        "W-LS-BARK-01",
+        "W-LS-CONE-01"
+      ],
+      "card_ids": [
+        "L01",
+        "L02",
+        "L03",
+        "L04"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "F1",
+      "module": "望",
+      "type": "single",
+      "prompt": "枫香掌状分裂的叶属于什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "单叶"
+        },
+        {
+          "id": "B",
+          "text": "掌状复叶"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "裂片属于同一叶片。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-FX-LEAF-01"
+      ],
+      "card_ids": [
+        "F01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "F2",
+      "module": "望",
+      "type": "single",
+      "prompt": "哪种描述对应枫香典型叶片？",
+      "options": [
+        {
+          "id": "A",
+          "text": "掌状裂片与掌状脉"
+        },
+        {
+          "id": "B",
+          "text": "钻形叶"
+        },
+        {
+          "id": "C",
+          "text": "扇形与叉状脉"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "比较轮廓与叶脉，不只看颜色。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-FX-LEAF-01"
+      ],
+      "card_ids": [
+        "F01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "F3",
+      "module": "望",
+      "type": "single",
+      "prompt": "叶序示意图中，每节一片叶叫什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "互生"
+        },
+        {
+          "id": "B",
+          "text": "对生"
+        },
+        {
+          "id": "C",
+          "text": "轮生"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "需沿连续节位判断；本题图为通用示意。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "B-PHYL-01"
+      ],
+      "card_ids": [
+        "B04",
+        "F02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "F4",
+      "module": "望",
+      "type": "multi",
+      "prompt": "区分枫香与部分相似槭树，还应核对什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "叶序"
+        },
+        {
+          "id": "B",
+          "text": "果序或果实结构"
+        },
+        {
+          "id": "C",
+          "text": "只看秋叶红不红"
+        }
+      ],
+      "answer_keys": [
+        "A",
+        "B"
+      ],
+      "feedback_correct": "枫香球形果序与部分槭树翅果不同，还需可靠图鉴核验。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-FX-FRUIT-01"
+      ],
+      "card_ids": [
+        "F02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "E1",
+      "module": "望",
+      "type": "multi",
+      "prompt": "请选择两类值得继续观察的材料。",
+      "options": [
+        {
+          "id": "A",
+          "text": "叶片"
+        },
+        {
+          "id": "B",
+          "text": "完整枝条"
+        },
+        {
+          "id": "C",
+          "text": "平台按钮颜色"
+        }
+      ],
+      "answer_keys": [
+        "A",
+        "B"
+      ],
+      "feedback_correct": "观察器官和着生关系有助于识别。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "card_ids": [
+        "E01",
+        "E02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "E2",
+      "module": "望",
+      "type": "single",
+      "prompt": "图中鹅掌楸叶片的醒目特征是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "先端平截或凹缺 并具侧裂片"
+        },
+        {
+          "id": "B",
+          "text": "羽状复叶"
+        },
+        {
+          "id": "C",
+          "text": "钻形叶"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "这类叶形提示鹅掌楸属，不能独自排除所有相似类型。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "card_ids": [
+        "E01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "E3",
+      "module": "望",
+      "type": "single",
+      "prompt": "哪项比树木高大更有鉴别价值？",
+      "options": [
+        {
+          "id": "A",
+          "text": "独特叶片轮廓"
+        },
+        {
+          "id": "B",
+          "text": "所有高树都一样"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "独特叶形更有用，但仍需其他证据。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "card_ids": [
+        "E01",
+        "E02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "E4",
+      "module": "望",
+      "type": "single",
+      "prompt": "只有一张叶片图，怎样处理种级结论？",
+      "options": [
+        {
+          "id": "A",
+          "text": "排除所有相似种 直接确定"
+        },
+        {
+          "id": "B",
+          "text": "记录候选并补查枝条花果与来源"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "认可证据不足，继续核验。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-EZ-LEAF-01"
+      ],
+      "card_ids": [
+        "E02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Y1",
+      "module": "望",
+      "type": "single",
+      "prompt": "哪项组合符合银杏叶的典型特征？",
+      "options": [
+        {
+          "id": "A",
+          "text": "扇形与叉状脉"
+        },
+        {
+          "id": "B",
+          "text": "羽状复叶与平行脉"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "二裂程度可能不同，重点看扇形与叉状脉。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-YX-LEAF-01",
+        "B-VEIN-01"
+      ],
+      "card_ids": [
+        "Y01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Y2",
+      "module": "望",
+      "type": "single",
+      "prompt": "银杏剖面图展示的是什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "真正的果实"
+        },
+        {
+          "id": "B",
+          "text": "外有肉质种皮的种子"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "外观像果实，不等于具有果皮。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-YX-SEED-01"
+      ],
+      "card_ids": [
+        "Y02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Y3",
+      "module": "望",
+      "type": "single",
+      "prompt": "银杏是否必须每片叶都二裂？",
+      "options": [
+        {
+          "id": "A",
+          "text": "是"
+        },
+        {
+          "id": "B",
+          "text": "不是 二裂程度有差异"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "不能以二裂与否作为唯一依据。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-YX-LEAF-01"
+      ],
+      "card_ids": [
+        "Y01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Y4",
+      "module": "望",
+      "type": "single",
+      "prompt": "短枝叶片密集时还应看什么？",
+      "options": [
+        {
+          "id": "A",
+          "text": "枝条结构与叶片着生"
+        },
+        {
+          "id": "B",
+          "text": "只数画面里几片叶"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "节间缩短会影响直观判断。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-YX-BRAN-01"
+      ],
+      "card_ids": [
+        "Y01",
+        "B04"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "T1",
+      "module": "望",
+      "type": "multi",
+      "prompt": "天目铁木叶片参考图适合观察哪些信息？",
+      "options": [
+        {
+          "id": "A",
+          "text": "叶缘齿形"
+        },
+        {
+          "id": "B",
+          "text": "侧脉"
+        },
+        {
+          "id": "C",
+          "text": "地下根系"
+        }
+      ],
+      "answer_keys": [
+        "A",
+        "B"
+      ],
+      "feedback_correct": "图片只能支持可见部位的观察。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "card_ids": [
+        "T01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "T2",
+      "module": "望",
+      "type": "single",
+      "prompt": "单张锯齿叶照片能否排除所有相似树种？",
+      "options": [
+        {
+          "id": "A",
+          "text": "能"
+        },
+        {
+          "id": "B",
+          "text": "不能"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "多种植物都可能有锯齿叶。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "card_ids": [
+        "T01"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "T3",
+      "module": "望",
+      "type": "multi",
+      "prompt": "核验铁木属候选，值得补查哪些材料？",
+      "options": [
+        {
+          "id": "A",
+          "text": "果苞结构"
+        },
+        {
+          "id": "B",
+          "text": "枝条与毛被"
+        },
+        {
+          "id": "C",
+          "text": "只看图片文件名"
+        }
+      ],
+      "answer_keys": [
+        "A",
+        "B"
+      ],
+      "feedback_correct": "需要照片之外的可靠补充证据。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "card_ids": [
+        "T02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "T4",
+      "module": "望",
+      "type": "single",
+      "prompt": "杭州的参考照片能证明本路线采到该树吗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "能"
+        },
+        {
+          "id": "B",
+          "text": "不能 还需项目采集记录"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "教学参考图与实地记录必须区分。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "card_ids": [
+        "T02"
+      ],
+      "core": false,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "H1",
+      "module": "闻",
+      "type": "single",
+      "prompt": "看到香樟照片，网页就能让你闻到真实气味吗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "能"
+        },
+        {
+          "id": "B",
+          "text": "不能 此处学习文字描述"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "虚拟页面呈现气味线索，不模拟真实嗅觉。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "H-XZ-LEAF-01"
+      ],
+      "card_ids": [
+        "H01"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "H2",
+      "module": "闻",
+      "type": "single",
+      "prompt": "仅凭芳香气味可以确定香樟吗？",
+      "options": [
+        {
+          "id": "A",
+          "text": "可以"
+        },
+        {
+          "id": "B",
+          "text": "还需枝叶等形态证据"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "气味是辅助证据，需交叉核验。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "H-XZ-LEAF-01"
+      ],
+      "card_ids": [
+        "H01",
+        "H02"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Q1",
+      "module": "问",
+      "type": "single",
+      "prompt": "识别软件给出天目铁木，下一步应怎样做？",
+      "options": [
+        {
+          "id": "A",
+          "text": "直接作为标准答案"
+        },
+        {
+          "id": "B",
+          "text": "核对叶片特征 来源和植物志"
+        }
+      ],
+      "answer_keys": [
+        "B"
+      ],
+      "feedback_correct": "软件输出只是候选，资料与观察需一致。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-TM-LEAF-01"
+      ],
+      "card_ids": [
+        "Q01"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "Q2",
+      "module": "问",
+      "type": "single",
+      "prompt": "看见一株古银杏，哪项结论有直接依据？",
+      "options": [
+        {
+          "id": "A",
+          "text": "这里存在银杏个体"
+        },
+        {
+          "id": "B",
+          "text": "该个体必然野生 天然种群更新良好"
+        }
+      ],
+      "answer_keys": [
+        "A"
+      ],
+      "feedback_correct": "存在个体不能证明原生性与更新状态。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-YX-BRAN-01"
+      ],
+      "card_ids": [
+        "Q02"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "C1",
+      "module": "切",
+      "type": "multi",
+      "prompt": "柳杉树皮照片能直接支持哪些描述？",
+      "options": [
+        {
+          "id": "A",
+          "text": "有纵向纹理"
+        },
+        {
+          "id": "B",
+          "text": "轻触一定柔软"
+        },
+        {
+          "id": "C",
+          "text": "有剥落痕迹"
+        }
+      ],
+      "answer_keys": [
+        "A",
+        "C"
+      ],
+      "feedback_correct": "照片支持可见纹理，不能替代实际触觉。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "W-LS-BARK-01"
+      ],
+      "card_ids": [
+        "C01"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    },
+    {
+      "question_id": "C2",
+      "module": "切",
+      "type": "match",
+      "prompt": "把描述放入整体质地或表面特征。",
+      "options": [
+        {
+          "id": "papery",
+          "text": "纸质"
+        },
+        {
+          "id": "leathery",
+          "text": "革质"
+        },
+        {
+          "id": "hairy",
+          "text": "有毛"
+        },
+        {
+          "id": "smooth",
+          "text": "光滑"
+        }
+      ],
+      "answer_keys": {
+        "papery": "整体质地",
+        "leathery": "整体质地",
+        "hairy": "表面特征",
+        "smooth": "表面特征"
+      },
+      "feedback_correct": "材质类比只帮助理解词义，不对应具体物种。",
+      "feedback_wrong": "先查看相关局部图与知识卡，再试一次。",
+      "hint_1": "回到本题对应图片，找可见特征。",
+      "hint_2": "打开对应知识卡，比较各选项的证据。",
+      "asset_ids": [
+        "C-MATERIAL-AI-01"
+      ],
+      "card_ids": [
+        "C02"
+      ],
+      "core": true,
+      "completion_rule": "答案与answer_keys一致；多选不多选不漏选；允许重试。"
+    }
+  ],
+  "references": [
+    {
+      "id": "S01",
+      "title": "植物分类基础与野外识别技能",
+      "type": "用户提供资料",
+      "locator": "2.1、2.2及银杏条目",
+      "url": ""
+    },
+    {
+      "id": "S02",
+      "title": "华东种子植物检索手册 节选65至72",
+      "type": "用户提供资料",
+      "locator": "PDF第1至2页，印刷页55至56，枫香属相关检索条目",
+      "url": ""
+    },
+    {
+      "id": "S03",
+      "title": "Flora of China Cryptomeria japonica",
+      "type": "植物志",
+      "url": "https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200005392"
+    },
+    {
+      "id": "S04",
+      "title": "Flora of China Ostrya rehderiana",
+      "type": "植物志",
+      "url": "https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200006221"
+    },
+    {
+      "id": "S05",
+      "title": "Flora of China Liriodendron chinense",
+      "type": "植物志",
+      "url": "https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200008462"
+    },
+    {
+      "id": "S06",
+      "title": "Flora of China Liquidambar",
+      "type": "植物志",
+      "url": "https://www.iplant.cn/foc/pdf/Liquidambar.pdf"
+    },
+    {
+      "id": "S07",
+      "title": "Flora of China Cinnamomum camphora",
+      "type": "植物志",
+      "url": "https://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200008697"
+    },
+    {
+      "id": "S08",
+      "title": "University of Sydney Cinnamomum camphora",
+      "type": "大学植物志",
+      "url": "https://eflora.sydney.edu.au/taxon/cinnamomum-camphora"
+    },
+    {
+      "id": "S09",
+      "title": "Zhao et al 2019 Resequencing 545 ginkgo genomes across the world",
+      "type": "研究论文",
+      "url": "https://doi.org/10.1038/s41467-019-12133-5"
+    },
+    {
+      "id": "S10",
+      "title": "植物的叶及植物的花和果实",
+      "type": "用户提供图示",
+      "locator": "两张原图；仅作形态术语参考",
+      "url": ""
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "W-LS-WHO-01",
+      "caption": "柳杉整株参考",
+      "kind": "external_photo",
+      "creator": "Luis Miguel Bugallo Sánchez",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cryptomeria_japonica._A_Ferradura._Santiago_de_Compostela._Galiza_01.jpg",
+      "notes": "外地栽培个体；不代表天目山古柳杉的树冠形态。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-LS-WHO-01.jpg"
+    },
+    {
+      "asset_id": "W-LS-LEAF-01",
+      "caption": "柳杉枝叶参考",
+      "kind": "external_photo",
+      "creator": "S. Rae from Scotland, UK",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cryptomeria_japonica_-_foliage_(31180139201).jpg",
+      "notes": "",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-LS-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "W-LS-BARK-01",
+      "caption": "柳杉树皮参考",
+      "kind": "external_photo",
+      "creator": "B.navez",
+      "license": "CC BY-SA 3.0",
+      "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cryptomeria_japonica_bark.jpg",
+      "notes": "",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-LS-BARK-01.jpg"
+    },
+    {
+      "asset_id": "W-LS-CONE-01",
+      "caption": "柳杉成熟球果与种子",
+      "kind": "external_photo",
+      "creator": "Didier Descouens",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Cryptomeria_japonica_MHNT.BOT2004.0.64.jpg",
+      "notes": "标本照片，无根茎叶全株归属信息。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-LS-CONE-01.jpg"
+    },
+    {
+      "asset_id": "W-FX-LEAF-01",
+      "caption": "枫香叶与果序",
+      "kind": "external_photo",
+      "creator": "Yoiyoi_kancho",
+      "license": "Public domain",
+      "license_url": "",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Liquidambar_formosana_02.jpg",
+      "notes": "秋季参考照片；颜色不作定种依据。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-FX-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "W-FX-FRUIT-01",
+      "caption": "枫香1与北美枫香2果序对照",
+      "kind": "external_photo",
+      "creator": "DouglasGoldman",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Liquidambar_formosana_winter4.jpg",
+      "notes": "原图编号1为枫香，编号2为北美枫香；枫香任务只引用1号，不把2号当作枫香。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-FX-FRUIT-01.jpg"
+    },
+    {
+      "asset_id": "W-EZ-LEAF-01",
+      "caption": "鹅掌楸叶片",
+      "kind": "external_photo",
+      "creator": "El Grafo",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Liriodendron_chinense_01.jpg",
+      "notes": "排除搜索中出现的北美鹅掌楸与杂交鹅掌楸图片。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-EZ-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "W-YX-LEAF-01",
+      "caption": "银杏扇形叶片",
+      "kind": "external_photo",
+      "creator": "Merlin",
+      "license": "CC BY 2.5",
+      "license_url": "https://creativecommons.org/licenses/by/2.5",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ginkgo_biloba_-_leaves.jpg",
+      "notes": "",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-YX-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "W-YX-BRAN-01",
+      "caption": "银杏短枝与叶片",
+      "kind": "external_photo",
+      "creator": "Urutseg",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ginkgo_biloba_leaves.jpg",
+      "notes": "",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-YX-BRAN-01.jpg"
+    },
+    {
+      "asset_id": "W-YX-SEED-01",
+      "caption": "银杏种子及剖面",
+      "kind": "external_photo",
+      "creator": "Genet",
+      "license": "CC BY-SA 3.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ginkgo_biloba_-_fruit.JPG",
+      "notes": "原文件名含fruit；平台标题统一改为种子，不沿用原名判断器官。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-YX-SEED-01.jpg"
+    },
+    {
+      "asset_id": "W-TM-LEAF-01",
+      "caption": "天目铁木枝叶",
+      "kind": "external_photo",
+      "creator": "no rights reserved",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Zhejiang_hop-hornbeam,_Hangzhou,_CN-ZJ,_CN_imported_from_iNaturalist_photo_227112162.jpg",
+      "notes": "来自杭州的观察记录；不作为天目山项目样点或天然分布证明。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/W-TM-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "H-XZ-LEAF-01",
+      "caption": "香樟枝叶",
+      "kind": "external_photo",
+      "creator": "Forest and Kim Starr",
+      "license": "CC BY 3.0 us",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/us/deed.en",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Starr-010515-0116-Cinnamomum_camphora-leaves-Makawao-Maui_(23904421664).jpg",
+      "notes": "闻的方法补充案例；不声称路线中已采集到该植株。",
+      "changes": "下载来源提供的缩略尺寸并统一JPEG格式，未修改画面内容",
+      "path": "/media/identification/H-XZ-LEAF-01.jpg"
+    },
+    {
+      "asset_id": "B-ROOT-01",
+      "caption": "直根系与须根系",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-ROOT-01.png"
+    },
+    {
+      "asset_id": "B-STEM-01",
+      "caption": "地上茎与地下茎",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-STEM-01.png"
+    },
+    {
+      "asset_id": "B-LEAF-01",
+      "caption": "叶片叶柄与托叶",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-LEAF-01.png"
+    },
+    {
+      "asset_id": "B-COMPOUND-01",
+      "caption": "复叶类型",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-COMPOUND-01.png"
+    },
+    {
+      "asset_id": "B-PHYL-01",
+      "caption": "互生对生轮生与簇生",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-PHYL-01.png"
+    },
+    {
+      "asset_id": "B-SHAPE-01",
+      "caption": "常见叶形",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-SHAPE-01.png"
+    },
+    {
+      "asset_id": "B-LOBES-01",
+      "caption": "叶裂类型",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-LOBES-01.png"
+    },
+    {
+      "asset_id": "B-MARGIN-01",
+      "caption": "叶尖叶缘与叶基",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-MARGIN-01.png"
+    },
+    {
+      "asset_id": "B-VEIN-01",
+      "caption": "叶脉类型",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-VEIN-01.png"
+    },
+    {
+      "asset_id": "B-FLOWER-01",
+      "caption": "被子植物花的结构",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-FLOWER-01.png"
+    },
+    {
+      "asset_id": "B-FRUIT-01",
+      "caption": "果实形成类型",
+      "kind": "user_reference_figure",
+      "creator": "见用户原资料及其图注",
+      "license": "用户提供资料 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "图号或局部标签沿用原稿；知识解释以本版卡片为准。未附原文件全文。",
+      "changes": "提取原嵌入图，未改画面",
+      "path": "/media/identification/B-FRUIT-01.png"
+    },
+    {
+      "asset_id": "R-LEAF-POSTER",
+      "caption": "植物的叶原图",
+      "kind": "user_reference_poster",
+      "creator": "原图署名 Enid Mayfield；2021 Illustrated Plant Glossary；翻译排版见图底",
+      "license": "用户提供 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "保留原图与来源；不将全部术语列为高中生通关要求。",
+      "changes": "原图保留",
+      "path": "/media/identification/R-LEAF-POSTER.png"
+    },
+    {
+      "asset_id": "R-FRUIT-POSTER",
+      "caption": "植物的花和果实原图",
+      "kind": "user_reference_poster",
+      "creator": "原图署名 Enid Mayfield；2021 Illustrated Plant Glossary；翻译排版见图底",
+      "license": "用户提供 内部参考 原图授权待核对",
+      "license_url": "",
+      "source_url": "",
+      "notes": "保留原图与来源；不将全部术语列为高中生通关要求。",
+      "changes": "原图保留",
+      "path": "/media/identification/R-FRUIT-POSTER.png"
+    },
+    {
+      "asset_id": "C-MATERIAL-AI-01",
+      "caption": "纸张皮革绒布的质地类比",
+      "kind": "ai_material_analogy",
+      "creator": "AI生成",
+      "license": "AI生成素材",
+      "license_url": "",
+      "source_url": "",
+      "notes": "始终显示AI生成材质类比；不表示任何物种的真实叶片或微观结构，不参与物种判题。",
+      "changes": "无",
+      "path": "/media/identification/C-MATERIAL-AI-01.png"
+    }
+  ]
+}

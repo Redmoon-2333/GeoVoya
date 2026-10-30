@@ -55,6 +55,32 @@ def test_catalog_does_not_invent_spatial_data(client: TestClient):
     assert data["feedback"]["teacher_status"] == "not_connected"
 
 
+def test_local_panorama_sandbox_and_knowledge_guide(client: TestClient):
+    data = client.get("/api/v1/bootstrap").json()
+    assert data["catalog"]["capabilities"]["local_panorama"] is True
+    assert data["catalog"]["capabilities"]["sandbox_2d"] is True
+    assert data["catalog"]["panorama_samples"][0]["image"] == "/media/tianmu-panorama.webp"
+    assert len(data["catalog"]["vegetation_zones"]) == 4
+    reply = client.post(
+        "/api/v1/guide/ask",
+        json={"question": "为什么要先观察再解释？", "page": "/explore"},
+    )
+    assert reply.status_code == 200
+    payload = reply.json()
+    assert payload["mode"] == "knowledge_pack"
+    assert payload["matched_card_id"] == "observe-before-explain"
+    assert "单张照片" in payload["answer"]
+    assert payload["disclaimer"]
+
+
+def test_guide_rejects_unknown_node(client: TestClient):
+    response = client.post(
+        "/api/v1/guide/ask",
+        json={"question": "如何观察？", "node_id": "unknown"},
+    )
+    assert response.status_code == 422
+
+
 def test_session_required_and_cookie_flags(tmp_path: Path):
     with TestClient(create_app(tmp_path)) as client:
         assert client.get("/api/v1/feedback").status_code == 401

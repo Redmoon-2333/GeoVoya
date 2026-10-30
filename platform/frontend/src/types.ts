@@ -25,6 +25,50 @@ export interface Resource {
   scope: string
 }
 
+export interface PanoramaHotspot {
+  id: string
+  title: string
+  yaw: string
+  pitch: string
+  prompt: string
+}
+
+export interface PanoramaSample {
+  id: string
+  title: string
+  image: string
+  filename: string
+  source: string
+  source_version: string
+  scope: string
+  status: string
+  hotspots: PanoramaHotspot[]
+}
+
+export interface VegetationZone {
+  id: string
+  order: number
+  title: string
+  short_title: string
+  color: string
+  node_ids: string[]
+  status: string
+  prompt: string
+  note: string
+}
+
+export interface GuideReply {
+  mode: 'knowledge_pack'
+  question: string
+  answer: string
+  sources: string[]
+  matched_card_id: string | null
+  page: string
+  node_id: string | null
+  theme_id: string
+  disclaimer: string
+}
+
 export interface ResearchQuestion {
   id: string
   title: string
@@ -116,6 +160,10 @@ export interface Bootstrap {
     subtitle: string
     nodes: FieldNode[]
     resources: Resource[]
+    panorama_samples: PanoramaSample[]
+    vegetation_zones: VegetationZone[]
+    guide_prompts: string[]
+    knowledge_cards: { id: string; title: string; sources: string[] }[]
     themes: Theme[]
     capabilities: Record<string, boolean>
   }

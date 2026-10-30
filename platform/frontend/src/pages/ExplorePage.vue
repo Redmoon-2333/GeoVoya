@@ -6,9 +6,10 @@ import { useFieldworkStore } from '../stores/fieldwork'
 import { notify, reportError } from '../notice'
 import { useUnsaved } from '../useUnsaved'
 import ObservationForm from '../components/ObservationForm.vue'
-import PanoramaViewer from '../components/PanoramaViewer.vue'
+import LocalPanorama from '../components/LocalPanorama.vue'
 import SpatialWorkbench from '../components/SpatialWorkbench.vue'
 import { localState } from '../localState'
+import type { PanoramaSample, PanoramaHotspot } from '../types'
 
 const store = useFieldworkStore()
 const route = useRoute()
@@ -23,6 +24,13 @@ const mode = ref<ViewMode>('photo')
 watch(() => route.query.view, view => { mode.value = ['panorama', 'terrain', 'profile'].includes(String(view)) ? view as ViewMode : 'photo'; dirty.value = false }, { immediate: true })
 function setMode(view: ViewMode) { router.replace({ query: { ...route.query, view } }) }
 const tourNotes = localState<string>('panorama-notes', '')
+const sceneIndex = ref(0), hotspot = ref<PanoramaHotspot>()
+const panoramas = computed<PanoramaSample[]>(() => [
+  ...(store.catalog?.panorama_samples || []),
+  ...['CAM_20260818103703_0032_D.JPG', 'CAM_20260818103812_0034_D.JPG'].map((filename, i) => ({ id: `local-scene-${i + 2}`, title: `天目山全景 ${i + 2}`, image: `/media/panorama-${i + 2}.webp`, filename, source: '团队提供 / 天目山全景图片-202608 / CAM_001', source_version: 'local-panorama-v1', scope: '采集地点与植被带归属未标注。', status: 'technical_sample', hotspots: [] })),
+])
+const panorama = computed(() => panoramas.value[sceneIndex.value])
+function selectScene(index: number) { sceneIndex.value = index; hotspot.value = undefined }
 const comparing = ref(false)
 const comparisonId = ref(store.resources[1]!.id)
 const comparison = computed(() => store.resource(comparisonId.value))
@@ -69,7 +77,7 @@ async function collect() {
         <div class="node-strip"><button v-for="item in store.nodes" :key="item.id" :class="{ selected: item.id === selectedId }" @click="select(item.id)"><img :src="store.resource(item.resource_id).thumbnail" :alt="item.title" /><span><small>{{ item.code }}</small>{{ item.title }}<Check v-if="store.observations.some((observation) => observation.node_id === item.id)" :size="15" /></span></button></div>
         <div class="node-pagination"><button class="button subtle compact" :disabled="index === 0" @click="select(store.nodes[index - 1]!.id)"><ChevronLeft :size="16" />上一份</button><span>{{ index + 1 }} / {{ store.nodes.length }}</span><button class="button subtle compact" :disabled="index === store.nodes.length - 1" @click="select(store.nodes[index + 1]!.id)">下一份<ChevronRight :size="16" /></button></div>
       </template>
-      <PanoramaViewer v-else-if="mode === 'panorama'" />
+      <template v-else-if="mode === 'panorama'"><LocalPanorama v-if="panorama" :key="panorama.id" :panorama="panorama" @hotspot="hotspot = $event"/><div v-if="hotspot" class="focus-note panorama-hotspot-note"><Info :size="18"/><p><strong>{{ hotspot.title }}</strong>：{{ hotspot.prompt }}</p></div><div class="viewer-bottom"><button class="button secondary compact" :disabled="sceneIndex === 0" @click="selectScene(sceneIndex - 1)">上一处影像</button><span>{{ sceneIndex + 1 }} / {{ panoramas.length }} · 素材序号不代表路线</span><button class="button secondary compact" :disabled="sceneIndex === panoramas.length - 1" @click="selectScene(sceneIndex + 1)">下一处影像</button></div></template>
       <SpatialWorkbench v-else :mode="mode" />
     </section>
     <aside class="observation-panel"><ObservationForm v-if="mode === 'photo'" :node-id="selectedId" @dirty="dirty = $event" /><template v-else><span class="eyebrow">FIELD COMPANION</span><h2>{{ mode === 'panorama' ? '全景观察草记' : '这次考察，留意什么？' }}</h2><div class="observation-prompts"><p><span>01</span>看叶片与林冠，区分可以直接看到的事实和推测。</p><p><span>02</span>比较林下、树干与群落层次，寻找需要核实的细节。</p><p><span>03</span>海拔、坡向与季节资料是否足够支持你的判断？</p></div><label class="field-label" for="tour-notes">我的随手记</label><textarea id="tour-notes" v-model="tourNotes" rows="7" maxlength="4000" placeholder="记录新发现、想验证的问题……"/><p class="save-caption">自动保存</p><RouterLink to="/library" class="button secondary full">查阅课程资料<ArrowRight :size="16" /></RouterLink></template><RouterLink to="/archive" class="text-link archive-shortcut">进入科考档案馆<ArrowRight :size="16" /></RouterLink></aside>

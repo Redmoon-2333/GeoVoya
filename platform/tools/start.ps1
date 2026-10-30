@@ -59,8 +59,11 @@ if (Test-Path -LiteralPath $statePath) {
 if (!(Test-Path -LiteralPath $pythonPath) -or !(Test-Path -LiteralPath $vitePath)) {
     throw 'Install dependencies first: backend: uv sync --python 3.12; frontend: pnpm install.'
 }
-if (!(Test-Path -LiteralPath (Join-Path $frontendDirectory 'public\media\forest-floor.webp'))) {
-    throw 'Prepare photographs first: cd frontend; pnpm prepare:assets.'
+if (
+    !(Test-Path -LiteralPath (Join-Path $frontendDirectory 'public\media\forest-floor.webp')) -or
+    !(Test-Path -LiteralPath (Join-Path $frontendDirectory 'public\media\tianmu-panorama.webp'))
+) {
+    throw 'Prepare photographs and the local panorama first: cd frontend; pnpm prepare:assets.'
 }
 $nodePath = (Get-Command node -ErrorAction Stop).Source
 New-Item -ItemType Directory -Path $runtimeDirectory -Force | Out-Null
