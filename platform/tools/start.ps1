@@ -1,6 +1,7 @@
 param(
     [int]$ApiPort = 8000,
-    [int]$WebPort = 5173
+    [int]$WebPort = 5173,
+    [switch]$OpenBrowser
 )
 
 $ErrorActionPreference = 'Stop'
@@ -47,8 +48,11 @@ if (Test-Path -LiteralPath $statePath) {
     $savedState = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
     $running = @($savedState.Processes | Where-Object { Test-ManagedProcess $_ })
     if ($running.Count -gt 0) {
+        Wait-Ready "$($savedState.ApiUrl)/api/v1/health"
+        Wait-Ready "$($savedState.WebUrl)/api/v1/health"
         Write-Output "A managed server is already running. Open $($savedState.WebUrl)"
-        Write-Output "Use tools\stop.ps1 before starting again."
+        Write-Output 'Use stop.cmd in the repository root to stop the services.'
+        if ($OpenBrowser) { Start-Process -FilePath $savedState.WebUrl }
         exit 0
     }
 }
@@ -97,3 +101,4 @@ try {
 } finally {
     $env:GEOVR_API_URL = $previousApiUrl
 }
+if ($OpenBrowser) { Start-Process -FilePath $webUrl }

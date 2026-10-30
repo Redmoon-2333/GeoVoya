@@ -2,6 +2,8 @@
 /*
 !/.gitignore
 !/README.md
+!/start.cmd
+!/stop.cmd
 !/platform/
 
 # Local dependencies, output, and personal records.

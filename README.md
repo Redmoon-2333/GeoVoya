@@ -69,6 +69,20 @@ Pop-Location
 
 ### 启动与停止
 
+本机依赖与素材已准备好时，在仓库根目录双击 `start.cmd`，即可启动前后端并打开网站。重复启动会打开已运行的网站，不会重复启动服务。停止时双击根目录的 `stop.cmd`；学习记录保留。
+
+也可以在 PowerShell 中执行：
+
+```powershell
+cd D:\GeoVoya
+.\start.cmd
+# 停止服务：.\stop.cmd
+```
+
+启动器直接使用已安装的 Node.js、项目内的 Vite 与 Python 虚拟环境，无需终端能识别 pnpm。端口被占用时自动选择空闲端口，前端同步连接实际后端地址；运行日志在 `platform/.runtime/`。
+
+在 `platform/` 下也可继续使用原来的脚本：
+
 ```powershell
 .\tools\start.ps1
 ```
