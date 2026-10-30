@@ -176,3 +176,27 @@ test('six views render with real images and no horizontal overflow', async ({ pa
   }
   expect(errors).toEqual([])
 })
+
+test('a guide reply does not request focus after the page goes into the background', async ({ page }) => {
+  let release!: () => void
+  const pending = new Promise<void>(resolve => { release = resolve })
+  await page.route('**/api/v1/guide/ask', async route => {
+    await pending
+    await route.fulfill({ json: { answer: '后台回答已到达。', sources: ['课程资料'], mode: 'knowledge_pack' } })
+  })
+  await page.goto('/explore')
+  await page.getByRole('button', { name: '打开小目导学', exact: true }).click()
+  await page.getByRole('button', { name: '什么是植被垂直地带性？', exact: true }).click()
+  await expect(page.locator('.guide-chat')).toContainText('正在查阅')
+  await page.evaluate(() => {
+    Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' })
+    Object.defineProperty(document, 'hasFocus', { configurable: true, value: () => false })
+    const state = window as unknown as { backgroundFocusCalls: number }
+    state.backgroundFocusCalls = 0
+    const focus = HTMLElement.prototype.focus
+    HTMLElement.prototype.focus = function(options) { state.backgroundFocusCalls++; focus.call(this, options) }
+  })
+  release()
+  await expect(page.locator('.guide-chat')).toContainText('后台回答已到达')
+  expect(await page.evaluate(() => (window as unknown as { backgroundFocusCalls: number }).backgroundFocusCalls)).toBe(0)
+})

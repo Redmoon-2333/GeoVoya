@@ -9,13 +9,14 @@ import {
 import { useFieldworkStore } from './stores/fieldwork'
 import { notice } from './notice'
 import GuidePanel from './components/GuidePanel.vue'
+import { focusIfActive } from './focus'
 
 const store = useFieldworkStore()
 const route = useRoute()
 const router = useRouter()
 const sidebarOpen = ref(false)
 const sidebar = ref<HTMLElement>(), menuButton = ref<HTMLButtonElement>()
-watch(sidebarOpen, async open => { await nextTick(); if (open) requestAnimationFrame(() => { if (sidebarOpen.value) sidebar.value?.querySelector<HTMLAnchorElement>('a')?.focus() }); else menuButton.value?.focus() })
+watch(sidebarOpen, async open => { await nextTick(); if (open) requestAnimationFrame(() => { if (sidebarOpen.value) focusIfActive(sidebar.value?.querySelector<HTMLAnchorElement>('a')) }); else focusIfActive(menuButton.value) })
 function trapNavigation(event: KeyboardEvent) {
   if (!sidebarOpen.value) return
   if (event.key === 'Escape') { event.preventDefault(); sidebarOpen.value = false; return }

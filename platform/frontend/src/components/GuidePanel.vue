@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { ArrowRight, Bot, ChevronDown, Compass, Lightbulb, LoaderCircle, MessageCircle, Send, X } from 'lucide-vue-next'
 import { useFieldworkStore } from '../stores/fieldwork'
 import { reportError } from '../notice'
+import { focusIfActive } from '../focus'
 
 const open = ref(false)
 const expanded = ref(false)
 const question = ref('')
 const asking = ref(false)
 const input = ref<HTMLInputElement>(), launcher = ref<HTMLButtonElement>(), error = ref('')
-async function show() { open.value = true; await nextTick(); input.value?.focus() }
-async function close() { open.value = false; await nextTick(); launcher.value?.focus() }
+async function show() { open.value = true; await nextTick(); focusIfActive(input.value) }
+async function close() { open.value = false; await nextTick(); focusIfActive(launcher.value) }
+function escape(event: KeyboardEvent) {
+  if (event.key === 'Escape' && open.value && !event.defaultPrevented && !document.querySelector('dialog[open]')) close()
+}
+onMounted(() => document.addEventListener('keydown', escape))
+onBeforeUnmount(() => document.removeEventListener('keydown', escape))
 const store = useFieldworkStore()
 const route = useRoute()
 const messages = ref<{ role: 'guide' | 'student'; text: string; sources?: string[] }[]>([])
@@ -43,7 +49,6 @@ async function ask(value = question.value) {
     reportError(cause)
   } finally {
     asking.value = false
-    nextTick(() => input.value?.focus())
   }
 }
 </script>

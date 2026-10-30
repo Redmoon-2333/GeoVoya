@@ -92,6 +92,8 @@ cd D:\GeoVoya
 
 启动器直接使用已安装的 Node.js、项目内的 Vite 与 Python 虚拟环境，无需终端能识别 pnpm。端口被占用时自动选择空闲端口，前端同步连接实际后端地址；运行日志在 `platform/.runtime/`。
 
+只启动服务、不自动打开或切换浏览器时，运行 `.\start.cmd -NoBrowser`，再手动访问启动器打印的网址。
+
 在 `platform/` 下也可继续使用原来的脚本：
 
 ```powershell
