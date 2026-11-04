@@ -87,7 +87,7 @@ test('band reconstruction gives real feedback and preserves notes', async ({ pag
   await expect(page.locator('.inline-feedback')).toContainText('还有位置需要调整')
   await page.getByRole('button', { name: '上移常绿阔叶林', exact: true }).click()
   await page.getByRole('button', { name: '上移常绿阔叶林', exact: true }).click()
-  await page.getByRole('button', { name: '下移落叶矮林', exact: true }).click()
+  await page.getByRole('button', { name: '下移落叶针叶混交林', exact: true }).click()
   await page.getByRole('button', { name: '检查带谱', exact: true }).click()
   await expect(page.locator('.inline-feedback')).toContainText('排列正确')
   await page.getByRole('tab', { name: '山地剖面', exact: true }).click()

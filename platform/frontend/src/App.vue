@@ -3,7 +3,7 @@ import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   ArrowRight, BookOpen, Check, CheckCircle2, ChevronRight, Compass, FileText,
-  FolderOpen, Leaf, Map, Menu, Mountain, PanelLeftClose, RotateCw,
+  FolderOpen, Globe2, Leaf, Map, Menu, Mountain, PanelLeftClose, RotateCw,
   Sprout, X,
 } from 'lucide-vue-next'
 import { useFieldworkStore } from './stores/fieldwork'
@@ -31,6 +31,7 @@ function trapNavigation(event: KeyboardEvent) {
 const navigation = [
   { path: '/', title: '项目总览', icon: Compass },
   { path: '/explore', title: '空间探索', icon: Map },
+  { path: '/geography', title: '地带性探究', icon: Globe2 },
   { path: '/inquiry', title: '专题探究', icon: Sprout },
   { path: '/archive', title: '科考档案馆', icon: FolderOpen },
   { path: '/outcomes', title: '成果交流', icon: FileText },
@@ -50,7 +51,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
 
 <template>
   <a href="#main-content" class="skip-link">跳到主要内容</a>
-  <header class="app-header">
+  <header class="app-header" :class="{ 'geography-header': route.path.startsWith('/geography') }">
     <div class="brand-wrap">
       <button ref="menuButton" class="icon-button mobile-menu" title="打开研学导航" aria-label="打开研学导航" :aria-expanded="sidebarOpen" aria-controls="study-navigation" @click="sidebarOpen = !sidebarOpen">
         <Menu :size="21" />
@@ -61,7 +62,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
       </RouterLink>
     </div>
     <nav class="main-nav" aria-label="主要导航">
-      <RouterLink v-for="item in navigation" :key="item.path" :to="item.path" :class="{ selected: route.path === item.path }">
+      <RouterLink v-for="item in navigation" :key="item.path" :to="item.path" :class="{ selected: item.path === '/geography' ? route.path.startsWith(item.path) : route.path === item.path }">
         <component :is="item.icon" :size="16" /><span>{{ item.title }}</span>
       </RouterLink>
     </nav>
@@ -78,7 +79,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
     <aside id="study-navigation" ref="sidebar" class="study-sidebar" :class="{ open: sidebarOpen }" :role="sidebarOpen ? 'dialog' : undefined" :aria-modal="sidebarOpen || undefined" aria-label="研学导航">
       <div class="sidebar-heading"><span>我的研学旅程</span><button class="icon-button mobile-menu" aria-label="收起研学导航" @click="sidebarOpen = false"><PanelLeftClose :size="18" /></button></div>
       <div class="course-label"><span class="tiny-label">FIELD STUDY / 01</span><h2>西天目山<br />自然地理考察</h2><span class="sidebar-course-tag">高中地理 · 个人研学</span></div>
-      <nav class="mobile-section-nav" aria-label="页面导航"><RouterLink v-for="item in navigation" :key="item.path" :to="item.path" :class="{ active: route.path === item.path }" @click="sidebarOpen = false"><component :is="item.icon" :size="17"/>{{ item.title }}<ChevronRight :size="14"/></RouterLink></nav>
+      <nav class="mobile-section-nav" aria-label="页面导航"><RouterLink v-for="item in navigation" :key="item.path" :to="item.path" :class="{ active: item.path === '/geography' ? route.path.startsWith(item.path) : route.path === item.path }" @click="sidebarOpen = false"><component :is="item.icon" :size="17"/>{{ item.title }}<ChevronRight :size="14"/></RouterLink></nav>
       <nav class="journey-nav" aria-label="研学流程">
         <RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href"
           :class="{ active: isActiveStep(step.href), complete: step.done }"
@@ -95,7 +96,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
       <RouterLink v-if="currentStep" :to="currentStep.href" class="sidebar-next" @click="sidebarOpen = false">
         <span>下一步</span><strong>{{ currentStep.title }}<ArrowRight :size="16" /></strong>
       </RouterLink>
-      <div class="sidebar-utilities"><RouterLink to="/methods" @click="sidebarOpen = false"><Sprout :size="17"/>望闻问切<ChevronRight :size="14"/></RouterLink><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink></div>
+      <div class="sidebar-utilities"><RouterLink to="/methods" @click="sidebarOpen = false"><Sprout :size="17"/>望闻问切<ChevronRight :size="14"/></RouterLink><RouterLink to="/geography" @click="sidebarOpen = false"><Globe2 :size="17"/>地带性探究<ChevronRight :size="14"/></RouterLink><RouterLink to="/library" @click="sidebarOpen = false"><BookOpen :size="17"/>课程资料库<ChevronRight :size="14"/></RouterLink></div>
     </aside>
 
     <main id="main-content" class="main-content" :inert="sidebarOpen">

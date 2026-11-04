@@ -153,13 +153,13 @@ export const demoCatalog = {
     {
       "id": "deciduous-dwarf",
       "order": 4,
-      "title": "落叶矮林带",
-      "short_title": "落叶矮林",
+      "title": "落叶针叶混交林带",
+      "short_title": "落叶针叶混交林",
       "color": "#a8794e",
       "node_ids": [],
       "status": "awaiting_content",
       "prompt": "观察植被高度、风环境线索和群落结构，避免只凭海拔下结论。",
-      "note": "代表节点、范围和过渡说明待地理组核验。"
+      "note": "显示名称沿用 V9 课程，原资料称落叶矮林；代表节点、范围和过渡说明待核验。"
     }
   ],
   "guide_prompts": [

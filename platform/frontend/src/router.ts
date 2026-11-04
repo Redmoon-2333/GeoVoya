@@ -13,6 +13,9 @@ export const router = createRouter({
     { path: '/feedback', component: () => import('./pages/FeedbackPage.vue'), meta: { title: '学习反馈' } },
     { path: '/library', component: () => import('./pages/LibraryPage.vue'), meta: { title: '课程资料库' } },
     { path: '/methods', component: () => import('./pages/MethodsPage.vue'), meta: { title: '望闻问切' } },
+    { path: '/geography', redirect: '/geography/tianmu' },
+    { path: '/geography/tianmu', component: () => import('./pages/GeographyPage.vue'), meta: { title: '垂直地带性探究' } },
+    { path: '/geography/atlas', component: () => import('./pages/GeographyPage.vue'), meta: { title: '星球植被图鉴' } },
     { path: '/:pathMatch(.*)*', redirect: '/' },
   ],
 })

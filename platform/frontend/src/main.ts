@@ -4,6 +4,7 @@ import App from './App.vue'
 import { router } from './router'
 import './style.css'
 import './course.css'
+import './geography.css'
 import { handleDemoDownload } from './demo'
 
 document.addEventListener('click', handleDemoDownload)

@@ -1,0 +1,290 @@
+{
+  "imported_on": "2026-11-04",
+  "sources": [
+    {
+      "file": "【经纬度地带性】星球植被图鉴.html",
+      "sha256": "45579ad22051f4b56d4ef06cf69a446c502374f078e4d728bc539a322748970a"
+    },
+    {
+      "file": "西天目山_模型与图表优化版_V9_20261104.html",
+      "sha256": "ca0d8ef6735ea2b05a9d6a14d6b9aba65f264fec4c965a4e1f6b7b604ad0960b"
+    }
+  ],
+  "tianmu_version": "9.0.0",
+  "pages": 26,
+  "datasets": 32,
+  "charts": 13,
+  "images": [
+    {
+      "path": "images/2faa400d1eade3bc44ca.webp",
+      "original_sha256": "2faa400d1eade3bc44caf6750d1b772bd9bbb6d87362c02bc7c3304e78fa0a9d",
+      "bytes": 333714
+    },
+    {
+      "path": "images/3fc43e9639c34e8223c4.webp",
+      "original_sha256": "3fc43e9639c34e8223c4a871e3bdf5b2d52ee79f7e89ce3f28cba45d4cac031a",
+      "bytes": 222846
+    },
+    {
+      "path": "images/2df48906732d7a458b2d.webp",
+      "original_sha256": "2df48906732d7a458b2d0a7cdec51a829262307c6bdee4cfdf079a4dd7c71c69",
+      "bytes": 162334
+    },
+    {
+      "path": "images/c4d851f737986fe0db1f.webp",
+      "original_sha256": "c4d851f737986fe0db1f294ff029c0748edb3a307a60d2e82ca95352e09bb2ae",
+      "bytes": 1155036
+    },
+    {
+      "path": "images/5e0086f70be7c794a7ef.webp",
+      "original_sha256": "5e0086f70be7c794a7ef55933625b43feaf8e1528eff8daea29e14125e5494e5",
+      "bytes": 968052
+    },
+    {
+      "path": "images/4d6b57c14e791e16981a.webp",
+      "original_sha256": "4d6b57c14e791e16981a1ac5a93019aee0c570f5c9fd99d964538e7210425c12",
+      "bytes": 1108786
+    },
+    {
+      "path": "images/5a30364ae23f480dcd7d.webp",
+      "original_sha256": "5a30364ae23f480dcd7d151b9372adab8550d86d07eda3125c5b7cbd07a01d38",
+      "bytes": 432422
+    },
+    {
+      "path": "images/a348f4c44bf828a28e42.webp",
+      "original_sha256": "a348f4c44bf828a28e422cccc43fd7a466bff3e25a3091979dc2933a34a67f45",
+      "bytes": 610948
+    },
+    {
+      "path": "images/e6797d466c3f2010622a.webp",
+      "original_sha256": "e6797d466c3f2010622af646040d158e6efe415469ea32246e07f5dd0b1c1849",
+      "bytes": 507592
+    },
+    {
+      "path": "images/ce0b302806bd261de600.webp",
+      "original_sha256": "ce0b302806bd261de600c33511b5f7d86c7dd1ba0749f08543801866e9dac59c",
+      "bytes": 390002
+    },
+    {
+      "path": "images/b167f74f1071464ebb85.webp",
+      "original_sha256": "b167f74f1071464ebb857647a35f9fbdd88f582d031683db9970796a63e47e71",
+      "bytes": 546470
+    },
+    {
+      "path": "images/812bc436b18a94093bd9.webp",
+      "original_sha256": "812bc436b18a94093bd95b765b333f8224c61ae514829c3717e600bd2e2483bc",
+      "bytes": 621316
+    },
+    {
+      "path": "images/401d7d2b308b3dbee2a2.webp",
+      "original_sha256": "401d7d2b308b3dbee2a20975462c4bc4e8739e521b760293aec5363b63aaa007",
+      "bytes": 357084
+    },
+    {
+      "path": "images/813d1123c55999fecebb.webp",
+      "original_sha256": "813d1123c55999fecebbe62d504a0e82318e4cd7a87f3a8e85f1fb68a4bb9e5c",
+      "bytes": 636392
+    },
+    {
+      "path": "images/088a007e61397532eb17.webp",
+      "original_sha256": "088a007e61397532eb17cfee497f5cac771de8844ec8a918b29dd7dc05c21f33",
+      "bytes": 319074
+    },
+    {
+      "path": "images/8dea69707acf2422c25f.webp",
+      "original_sha256": "8dea69707acf2422c25f7107e2e8f973b4fc71e8ebbf276767574be357258e25",
+      "bytes": 519216
+    },
+    {
+      "path": "images/5246d289aae64dbbef74.webp",
+      "original_sha256": "5246d289aae64dbbef7473b75d804daa70d6004c6d828ed5d8099fd0f5bbce19",
+      "bytes": 75286
+    },
+    {
+      "path": "images/22533acb9fbd222be3bf.webp",
+      "original_sha256": "22533acb9fbd222be3bfc9d5669b695e25cee2840d19ba83a1c7c0b1b9bb0a66",
+      "bytes": 83420
+    },
+    {
+      "path": "images/8d287810fdd71ef71af9.webp",
+      "original_sha256": "8d287810fdd71ef71af91f6cc209935c9f44d871b497a29b0cbd0e779ba2e797",
+      "bytes": 76248
+    },
+    {
+      "path": "images/7f3e969384b2dd97f085.webp",
+      "original_sha256": "7f3e969384b2dd97f08549cd479e31e715977cd53c5f458fdf3a569ca8329ddc",
+      "bytes": 84362
+    },
+    {
+      "path": "images/d4780383bf9d90120439.webp",
+      "original_sha256": "d4780383bf9d9012043952fcc030251d7228040c35dcb0d9551a8a4e4e9cbd8d",
+      "bytes": 211800
+    },
+    {
+      "path": "images/84bfd8e359e21c1ada8d.webp",
+      "original_sha256": "84bfd8e359e21c1ada8d4b87a38d648440bafef330a306de21848c7d5a0ccf47",
+      "bytes": 139088
+    },
+    {
+      "path": "images/5bb5cc200d0587505b42.webp",
+      "original_sha256": "5bb5cc200d0587505b424d781d73755fcf97bdc295d0ae9ed00da7ffc32fde8d",
+      "bytes": 20476
+    },
+    {
+      "path": "images/9ead6d168c3f1508af5c.webp",
+      "original_sha256": "9ead6d168c3f1508af5c0a77f63021acf1879b46b1a02b15496bd99482ea7f21",
+      "bytes": 109130
+    },
+    {
+      "path": "images/4bc296840f6aa84ed9e7.webp",
+      "original_sha256": "4bc296840f6aa84ed9e74af782ff54a7a9e5d4a2766658b841d87fa2dd5d69f4",
+      "bytes": 67112
+    },
+    {
+      "path": "images/87be90d480583c8cd670.webp",
+      "original_sha256": "87be90d480583c8cd6702fa525bacc9722eca0f5ccae5b7ff369c6336eb77a7a",
+      "bytes": 65806
+    },
+    {
+      "path": "images/eb7df4d3a0023e339b6e.webp",
+      "original_sha256": "eb7df4d3a0023e339b6ecbe9751200790690adf975c2bc462e40620246df1698",
+      "bytes": 379554
+    },
+    {
+      "path": "images/ec3ede935d0f8b76a2b7.webp",
+      "original_sha256": "ec3ede935d0f8b76a2b781d07c852ece85960e0d81898daad265728751c686ad",
+      "bytes": 79656
+    },
+    {
+      "path": "images/bf6e7f6ebd0356315c12.webp",
+      "original_sha256": "bf6e7f6ebd0356315c12222af9471f6bd140f574671f7d81579b7b546b4fe1c9",
+      "bytes": 28318
+    },
+    {
+      "path": "images/7cc42a16ce7b8c1176d7.webp",
+      "original_sha256": "7cc42a16ce7b8c1176d7c8e7f366fe7e191eb7ca41b68137aee822446b06738d",
+      "bytes": 82024
+    },
+    {
+      "path": "images/8e4374fc16807a12fb09.webp",
+      "original_sha256": "8e4374fc16807a12fb09e82bb31c5baef8bc0855c361f7f04bcfd6377ac0a249",
+      "bytes": 131562
+    },
+    {
+      "path": "images/273979ce6fad10872be0.webp",
+      "original_sha256": "273979ce6fad10872be0b4cec693803b4ffc58ed7140ff069347e9c3955562c9",
+      "bytes": 38944
+    },
+    {
+      "path": "images/0460ad262714f6a3ddc6.webp",
+      "original_sha256": "0460ad262714f6a3ddc60ae0b2b143f62565fbbf565e677eab4118bd3ae3ff11",
+      "bytes": 79564
+    },
+    {
+      "path": "images/6f36ca519930ad21561d.webp",
+      "original_sha256": "6f36ca519930ad21561d94040f530a92e5b8776e324376a6d9b06f690ab1ff20",
+      "bytes": 121768
+    },
+    {
+      "path": "images/d39c2c08c71f2d2ca221.webp",
+      "original_sha256": "d39c2c08c71f2d2ca221b14866d21955d17c0fd53190297f5f997a4ebbca9101",
+      "bytes": 136442
+    },
+    {
+      "path": "images/6b7dbe61043728361ff9.webp",
+      "original_sha256": "6b7dbe61043728361ff97cf7d7ae6c4f1a4dd4374f3604f5358e76d2af57b1c5",
+      "bytes": 56044
+    },
+    {
+      "path": "images/d475ccc885a76305aad0.webp",
+      "original_sha256": "d475ccc885a76305aad0ac79c660147775836e4205654ad27e2126e0e883d9be",
+      "bytes": 113304
+    },
+    {
+      "path": "images/f988290c0370d71c294e.webp",
+      "original_sha256": "f988290c0370d71c294ed74b05b7034a5d5310a7d279db9bd068a949df968da5",
+      "bytes": 34220
+    },
+    {
+      "path": "images/b90328c8cd8c804b283c.webp",
+      "original_sha256": "b90328c8cd8c804b283c8602d645373b6ffb50fa6f6e6162dac7f03a8eaf874a",
+      "bytes": 42980
+    },
+    {
+      "path": "images/9e3b945938ab2fadb8f0.webp",
+      "original_sha256": "9e3b945938ab2fadb8f06d566add49f9b558a1bae1c12964b24b963cca967630",
+      "bytes": 99332
+    },
+    {
+      "path": "images/c63b75bbb27c2da4a285.webp",
+      "original_sha256": "c63b75bbb27c2da4a285bdc22c87c16ff8ed225adbce8da516b746085409bfb9",
+      "bytes": 27306
+    },
+    {
+      "path": "images/069fae6f7d9163c15b4f.webp",
+      "original_sha256": "069fae6f7d9163c15b4f0cd1545b80ce2273735ad7d326751d4076fc3113d7fa",
+      "bytes": 187266
+    },
+    {
+      "path": "images/31b161b57a1537427a52.webp",
+      "original_sha256": "31b161b57a1537427a528fe0f5c06070498b18124d8dfaa22fddc6aaebc6d694",
+      "bytes": 298176
+    },
+    {
+      "path": "images/b07b4488563ab09f37fe.webp",
+      "original_sha256": "b07b4488563ab09f37fe905801383f2e2a61e91fb651b7078dc4d4a3f5d4c834",
+      "bytes": 137832
+    },
+    {
+      "path": "images/72fdd549a792dd15d549.webp",
+      "original_sha256": "72fdd549a792dd15d54948223fb0581594d81ebe559882b147154410fe9b326e",
+      "bytes": 52922
+    },
+    {
+      "path": "images/662aa94edd31511a9c93.webp",
+      "original_sha256": "662aa94edd31511a9c936ed1ba77442510c6ade30d484239b667be883ed08938",
+      "bytes": 184622
+    },
+    {
+      "path": "images/d9f2bd95f02f24b5641d.webp",
+      "original_sha256": "d9f2bd95f02f24b5641d5f30a759d097ad70e9887fcfb78c9661b22a905ed2e9",
+      "bytes": 35546
+    },
+    {
+      "path": "images/3a576fe1d48da686666b.webp",
+      "original_sha256": "3a576fe1d48da686666bc2abc62aa241bee97d4dd9eb14071f2cdb4fe077afb9",
+      "bytes": 97852
+    },
+    {
+      "path": "images/fc724bff7b79826d42d7.webp",
+      "original_sha256": "fc724bff7b79826d42d7a95c3ace6b372c613809c382cbf0a96006315025a1e5",
+      "bytes": 88858
+    },
+    {
+      "path": "images/80235df4b89e2284f9df.webp",
+      "original_sha256": "80235df4b89e2284f9dfd2e15e2156a88802ba574941efca967c7ec48a1f955f",
+      "bytes": 51508
+    },
+    {
+      "path": "images/f5849a3b608af71f6eb3.webp",
+      "original_sha256": "f5849a3b608af71f6eb35bd1e78ae8efa775bae00eb095771c081dde73be8bbf",
+      "bytes": 214574
+    },
+    {
+      "path": "images/d9599e3d2e897bb6e390.webp",
+      "original_sha256": "d9599e3d2e897bb6e3902a04f9b440af25a23a90248e74450129f3372aa014cd",
+      "bytes": 107978
+    }
+  ],
+  "original_readers_included": false,
+  "changes": [
+    "Extract inline images as deduplicated WebP files without cropping or resizing.",
+    "Show the climate query only in climate modes so route controls remain clickable.",
+    "Fit the globe to narrow workspace widths without clipping either side.",
+    "Load Tianmu through its existing mount/destroy API and scoped CSS.",
+    "Allow the host to disable the automatic operation tour.",
+    "Skip asynchronous state rendering when the mounted lesson has been destroyed.",
+    "Keep the observation editor open if browser persistence fails.",
+    "Retain citations and source figures; exclude full original-document readers."
+  ]
+}

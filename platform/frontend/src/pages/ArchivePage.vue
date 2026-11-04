@@ -7,6 +7,7 @@ import { formatDate } from '../api'
 import { notify, reportError } from '../notice'
 import { useUnsaved } from '../useUnsaved'
 import type { AnalysisFields } from '../types'
+import GeographyRecords from '../components/GeographyRecords.vue'
 
 const store = useFieldworkStore()
 const route = useRoute()
@@ -60,6 +61,7 @@ async function save(onBoard: boolean) {
   <div class="page-heading"><div><span class="eyebrow">FIELDWORK ARCHIVE</span><h1>科考档案馆</h1></div><RouterLink to="/explore" class="button secondary">继续观察<ArrowRight :size="16" /></RouterLink></div>
   <div class="archive-tabs tab-bar" role="tablist" aria-label="档案馆分区"><button role="tab" :aria-selected="tab === 'collection'" :class="{ active: tab === 'collection' }" @click="setTab('collection')"><Bookmark :size="18" />发现收藏<span class="count-badge">{{ store.favorites.length }}</span></button><button role="tab" :aria-selected="tab === 'workbench'" :class="{ active: tab === 'workbench' }" @click="setTab('workbench')"><ClipboardList :size="18" />证据工作台</button><button role="tab" :aria-selected="tab === 'board'" :class="{ active: tab === 'board' }" @click="setTab('board')"><FileStack :size="18" />研究论证板<span class="count-badge">{{ store.board.length }}</span></button></div>
   <template v-if="tab === 'collection'">
+    <GeographyRecords />
     <section class="section-band"><div class="section-heading"><h2>我的发现收藏</h2><label class="search-field"><Search :size="17" /><input v-model="search" aria-label="搜索收藏" placeholder="搜索资料名称" /></label></div>
       <div v-if="filtered.length" class="resource-grid"><article v-for="item in filtered" :key="item.id" class="resource-card"><RouterLink :to="`/explore?node=${store.resource(item.resource_id).node_id}`" class="resource-image"><img :src="store.resource(item.resource_id).thumbnail" :alt="store.resource(item.resource_id).title" /><span class="media-tag">实景照片</span></RouterLink><div class="resource-content"><span class="status-tag" :class="{ green: store.analyses.some((analysis) => analysis.favorite_id === item.id) }">{{ store.analyses.some((analysis) => analysis.favorite_id === item.id) ? '已有分析' : '等待分析' }}</span><h3>{{ store.resource(item.resource_id).title }}</h3><p class="resource-source">{{ item.source }}</p><div class="resource-actions"><span class="muted small">{{ formatDate(item.created_at) }}</span><button class="text-link" @click="edit(item.resource_id)">分析资料<ArrowRight :size="15" /></button></div></div></article></div>
       <div v-else class="empty-state"><FolderOpen :size="38" :stroke-width="1.3" /><h3>{{ search ? '没有匹配的收藏' : '发现收藏还是空的' }}</h3><p>{{ search ? '试试另一个资料名称。' : '从实景照片中发现值得研究的细节。' }}</p><RouterLink v-if="!search" to="/explore" class="button primary">前往实景观察<ArrowRight :size="16" /></RouterLink></div>

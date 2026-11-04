@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ArrowRight, Check, Compass, FileStack, FolderOpen, NotebookPen, Sprout } from 'lucide-vue-next'
+import { ArrowRight, Check, Compass, FileStack, FolderOpen, Globe2, Mountain, NotebookPen, Sprout } from 'lucide-vue-next'
 import { useFieldworkStore } from '../stores/fieldwork'
 import { formatDate } from '../api'
 
@@ -25,6 +25,7 @@ const stats = computed(() => [
     <span class="photo-credit">团队实拍 · 普通照片</span>
   </section>
   <section class="learning-entry"><div><h2>先学会观察植物</h2><p>从柳杉示范出发，练习望、闻、问、切，再进入垂直样带考察。</p></div><RouterLink to="/methods" class="button primary">开始方法学习<ArrowRight :size="16"/></RouterLink><RouterLink to="/explore?view=terrain" class="button secondary">垂直样带考察<ArrowRight :size="16"/></RouterLink></section>
+  <section class="geography-entry" aria-label="地带性探究入口"><RouterLink to="/geography/tianmu"><Mountain :size="25"/><div><h2>西天目山 · 垂直地带性</h2><p>比较气候、土壤和植被，寻找山地分异的依据。</p></div><ArrowRight :size="18"/></RouterLink><RouterLink to="/geography/atlas"><Globe2 :size="25"/><div><h2>星球植被图鉴</h2><p>走向全球，比较纬度与干湿度地带性。</p></div><ArrowRight :size="18"/></RouterLink></section>
   <div class="overview-title"><div><span class="eyebrow">MY FIELD NOTES</span><h2>我的研学工作台</h2></div><span class="muted small">个人试学 · 本机保存</span></div>
   <div class="stats-row">
     <RouterLink v-for="stat in stats" :key="stat.title" :to="stat.href" class="stat-item"><span class="stat-icon"><component :is="stat.icon" :size="22" /></span><div><strong>{{ stat.value }}<small> 条</small></strong><span>{{ stat.title }}</span></div><ArrowRight :size="17" /></RouterLink>

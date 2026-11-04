@@ -1,0 +1,47 @@
+/* Adapt the supplied full-screen atlas to the course workspace. */
+* { letter-spacing: 0 !important; }
+button { border-radius: 6px; }
+.top { top: 14px; left: 16px; right: 16px; }
+.top > div:first-child, .leftStatement, .leftBottom, .notes { display: none; }
+.headerActions { width: 100%; justify-content: flex-start; gap: 6px; }
+.headerActions button { font-size: 12px; }
+.headerActions button.active { color: #09241e; background: #b2edca; border-color: #b2edca; }
+.side { top: 76px; right: 16px; bottom: 150px; width: 248px; padding: 14px; border-radius: 8px; }
+.side .small { font-size: 11px; }
+.biomeBtn { min-width: 0; padding: 8px; }
+.biomeBtn > span:nth-child(2) { min-width: 0; }
+.biomeBtn strong { overflow-wrap: anywhere; }
+.focus { grid-template-columns: 62px 1fr; }
+.focus canvas { width: 62px; height: 62px; }
+.dock { bottom: 28px; width: calc(100% - 32px); max-width: 850px; border-radius: 8px; padding: 10px; }
+.dockSub { display: none; }
+.modes button { min-height: 38px; padding: 7px; }
+.sources { left: 16px; right: 16px; bottom: 5px; font-size: 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.legend { left: 16px; bottom: 118px; padding: 9px; }
+.popup { left: 16px; bottom: 220px; width: min(330px, calc(100% - 32px)); }
+#referencePanel { left: 16px; bottom: 110px; width: min(500px, calc(100% - 32px)); }
+.error { top: 65px; max-width: calc(100% - 30px); }
+#biomeMenu { display: none; }
+@media (max-width: 700px) {
+  .top { left: 10px; right: 10px; top: 10px; }
+  .headerActions { gap: 5px; }
+  .headerActions button { font-size: 11px; padding: 7px 8px; min-height: 34px; }
+  #biomeMenu { display: inline-block; }
+  .side { top: 94px; right: 10px; left: 10px; bottom: auto; width: auto; height: auto; max-height: 260px; z-index: 8; padding: 10px; }
+  .side .small, .focus { display: none; }
+  .sideHead { margin-bottom: 8px; }
+  .biomes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; }
+  .biomeBtn { min-height: 37px; gap: 8px; padding: 5px 8px; }
+  .biomeBtn small { display: none; }
+  .biomeBtn strong { font-size: 12px; }
+  .swatch { height: 22px; flex-shrink: 0; }
+  .dock { bottom: 25px; width: calc(100% - 20px); padding: 7px; }
+  .modes { gap: 3px; }
+  .modes button { flex: 1 1 30%; min-height: 36px; font-size: 11px; padding: 6px 3px; }
+  .legend { left: 10px; bottom: 124px; }
+  .popup { left: 10px; bottom: 214px; width: calc(100% - 20px); padding: 10px; }
+  .popup p { font-size: 11px; }
+  .popup { top: 110px; bottom: auto; }
+  #referencePanel { left: 10px; bottom: 125px; width: calc(100% - 20px); max-height: 65%; }
+  .sources { display: block; left: 10px; right: 10px; }
+}

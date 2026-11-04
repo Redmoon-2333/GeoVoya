@@ -60,7 +60,7 @@ async function collect() {
 </script>
 
 <template>
-  <div class="page-heading"><div><span class="eyebrow">SPATIAL EXPLORATION</span><h1>空间探索</h1></div><RouterLink to="/inquiry" class="button secondary">专题探究<ArrowRight :size="16" /></RouterLink></div>
+  <div class="page-heading"><div><span class="eyebrow">SPATIAL EXPLORATION</span><h1>空间探索</h1></div><div class="explore-course-links"><RouterLink to="/geography/tianmu" class="button secondary">地带性探究<ArrowRight :size="16" /></RouterLink><RouterLink to="/inquiry" class="button secondary">专题探究<ArrowRight :size="16" /></RouterLink></div></div>
   <div class="explore-layout">
     <section class="explore-main">
       <div class="tab-bar" role="tablist" aria-label="空间视图"><button role="tab" :aria-selected="mode === 'terrain'" :class="{ active: mode === 'terrain' }" @click="setMode('terrain')"><Mountain :size="17" />数字沙盘</button><button role="tab" :aria-selected="mode === 'profile'" :class="{ active: mode === 'profile' }" @click="setMode('profile')"><Route :size="17" />山地剖面</button><button role="tab" :aria-selected="mode === 'panorama'" :class="{ active: mode === 'panorama' }" @click="setMode('panorama')"><Maximize2 :size="17" />360° 全景</button><button role="tab" :aria-selected="mode === 'photo'" :class="{ active: mode === 'photo' }" @click="setMode('photo')"><Image :size="17" />实景观察</button></div>
