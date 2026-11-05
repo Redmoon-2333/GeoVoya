@@ -5,6 +5,7 @@ import { ArrowRight, Bot, ChevronDown, Compass, Lightbulb, LoaderCircle, Message
 import { useFieldworkStore } from '../stores/fieldwork'
 import { reportError } from '../notice'
 import { focusIfActive } from '../focus'
+import { start } from '../onboarding'
 
 const open = ref(false)
 const expanded = ref(false)
@@ -23,8 +24,13 @@ const route = useRoute()
 const messages = ref<{ role: 'guide' | 'student'; text: string; sources?: string[] }[]>([])
 const hint = computed(() => {
   switch (route.path) {
+    case '/': return ['先看课程介绍和西天目山考察导览，再按五个板块依次推进。', '板块顺序只是推荐，随时可以从顶栏或研学路线跳到你需要的环节。']
+    case '/methods': return ['望闻问切的入门题可以帮助你练习区分事实与解释。', '先自己观察选项，再点开知识卡核对依据；答对后可以进入案例和下一步考察。']
+    case '/library': return ['按植被、土壤、气候或方法筛选，找到与当前问题直接相关的摘要。', '把资料加入待读，再回到专题探究里说明它和你的问题有什么关系。']
     case '/explore': return ['先记录你在画面中能直接看到的内容，再把推测放进“疑问”。', '比较两张照片时，留意拍摄方向、光照与范围是否相同。画面差异不一定代表真实的环境变化。']
     case '/inquiry': return ['把驱动性问题拆成能观察、能比较、能查证的小问题。', '先提出一种可能解释，再写出：如果解释成立，应该找到什么资料？也要寻找可能反驳它的证据。']
+    case '/geography/tianmu': return ['沿山地比较各海拔带的气候、土壤与植被，先描述差异再找依据。', '收藏或记下观察后会进入档案馆，可以回来核对相同的课程页。']
+    case '/geography/atlas': return ['在全球视角里比较纬度与干湿度地带性，注意区分示意与实测。', '把西天目山的经验放到全球图鉴中检验，想清楚哪些结论不能直接迁移。']
     case '/archive': return ['收藏是研究的起点。想把资料用作证据，还需要说明它与问题的关系。', '分别写清“看到了什么”“能说明什么”“还缺什么”。不确定时可以保留判断，无需强行选择支持或削弱。']
     case '/outcomes': return ['把问题、证据、推理和局限连起来，让读者能顺着出处回到原始资料。', '检查正文是否超出证据范围。照片可以支持可见现象，变化趋势和成因还需要对照、时间序列或其他资料。']
     case '/feedback': return ['回看一条观察，看看你的解释因哪些资料发生了变化。', '过程提示帮助发现缺漏，不代替科学评价。优先补充与你的核心解释直接相关的材料。']
@@ -76,5 +82,6 @@ async function ask(value = question.value) {
     <p v-if="error" class="form-error" role="alert">{{ error }}</p>
     <button class="button subtle full" @click="expanded = !expanded"><MessageCircle :size="16" />{{ expanded ? '收起方法提示' : '展开方法提示' }}<ChevronDown :size="15" /></button>
     <RouterLink to="/explore" class="button primary full" @click="open = false"><Compass :size="16" />回到实景观察<ArrowRight :size="16" /></RouterLink>
+    <button class="button subtle full" @click="open = false; start()"><Lightbulb :size="16" />重新查看新手引导</button>
   </section>
 </template>

@@ -1,16 +1,16 @@
 {
-  "imported_on": "2026-11-04",
+  "imported_on": "2026-11-05",
   "sources": [
     {
       "file": "【经纬度地带性】星球植被图鉴.html",
       "sha256": "45579ad22051f4b56d4ef06cf69a446c502374f078e4d728bc539a322748970a"
     },
     {
-      "file": "西天目山_模型与图表优化版_V9_20261104.html",
-      "sha256": "ca0d8ef6735ea2b05a9d6a14d6b9aba65f264fec4c965a4e1f6b7b604ad0960b"
+      "file": "西天目山_场景与阅读交互升级版_V11_20261104.html",
+      "sha256": "3db9f17299e8797a8d83ea8452310ca469b633e2b410b4afdf204463c4f0c7b8"
     }
   ],
-  "tianmu_version": "9.0.0",
+  "tianmu_version": "11.0.0",
   "pages": 26,
   "datasets": 32,
   "charts": 13,
@@ -56,9 +56,39 @@
       "bytes": 610948
     },
     {
+      "path": "images/8dea69707acf2422c25f.webp",
+      "original_sha256": "8dea69707acf2422c25f7107e2e8f973b4fc71e8ebbf276767574be357258e25",
+      "bytes": 519216
+    },
+    {
+      "path": "images/87844033495189d0f5a3.webp",
+      "original_sha256": "87844033495189d0f5a3a2cdb8d537a8fd00db123e2fd474f167b2a2b8af64da",
+      "bytes": 458802
+    },
+    {
+      "path": "images/401d7d2b308b3dbee2a2.webp",
+      "original_sha256": "401d7d2b308b3dbee2a20975462c4bc4e8739e521b760293aec5363b63aaa007",
+      "bytes": 357084
+    },
+    {
+      "path": "images/088a007e61397532eb17.webp",
+      "original_sha256": "088a007e61397532eb17cfee497f5cac771de8844ec8a918b29dd7dc05c21f33",
+      "bytes": 319074
+    },
+    {
+      "path": "images/813d1123c55999fecebb.webp",
+      "original_sha256": "813d1123c55999fecebbe62d504a0e82318e4cd7a87f3a8e85f1fb68a4bb9e5c",
+      "bytes": 636392
+    },
+    {
       "path": "images/e6797d466c3f2010622a.webp",
       "original_sha256": "e6797d466c3f2010622af646040d158e6efe415469ea32246e07f5dd0b1c1849",
       "bytes": 507592
+    },
+    {
+      "path": "images/812bc436b18a94093bd9.webp",
+      "original_sha256": "812bc436b18a94093bd95b765b333f8224c61ae514829c3717e600bd2e2483bc",
+      "bytes": 621316
     },
     {
       "path": "images/ce0b302806bd261de600.webp",
@@ -71,29 +101,9 @@
       "bytes": 546470
     },
     {
-      "path": "images/812bc436b18a94093bd9.webp",
-      "original_sha256": "812bc436b18a94093bd95b765b333f8224c61ae514829c3717e600bd2e2483bc",
-      "bytes": 621316
-    },
-    {
-      "path": "images/401d7d2b308b3dbee2a2.webp",
-      "original_sha256": "401d7d2b308b3dbee2a20975462c4bc4e8739e521b760293aec5363b63aaa007",
-      "bytes": 357084
-    },
-    {
-      "path": "images/813d1123c55999fecebb.webp",
-      "original_sha256": "813d1123c55999fecebbe62d504a0e82318e4cd7a87f3a8e85f1fb68a4bb9e5c",
-      "bytes": 636392
-    },
-    {
-      "path": "images/088a007e61397532eb17.webp",
-      "original_sha256": "088a007e61397532eb17cfee497f5cac771de8844ec8a918b29dd7dc05c21f33",
-      "bytes": 319074
-    },
-    {
-      "path": "images/8dea69707acf2422c25f.webp",
-      "original_sha256": "8dea69707acf2422c25f7107e2e8f973b4fc71e8ebbf276767574be357258e25",
-      "bytes": 519216
+      "path": "images/c4c80247eeb7e69d6b12.webp",
+      "original_sha256": "c4c80247eeb7e69d6b1254e519399b8ea17a7514e17fbea6d6b1876bb8a74b05",
+      "bytes": 661412
     },
     {
       "path": "images/5246d289aae64dbbef74.webp",
@@ -106,14 +116,19 @@
       "bytes": 83420
     },
     {
+      "path": "images/7f3e969384b2dd97f085.webp",
+      "original_sha256": "7f3e969384b2dd97f08549cd479e31e715977cd53c5f458fdf3a569ca8329ddc",
+      "bytes": 84362
+    },
+    {
       "path": "images/8d287810fdd71ef71af9.webp",
       "original_sha256": "8d287810fdd71ef71af91f6cc209935c9f44d871b497a29b0cbd0e779ba2e797",
       "bytes": 76248
     },
     {
-      "path": "images/7f3e969384b2dd97f085.webp",
-      "original_sha256": "7f3e969384b2dd97f08549cd479e31e715977cd53c5f458fdf3a569ca8329ddc",
-      "bytes": 84362
+      "path": "images/b07b4488563ab09f37fe.webp",
+      "original_sha256": "b07b4488563ab09f37fe905801383f2e2a61e91fb651b7078dc4d4a3f5d4c834",
+      "bytes": 137832
     },
     {
       "path": "images/d4780383bf9d90120439.webp",
@@ -121,14 +136,99 @@
       "bytes": 211800
     },
     {
-      "path": "images/84bfd8e359e21c1ada8d.webp",
-      "original_sha256": "84bfd8e359e21c1ada8d4b87a38d648440bafef330a306de21848c7d5a0ccf47",
-      "bytes": 139088
+      "path": "images/ec3ede935d0f8b76a2b7.webp",
+      "original_sha256": "ec3ede935d0f8b76a2b781d07c852ece85960e0d81898daad265728751c686ad",
+      "bytes": 79656
+    },
+    {
+      "path": "images/f5849a3b608af71f6eb3.webp",
+      "original_sha256": "f5849a3b608af71f6eb35bd1e78ae8efa775bae00eb095771c081dde73be8bbf",
+      "bytes": 214574
+    },
+    {
+      "path": "images/72fdd549a792dd15d549.webp",
+      "original_sha256": "72fdd549a792dd15d54948223fb0581594d81ebe559882b147154410fe9b326e",
+      "bytes": 52922
+    },
+    {
+      "path": "images/c63b75bbb27c2da4a285.webp",
+      "original_sha256": "c63b75bbb27c2da4a285bdc22c87c16ff8ed225adbce8da516b746085409bfb9",
+      "bytes": 27306
+    },
+    {
+      "path": "images/eb7df4d3a0023e339b6e.webp",
+      "original_sha256": "eb7df4d3a0023e339b6ecbe9751200790690adf975c2bc462e40620246df1698",
+      "bytes": 379554
     },
     {
       "path": "images/5bb5cc200d0587505b42.webp",
       "original_sha256": "5bb5cc200d0587505b424d781d73755fcf97bdc295d0ae9ed00da7ffc32fde8d",
       "bytes": 20476
+    },
+    {
+      "path": "images/6f36ca519930ad21561d.webp",
+      "original_sha256": "6f36ca519930ad21561d94040f530a92e5b8776e324376a6d9b06f690ab1ff20",
+      "bytes": 121768
+    },
+    {
+      "path": "images/87be90d480583c8cd670.webp",
+      "original_sha256": "87be90d480583c8cd6702fa525bacc9722eca0f5ccae5b7ff369c6336eb77a7a",
+      "bytes": 65806
+    },
+    {
+      "path": "images/fc724bff7b79826d42d7.webp",
+      "original_sha256": "fc724bff7b79826d42d7a95c3ace6b372c613809c382cbf0a96006315025a1e5",
+      "bytes": 88858
+    },
+    {
+      "path": "images/bf6e7f6ebd0356315c12.webp",
+      "original_sha256": "bf6e7f6ebd0356315c12222af9471f6bd140f574671f7d81579b7b546b4fe1c9",
+      "bytes": 28318
+    },
+    {
+      "path": "images/84bfd8e359e21c1ada8d.webp",
+      "original_sha256": "84bfd8e359e21c1ada8d4b87a38d648440bafef330a306de21848c7d5a0ccf47",
+      "bytes": 139088
+    },
+    {
+      "path": "images/d9599e3d2e897bb6e390.webp",
+      "original_sha256": "d9599e3d2e897bb6e3902a04f9b440af25a23a90248e74450129f3372aa014cd",
+      "bytes": 107978
+    },
+    {
+      "path": "images/3a576fe1d48da686666b.webp",
+      "original_sha256": "3a576fe1d48da686666bc2abc62aa241bee97d4dd9eb14071f2cdb4fe077afb9",
+      "bytes": 97852
+    },
+    {
+      "path": "images/d475ccc885a76305aad0.webp",
+      "original_sha256": "d475ccc885a76305aad0ac79c660147775836e4205654ad27e2126e0e883d9be",
+      "bytes": 113304
+    },
+    {
+      "path": "images/7cc42a16ce7b8c1176d7.webp",
+      "original_sha256": "7cc42a16ce7b8c1176d7c8e7f366fe7e191eb7ca41b68137aee822446b06738d",
+      "bytes": 82024
+    },
+    {
+      "path": "images/662aa94edd31511a9c93.webp",
+      "original_sha256": "662aa94edd31511a9c936ed1ba77442510c6ade30d484239b667be883ed08938",
+      "bytes": 184622
+    },
+    {
+      "path": "images/069fae6f7d9163c15b4f.webp",
+      "original_sha256": "069fae6f7d9163c15b4f0cd1545b80ce2273735ad7d326751d4076fc3113d7fa",
+      "bytes": 187266
+    },
+    {
+      "path": "images/f988290c0370d71c294e.webp",
+      "original_sha256": "f988290c0370d71c294ed74b05b7034a5d5310a7d279db9bd068a949df968da5",
+      "bytes": 34220
+    },
+    {
+      "path": "images/9e3b945938ab2fadb8f0.webp",
+      "original_sha256": "9e3b945938ab2fadb8f06d566add49f9b558a1bae1c12964b24b963cca967630",
+      "bytes": 99332
     },
     {
       "path": "images/9ead6d168c3f1508af5c.webp",
@@ -141,54 +241,9 @@
       "bytes": 67112
     },
     {
-      "path": "images/87be90d480583c8cd670.webp",
-      "original_sha256": "87be90d480583c8cd6702fa525bacc9722eca0f5ccae5b7ff369c6336eb77a7a",
-      "bytes": 65806
-    },
-    {
-      "path": "images/eb7df4d3a0023e339b6e.webp",
-      "original_sha256": "eb7df4d3a0023e339b6ecbe9751200790690adf975c2bc462e40620246df1698",
-      "bytes": 379554
-    },
-    {
-      "path": "images/ec3ede935d0f8b76a2b7.webp",
-      "original_sha256": "ec3ede935d0f8b76a2b781d07c852ece85960e0d81898daad265728751c686ad",
-      "bytes": 79656
-    },
-    {
-      "path": "images/bf6e7f6ebd0356315c12.webp",
-      "original_sha256": "bf6e7f6ebd0356315c12222af9471f6bd140f574671f7d81579b7b546b4fe1c9",
-      "bytes": 28318
-    },
-    {
-      "path": "images/7cc42a16ce7b8c1176d7.webp",
-      "original_sha256": "7cc42a16ce7b8c1176d7c8e7f366fe7e191eb7ca41b68137aee822446b06738d",
-      "bytes": 82024
-    },
-    {
-      "path": "images/8e4374fc16807a12fb09.webp",
-      "original_sha256": "8e4374fc16807a12fb09e82bb31c5baef8bc0855c361f7f04bcfd6377ac0a249",
-      "bytes": 131562
-    },
-    {
-      "path": "images/273979ce6fad10872be0.webp",
-      "original_sha256": "273979ce6fad10872be0b4cec693803b4ffc58ed7140ff069347e9c3955562c9",
-      "bytes": 38944
-    },
-    {
-      "path": "images/0460ad262714f6a3ddc6.webp",
-      "original_sha256": "0460ad262714f6a3ddc60ae0b2b143f62565fbbf565e677eab4118bd3ae3ff11",
-      "bytes": 79564
-    },
-    {
-      "path": "images/6f36ca519930ad21561d.webp",
-      "original_sha256": "6f36ca519930ad21561d94040f530a92e5b8776e324376a6d9b06f690ab1ff20",
-      "bytes": 121768
-    },
-    {
-      "path": "images/d39c2c08c71f2d2ca221.webp",
-      "original_sha256": "d39c2c08c71f2d2ca221b14866d21955d17c0fd53190297f5f997a4ebbca9101",
-      "bytes": 136442
+      "path": "images/80235df4b89e2284f9df.webp",
+      "original_sha256": "80235df4b89e2284f9dfd2e15e2156a88802ba574941efca967c7ec48a1f955f",
+      "bytes": 51508
     },
     {
       "path": "images/6b7dbe61043728361ff9.webp",
@@ -196,34 +251,14 @@
       "bytes": 56044
     },
     {
-      "path": "images/d475ccc885a76305aad0.webp",
-      "original_sha256": "d475ccc885a76305aad0ac79c660147775836e4205654ad27e2126e0e883d9be",
-      "bytes": 113304
+      "path": "images/273979ce6fad10872be0.webp",
+      "original_sha256": "273979ce6fad10872be0b4cec693803b4ffc58ed7140ff069347e9c3955562c9",
+      "bytes": 38944
     },
     {
-      "path": "images/f988290c0370d71c294e.webp",
-      "original_sha256": "f988290c0370d71c294ed74b05b7034a5d5310a7d279db9bd068a949df968da5",
-      "bytes": 34220
-    },
-    {
-      "path": "images/b90328c8cd8c804b283c.webp",
-      "original_sha256": "b90328c8cd8c804b283c8602d645373b6ffb50fa6f6e6162dac7f03a8eaf874a",
-      "bytes": 42980
-    },
-    {
-      "path": "images/9e3b945938ab2fadb8f0.webp",
-      "original_sha256": "9e3b945938ab2fadb8f06d566add49f9b558a1bae1c12964b24b963cca967630",
-      "bytes": 99332
-    },
-    {
-      "path": "images/c63b75bbb27c2da4a285.webp",
-      "original_sha256": "c63b75bbb27c2da4a285bdc22c87c16ff8ed225adbce8da516b746085409bfb9",
-      "bytes": 27306
-    },
-    {
-      "path": "images/069fae6f7d9163c15b4f.webp",
-      "original_sha256": "069fae6f7d9163c15b4f0cd1545b80ce2273735ad7d326751d4076fc3113d7fa",
-      "bytes": 187266
+      "path": "images/8e4374fc16807a12fb09.webp",
+      "original_sha256": "8e4374fc16807a12fb09e82bb31c5baef8bc0855c361f7f04bcfd6377ac0a249",
+      "bytes": 131562
     },
     {
       "path": "images/31b161b57a1537427a52.webp",
@@ -231,19 +266,9 @@
       "bytes": 298176
     },
     {
-      "path": "images/b07b4488563ab09f37fe.webp",
-      "original_sha256": "b07b4488563ab09f37fe905801383f2e2a61e91fb651b7078dc4d4a3f5d4c834",
-      "bytes": 137832
-    },
-    {
-      "path": "images/72fdd549a792dd15d549.webp",
-      "original_sha256": "72fdd549a792dd15d54948223fb0581594d81ebe559882b147154410fe9b326e",
-      "bytes": 52922
-    },
-    {
-      "path": "images/662aa94edd31511a9c93.webp",
-      "original_sha256": "662aa94edd31511a9c936ed1ba77442510c6ade30d484239b667be883ed08938",
-      "bytes": 184622
+      "path": "images/0460ad262714f6a3ddc6.webp",
+      "original_sha256": "0460ad262714f6a3ddc60ae0b2b143f62565fbbf565e677eab4118bd3ae3ff11",
+      "bytes": 79564
     },
     {
       "path": "images/d9f2bd95f02f24b5641d.webp",
@@ -251,34 +276,344 @@
       "bytes": 35546
     },
     {
-      "path": "images/3a576fe1d48da686666b.webp",
-      "original_sha256": "3a576fe1d48da686666bc2abc62aa241bee97d4dd9eb14071f2cdb4fe077afb9",
-      "bytes": 97852
+      "path": "images/d39c2c08c71f2d2ca221.webp",
+      "original_sha256": "d39c2c08c71f2d2ca221b14866d21955d17c0fd53190297f5f997a4ebbca9101",
+      "bytes": 136442
     },
     {
-      "path": "images/fc724bff7b79826d42d7.webp",
-      "original_sha256": "fc724bff7b79826d42d7a95c3ace6b372c613809c382cbf0a96006315025a1e5",
-      "bytes": 88858
+      "path": "images/b90328c8cd8c804b283c.webp",
+      "original_sha256": "b90328c8cd8c804b283c8602d645373b6ffb50fa6f6e6162dac7f03a8eaf874a",
+      "bytes": 42980
     },
     {
-      "path": "images/80235df4b89e2284f9df.webp",
-      "original_sha256": "80235df4b89e2284f9dfd2e15e2156a88802ba574941efca967c7ec48a1f955f",
-      "bytes": 51508
+      "path": "tianmu/landmarks/cedar-00.webp",
+      "landmark": "assets/landmarks/cedar-00.webp",
+      "original_sha256": "e2d962206da7281df0cb63ed4c55d816f6b1fe4df425a1701f68705f3233b6c7",
+      "bytes": 523942
     },
     {
-      "path": "images/f5849a3b608af71f6eb3.webp",
-      "original_sha256": "f5849a3b608af71f6eb35bd1e78ae8efa775bae00eb095771c081dde73be8bbf",
-      "bytes": 214574
+      "path": "tianmu/landmarks/tianmu-forest-1.webp",
+      "landmark": "assets/landmarks/tianmu-forest-1.webp",
+      "original_sha256": "f63349bfcddc6ea85a8fd01295a06d02d5ff9d84ffdfdffc008c3d1c1db55b7b",
+      "bytes": 505092
     },
     {
-      "path": "images/d9599e3d2e897bb6e390.webp",
-      "original_sha256": "d9599e3d2e897bb6e3902a04f9b440af25a23a90248e74450129f3372aa014cd",
-      "bytes": 107978
+      "path": "tianmu/landmarks/tianmu-tree.webp",
+      "landmark": "assets/landmarks/tianmu-tree.webp",
+      "original_sha256": "abd792176d2bd2bd10b4a14e33a819c7918cd87dc289a7a285c83b134737d8d7",
+      "bytes": 460444
+    },
+    {
+      "path": "tianmu/landmarks/chanyuan-library.webp",
+      "landmark": "assets/landmarks/chanyuan-library.webp",
+      "original_sha256": "1406365b425dfed2b4439833abfe9a06d58cc34a8e809c5bcfa9f1c5a5724808",
+      "bytes": 409944
+    },
+    {
+      "path": "tianmu/landmarks/chanyuan.webp",
+      "landmark": "assets/landmarks/chanyuan.webp",
+      "original_sha256": "697c8fc6418295f96ec0adf512c772ad0c49af44282bd036cc0ee1057178c9d3",
+      "bytes": 217396
+    },
+    {
+      "path": "tianmu/landmarks/cedar-16.webp",
+      "landmark": "assets/landmarks/cedar-16.webp",
+      "original_sha256": "0ef73f638bd75af1561e631f56f89a37f8a19118a035d600316d3b406a16ef74",
+      "bytes": 444510
+    },
+    {
+      "path": "tianmu/landmarks/dashuwang-2010.webp",
+      "landmark": "assets/landmarks/dashuwang-2010.webp",
+      "original_sha256": "9812175b0496b31b0e452ed7138460a1f623b4c66a3a93e3069e91be06960edb",
+      "bytes": 424736
+    },
+    {
+      "path": "tianmu/landmarks/qili.webp",
+      "landmark": "assets/landmarks/qili.webp",
+      "original_sha256": "f9bc6973a2c809332950224471da32a6d241f566b5a353adab80ad57a8e41452",
+      "bytes": 192120
+    },
+    {
+      "path": "tianmu/landmarks/cedar-17.webp",
+      "landmark": "assets/landmarks/cedar-17.webp",
+      "original_sha256": "8e9838d17ccdf5c9e256b7a9260d9410f416da8927506e757058ba85897305b1",
+      "bytes": 430348
+    },
+    {
+      "path": "tianmu/landmarks/cedar-12.webp",
+      "landmark": "assets/landmarks/cedar-12.webp",
+      "original_sha256": "24b9df8adc0de3c4e0c4d2c038ec348f3b45d94517c796c4b1bcc01762e3b41a",
+      "bytes": 538100
+    },
+    {
+      "path": "images/509b2327ce373fe5322e.webp",
+      "original_sha256": "509b2327ce373fe5322e56be6143954f675fe882aa11db401e9ed76731108091",
+      "bytes": 358300
+    },
+    {
+      "path": "tianmu/landmarks/dashuwang-team.webp",
+      "landmark": "assets/landmarks/dashuwang-team.webp",
+      "original_sha256": "5e5562240304acc447e03709e4a5508ad7b19740fea38743e920e50a259ed5f8",
+      "bytes": 1647396
+    },
+    {
+      "path": "tianmu/landmarks/xianrending-sign.webp",
+      "landmark": "assets/landmarks/xianrending-sign.webp",
+      "original_sha256": "0d05d9b95a16b7ede8e37ae4a0a3fcfb485c61ed31b805b45115982cc74566f5",
+      "bytes": 688900
+    },
+    {
+      "path": "tianmu/landmarks/xianrending-view-1.webp",
+      "landmark": "assets/landmarks/xianrending-view-1.webp",
+      "original_sha256": "bb4e76ae7770552cd284ebb797b1ca2a1926dc69aa4f1139d7f54205910b1dd2",
+      "bytes": 242058
+    },
+    {
+      "path": "tianmu/landmarks/xianrending-view-2.webp",
+      "landmark": "assets/landmarks/xianrending-view-2.webp",
+      "original_sha256": "3ebed744e2b593c2c0d2e1773d79a1f5bb0e7d947397a4b0b36b1f0cfec5a09b",
+      "bytes": 496940
+    },
+    {
+      "path": "tianmu/landmarks/xianrending-view-3.webp",
+      "landmark": "assets/landmarks/xianrending-view-3.webp",
+      "original_sha256": "c163b6e43359edc4f0a8bfb909794b322284c3195e799bba84536b28994e439b",
+      "bytes": 212802
     }
   ],
+  "landmarks": {
+    "cards": [
+      {
+        "id": "chanyuan",
+        "title": "禅源寺",
+        "photos": [
+          "assets/landmarks/chanyuan.webp",
+          "assets/landmarks/chanyuan-library.webp"
+        ]
+      },
+      {
+        "id": "sanli",
+        "title": "三里亭",
+        "photos": [
+          "assets/landmarks/tianmu-forest-1.webp"
+        ]
+      },
+      {
+        "id": "qili",
+        "title": "七里亭",
+        "photos": [
+          "assets/landmarks/qili.webp"
+        ]
+      },
+      {
+        "id": "dashuwang",
+        "title": "大树王",
+        "photos": [
+          "assets/landmarks/dashuwang-team.webp",
+          "assets/landmarks/dashuwang-2010.webp"
+        ]
+      },
+      {
+        "id": "laodian",
+        "title": "开山老殿",
+        "photos": [
+          "assets/landmarks/tianmu-forest-1.webp"
+        ]
+      },
+      {
+        "id": "xianrending",
+        "title": "仙人顶",
+        "photos": [
+          "assets/landmarks/xianrending-sign.webp",
+          "assets/landmarks/xianrending-view-1.webp",
+          "assets/landmarks/xianrending-view-2.webp",
+          "assets/landmarks/xianrending-view-3.webp"
+        ]
+      },
+      {
+        "id": "trail-cedars",
+        "title": "古道柳杉",
+        "photos": [
+          "assets/landmarks/tianmu-forest-1.webp",
+          "assets/landmarks/cedar-00.webp",
+          "assets/landmarks/cedar-12.webp",
+          "assets/landmarks/cedar-16.webp",
+          "assets/landmarks/cedar-17.webp"
+        ]
+      }
+    ],
+    "photos": [
+      {
+        "id": "chanyuan",
+        "asset": "assets/landmarks/chanyuan.webp",
+        "caption": "禅源寺外景",
+        "author": "Yxh1433",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chanyuan_Temple_Outside.jpg",
+        "changes": "缩小并转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/chanyuan.webp",
+        "bytes": 217396
+      },
+      {
+        "id": "chanyuan-library",
+        "asset": "assets/landmarks/chanyuan-library.webp",
+        "caption": "禅源寺藏经阁",
+        "author": "Yxh1433",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Chanyuan_Temple_Tibetan_Classics.jpg",
+        "changes": "缩小并转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/chanyuan-library.webp",
+        "bytes": 409944
+      },
+      {
+        "id": "qili",
+        "asset": "assets/landmarks/qili.webp",
+        "caption": "七里亭（眠牛亭）",
+        "author": "Yxh1433",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tianmu_Mountain_Sleeping_Cow_Pavilion.jpg",
+        "changes": "缩小并转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/qili.webp",
+        "bytes": 192120
+      },
+      {
+        "id": "tianmu-forest-1",
+        "asset": "assets/landmarks/tianmu-forest-1.webp",
+        "caption": "天目山石阶与林下环境（沿线环境照）",
+        "author": "Jakub Hałun",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:20090711_0938_Mount_Tianmu_Park_0896.jpg",
+        "changes": "缩小并转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/tianmu-forest-1.webp",
+        "bytes": 505092
+      },
+      {
+        "id": "tianmu-tree",
+        "asset": "assets/landmarks/tianmu-tree.webp",
+        "caption": "天目山林木近景（未作大树王单株定位）",
+        "author": "Yxh1433",
+        "license": "CC BY-SA 4.0",
+        "source": "https://commons.wikimedia.org/wiki/File:Tianmu_Mountain_tree.jpg",
+        "changes": "缩小并转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/tianmu-tree.webp",
+        "bytes": 460444
+      },
+      {
+        "id": "cedar-00",
+        "asset": "assets/landmarks/cedar-00.webp",
+        "caption": "柳杉干基部与外露根系（用户实景图01；未定位为大树王）",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "缩小并转换为WebP，保留原分类与可见外观说明",
+        "path": "tianmu/landmarks/cedar-00.webp",
+        "bytes": 523942
+      },
+      {
+        "id": "cedar-12",
+        "asset": "assets/landmarks/cedar-12.webp",
+        "caption": "柳杉树干纵向裂隙与凹洞（用户实景图13；未据照片推断成因）",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "缩小并转换为WebP，保留原分类与可见外观说明",
+        "path": "tianmu/landmarks/cedar-12.webp",
+        "bytes": 538100
+      },
+      {
+        "id": "cedar-16",
+        "asset": "assets/landmarks/cedar-16.webp",
+        "caption": "柳杉树干长条状剥落（用户实景图17；保留外观描述）",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "缩小并转换为WebP，保留原分类与可见外观说明",
+        "path": "tianmu/landmarks/cedar-16.webp",
+        "bytes": 444510
+      },
+      {
+        "id": "cedar-17",
+        "asset": "assets/landmarks/cedar-17.webp",
+        "caption": "柳杉枯立木仰视（用户实景图18；风折依据来自现场标牌）",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "缩小并转换为WebP，保留原分类与可见外观说明",
+        "path": "tianmu/landmarks/cedar-17.webp",
+        "bytes": 430348
+      },
+      {
+        "id": "dashuwang-2010",
+        "asset": "assets/landmarks/dashuwang-2010.webp",
+        "caption": "老大树王 · 2010年4月历史照片（拍摄时间据原照片页）",
+        "author": "rheins",
+        "license": "CC BY 3.0",
+        "source": "https://commons.wikimedia.org/wiki/File:%E6%AD%BB%E5%8E%BB%E7%9A%84%E5%A4%A7%E6%A0%91%E7%8E%8B_-_King_of_Cryptomeria(Dead)_-_2010.04_-_panoramio.jpg",
+        "changes": "转换为WebP；网页按容器显示",
+        "path": "tianmu/landmarks/dashuwang-2010.webp",
+        "bytes": 424736
+      },
+      {
+        "id": "dashuwang-team",
+        "asset": "assets/landmarks/dashuwang-team.webp",
+        "caption": "围栏内的树干与“老大树王”标牌",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "缩放至长边不超过 2000 px，转换为 WebP，未裁剪",
+        "path": "tianmu/landmarks/dashuwang-team.webp",
+        "bytes": 1647396
+      },
+      {
+        "id": "xianrending-sign",
+        "asset": "assets/landmarks/xianrending-sign.webp",
+        "caption": "刻有“仙人顶”的石质介绍牌",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "转换为 WebP，未裁剪",
+        "path": "tianmu/landmarks/xianrending-sign.webp",
+        "bytes": 688900
+      },
+      {
+        "id": "xianrending-view-1",
+        "asset": "assets/landmarks/xianrending-view-1.webp",
+        "caption": "云层间露出蓝天与远处山脊",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "转换为 WebP，未裁剪",
+        "path": "tianmu/landmarks/xianrending-view-1.webp",
+        "bytes": 242058
+      },
+      {
+        "id": "xianrending-view-2",
+        "asset": "assets/landmarks/xianrending-view-2.webp",
+        "caption": "山坡灌木与远处山脊",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "转换为 WebP，未裁剪",
+        "path": "tianmu/landmarks/xianrending-view-2.webp",
+        "bytes": 496940
+      },
+      {
+        "id": "xianrending-view-3",
+        "asset": "assets/landmarks/xianrending-view-3.webp",
+        "caption": "云雾下的层叠山岭",
+        "author": "用户实地采集",
+        "license": null,
+        "source": null,
+        "changes": "转换为 WebP，未裁剪",
+        "path": "tianmu/landmarks/xianrending-view-3.webp",
+        "bytes": 212802
+      }
+    ]
+  },
   "original_readers_included": false,
   "changes": [
     "Extract inline images as deduplicated WebP files without cropping or resizing.",
+    "Store landmark-card photos under tianmu/landmarks/ with their supplied file names so cards can be replaced or added.",
     "Show the climate query only in climate modes so route controls remain clickable.",
     "Fit the globe to narrow workspace widths without clipping either side.",
     "Load Tianmu through its existing mount/destroy API and scoped CSS.",

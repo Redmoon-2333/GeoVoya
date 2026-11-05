@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, defineAsyncComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { ArrowRight, Globe2, Maximize2, Minimize2, Mountain, RotateCw } from 'lucide-vue-next'
+import { ArrowRight, Maximize2, Minimize2, RotateCw } from 'lucide-vue-next'
 import { notify } from '../notice'
+import ModuleSubnav from '../components/ModuleSubnav.vue'
 
 const TianmuLesson = defineAsyncComponent(() => import('../components/TianmuLesson.vue'))
 const route = useRoute()
@@ -25,11 +26,8 @@ onBeforeUnmount(() => { window.removeEventListener('message', receive); document
 </script>
 
 <template>
-  <div class="page-heading"><div><span class="eyebrow">GEOGRAPHICAL ZONATION</span><h1>{{ atlas ? '星球植被图鉴' : '垂直地带性探究' }}</h1><p>{{ atlas ? '把森林放回全球，比较纬度与水分条件。' : '沿山地比较气候、土壤与植被，把观察连成解释。' }}</p></div><RouterLink to="/explore?view=terrain" class="button secondary">回到样带考察<ArrowRight :size="16" /></RouterLink></div>
-  <nav class="lesson-tabs" aria-label="地带性课程">
-    <RouterLink to="/geography/tianmu" :aria-current="!atlas ? 'page' : undefined"><Mountain :size="18" /><span>西天目山<span class="lesson-tab-detail">垂直地带性</span></span></RouterLink>
-    <RouterLink to="/geography/atlas" :aria-current="atlas ? 'page' : undefined"><Globe2 :size="18" /><span>星球植被图鉴<span class="lesson-tab-detail">纬度与干湿度地带性</span></span></RouterLink>
-  </nav>
+  <div class="page-heading"><div><span class="eyebrow">MODULE 02 · GEOGRAPHICAL ZONATION</span><h1>{{ atlas ? '星球植被图鉴' : '垂直地带性探究' }}</h1><p>{{ atlas ? '把森林放回全球，比较纬度与水分条件。' : '沿山地比较气候、土壤与植被，把观察连成解释。' }}</p></div><RouterLink to="/explore?view=terrain" class="button secondary">回到样带考察<ArrowRight :size="16" /></RouterLink></div>
+  <ModuleSubnav />
   <section v-if="atlas" ref="workspace" class="atlas-workspace" aria-label="全球植被交互场景">
     <div class="atlas-toolbar"><span>全球自然带</span><button class="icon-button" :aria-label="expanded ? '退出图鉴全屏' : '全屏查看图鉴'" :title="expanded ? '退出全屏' : '全屏查看'" @click="toggleFullscreen"><Minimize2 v-if="expanded" :size="18" /><Maximize2 v-else :size="18" /></button></div>
     <div v-if="!ready" class="atlas-loading" role="status"><RotateCw class="spin" :size="24" />正在打开星球图鉴…</div>

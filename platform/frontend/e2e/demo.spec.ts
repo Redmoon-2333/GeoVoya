@@ -3,8 +3,10 @@ import { readFile } from 'node:fs/promises'
 
 async function visit(page: Page, url: string) { await page.goto(`${url}${url.includes('?') ? '&' : '?'}demo=1`); await expect(page.locator('.main-content h1').first()).toBeVisible() }
 async function navigate(page: Page, title: string) {
-  if (await page.locator('.main-nav').isVisible()) await page.locator('.main-nav').getByRole('link', { name: title, exact: true }).click()
-  else { await page.getByRole('button', { name: '打开研学导航', exact: true }).click(); await page.locator('.mobile-section-nav').getByRole('link', { name: title, exact: true }).click() }
+  const moduleLink = page.locator('.main-nav').getByRole('link', { name: title, exact: true })
+  if (await moduleLink.count()) { await moduleLink.click(); return }
+  if ((await page.viewportSize())!.width <= 760) await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
+  await page.locator('.sidebar-tools').getByRole('link', { name: title, exact: true }).click()
 }
 
 test('eight views render without a backend, with usable images and narrow layouts', async ({ page }, info) => {
@@ -36,7 +38,7 @@ test('demo observation, evidence, outcome, revision, attachment and export survi
   await page.getByRole('button', { name: '收藏这份资料', exact: true }).click()
   await navigate(page, '科考档案馆')
   await expect(page).toHaveURL(/demo=1/)
-  await page.getByRole('button', { name: '分析资料', exact: true }).click()
+  await page.getByRole('link', { name: '分析资料', exact: true }).click()
   await page.locator('#analysis-observed').fill('画面中部可见倒木。')
   await page.locator('#analysis-meaning').fill('可描述局部地表覆盖。')
   await page.locator('#analysis-missing').fill('缺少时间序列与健康样点。')

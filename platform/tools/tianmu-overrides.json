@@ -1,0 +1,135 @@
+{
+  "$comment": "课程内容改动清单。导入脚本解析源 HTML 后按此文件套用，再提取图片与改写路径；未知卡片、未知资料、缺失照片、缺失本地文件或资料摘要与预期原文不符都会使导入失败。pages 只改 summary，不动 body。source 为相对仓库根目录的路径，只在第一次导入时读取。",
+  "landmark_cards": {
+    "sanli": {
+      "remove_photos": ["assets/landmarks/tianmu-tree.webp"]
+    },
+    "qili": {
+      "remove_photos": ["assets/landmarks/tianmu-forest-1.webp"]
+    },
+    "dashuwang": {
+      "remove_photos": ["assets/landmarks/tianmu-forest-1.webp", "assets/landmarks/tianmu-tree.webp"],
+      "add_photos": [
+        {
+          "file": "assets/landmarks/dashuwang-team.webp",
+          "source": "资料库/页面原件/2026-11-05/landmark-photos/dashuwang-team.jpg",
+          "position": 0,
+          "caption": "围栏内的树干与“老大树王”标牌",
+          "alt": "围栏内可见一株高大树木、木质标牌与介绍牌",
+          "author": "用户实地采集",
+          "credit": "实地采集照片",
+          "license": "",
+          "license_url": "",
+          "source_url": "",
+          "changes": "转换为 WebP，未裁剪"
+        }
+      ]
+    },
+    "laodian": {
+      "remove_photos": ["assets/landmarks/qili.webp"],
+      "photo_captions": {
+        "assets/landmarks/tianmu-forest-1.webp": "开山老殿附近沿线环境（非殿址照片）"
+      }
+    }
+  },
+  "new_cards": [
+    {
+      "after": "laodian",
+      "card": {
+        "id": "xianrending",
+        "name": "仙人顶",
+        "title": "仙人顶",
+        "altitude": "1506 m",
+        "kicker": "山顶的观察点",
+        "story": "仙人顶是西天目山主峰，海拔1506米。现场介绍牌记载：峰上有天柱峰巨石兀立，旁边是气象站遗址，附近还有天池、浮玉石、仙人锯板等景观；民国23年秋，竺可桢曾在此题诗。",
+        "task": "观察山顶树木的高度、树干弯曲和树冠偏向，记录哪些特征可能与低温、强风和雾霜有关。只描述照片中看得见的形态，不凭单张照片判断成因。",
+        "photos": [
+          {
+            "file": "assets/landmarks/xianrending-sign.webp",
+            "source": "资料库/页面原件/2026-11-05/landmark-photos/xianrending-sign.jpg",
+            "caption": "刻有“仙人顶”的石质介绍牌",
+            "alt": "草丛前的石质介绍牌，牌面写有“仙人顶”",
+            "author": "用户实地采集",
+            "credit": "实地采集照片",
+            "license": "",
+            "license_url": "",
+            "source_url": "",
+            "changes": "转换为 WebP，未裁剪"
+          },
+          {
+            "file": "assets/landmarks/xianrending-view-1.webp",
+            "source": "资料库/页面原件/2026-11-05/landmark-photos/xianrending-view-1.jpg",
+            "caption": "云层间露出蓝天与远处山脊",
+            "alt": "前景树木、远处山脊以及大面积云层和蓝天",
+            "author": "用户实地采集",
+            "credit": "实地采集照片",
+            "license": "",
+            "license_url": "",
+            "source_url": "",
+            "changes": "转换为 WebP，未裁剪"
+          },
+          {
+            "file": "assets/landmarks/xianrending-view-2.webp",
+            "source": "资料库/页面原件/2026-11-05/landmark-photos/xianrending-view-2.jpg",
+            "caption": "山坡灌木与远处山脊",
+            "alt": "近处灌木、右侧屋顶一角和远处层叠山脊",
+            "author": "用户实地采集",
+            "credit": "实地采集照片",
+            "license": "",
+            "license_url": "",
+            "source_url": "",
+            "changes": "转换为 WebP，未裁剪"
+          },
+          {
+            "file": "assets/landmarks/xianrending-view-3.webp",
+            "source": "资料库/页面原件/2026-11-05/landmark-photos/xianrending-view-3.jpg",
+            "caption": "云雾下的层叠山岭",
+            "alt": "云层下可见多层山岭和近处植被",
+            "author": "用户实地采集",
+            "credit": "实地采集照片",
+            "license": "",
+            "license_url": "",
+            "source_url": "",
+            "changes": "转换为 WebP，未裁剪"
+          }
+        ],
+        "sources": [
+          {
+            "label": "仙人顶现场介绍牌（项目团队拍摄，2026）",
+            "title": "仙人顶现场介绍牌（项目团队拍摄，2026）",
+            "url": ""
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "page_id": "VE05",
+      "summary": {
+        "from": "山顶和上部山坡出现包括黄山松在内的针叶树，与落叶阔叶树共同分布。",
+        "to": "山顶和上部山坡是以黄山松、金钱松等针叶树种和灯台树、四照花、红果山胡椒等阔叶树种为主形成的针阔叶混交林群落。"
+      },
+      "body": [
+        {
+          "from": "在海拔1380—1506 m的山顶与上部山坡，出现了包括黄山松在内的针叶树，与落叶阔叶树共同分布。",
+          "to": "海拔1380—1506 m的山顶与上部山坡，是以黄山松、金钱松等针叶树种和灯台树、四照花、红果山胡椒等阔叶树种为主形成的针阔叶混交林群落。"
+        }
+      ]
+    }
+  ],
+  "diagrams": [
+    {
+      "diagram_id": "vegetation_bands",
+      "from": ">出现黄山松等针叶树，与落叶阔叶树混生</text>",
+      "to": ">黄山松、金钱松与灯台树、四照花等混交</text>"
+    }
+  ],
+  "vegetation": [
+    {
+      "vegetation_id": "course_upper_mixed",
+      "species": ["黄山松", "金钱松", "灯台树", "四照花", "红果山胡椒"],
+      "appearance": "该样地是以黄山松、金钱松等针叶树种和灯台树、四照花、红果山胡椒等阔叶树种为主形成的针阔叶混交林群落。"
+    }
+  ]
+}

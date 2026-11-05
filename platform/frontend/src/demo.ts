@@ -18,8 +18,8 @@ function feedback(d: DemoData): Bootstrap['feedback'] {
   const definitions = [
     ['observe', '观察与记录', !!d.observations.length, '保存至少一条对实景的独立观察', '/explore'],
     ['collect', '收藏发现', !!d.favorites.length, '收藏资料并保留原始出处', '/archive'],
-    ['analyze', '整理证据', d.analyses.some(a => a.observed && a.meaning && a.missing), '写清观察、含义和仍需补充的资料', '/archive?tab=workbench'],
-    ['argue', '组织解释', !!board.length, '把分析加入论证板，保留局限', '/archive?tab=board'],
+    ['analyze', '整理证据', d.analyses.some(a => a.observed && a.meaning && a.missing), '写清观察、含义和仍需补充的资料', '/inquiry?tab=workbench'],
+    ['argue', '组织解释', !!board.length, '把分析加入论证板，保留局限', '/inquiry?tab=board'],
     ['create', '形成成果', d.artifacts.some(a => a.status === 'archived'), '完成带有证据引用的个人成果', '/outcomes'],
   ] as const
   const steps = definitions.map(([id, title, done, description, href]) => ({ id, title, done, description, href }))

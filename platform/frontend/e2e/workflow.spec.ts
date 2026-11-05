@@ -2,8 +2,10 @@ import { test, expect, type Page } from '@playwright/test'
 import { readFile } from 'node:fs/promises'
 
 async function navigate(page: Page, title: string) {
-  if (await page.locator('.main-nav').isVisible()) await page.locator('.main-nav').getByRole('link', { name: title, exact: true }).click()
-  else { await page.getByRole('button', { name: '打开研学导航', exact: true }).click(); await page.locator('.mobile-section-nav').getByRole('link', { name: title, exact: true }).click() }
+  const moduleLink = page.locator('.main-nav').getByRole('link', { name: title, exact: true })
+  if (await moduleLink.count()) { await moduleLink.click(); return }
+  if ((await page.viewportSize())!.width <= 760) await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
+  await page.locator('.sidebar-tools').getByRole('link', { name: title, exact: true }).click()
 }
 
 test('observation to archived outcome persists with real feedback and exports', async ({ page }) => {
@@ -33,11 +35,13 @@ test('observation to archived outcome persists with real feedback and exports', 
   await page.getByLabel('选择对比照片').selectOption('photo-canopy')
   await expect(page.locator('.photo-viewer figure').nth(1).locator('img')).toHaveAttribute('alt', '仰视林冠')
   await navigate(page, '科考档案馆')
+  await expect(page.locator('.sidebar-tools a[aria-current="page"]')).toHaveCount(1)
+  await expect(page.locator('.sidebar-tools a[aria-current="page"]')).toContainText('科考档案馆')
+  await page.getByRole('link', { name: '分析资料', exact: true }).click()
+  await expect(page).toHaveURL(/\/inquiry\?.*tab=workbench/)
+  await expect(page.getByRole('tab', { name: '证据工作台', exact: true })).toHaveAttribute('aria-selected', 'true')
   await expect(page.locator('.journey-nav a.active')).toHaveCount(1)
-  await expect(page.locator('.journey-nav a.active')).toContainText('收藏发现')
-  await page.getByRole('button', { name: '分析资料', exact: true }).click()
-  await expect(page.locator('.journey-nav a.active')).toHaveCount(1)
-  await expect(page.locator('.journey-nav a.active')).toContainText('整理证据')
+  await expect(page.locator('.journey-nav a.active')).toContainText('专题探究')
   await page.locator('#analysis-observed').fill('测试事实：画面可见倒木与地表植物。')
   await page.locator('#analysis-meaning').fill('测试分析：可用于描述此画面的地表覆盖。')
   await page.locator('#analysis-missing').fill('测试局限：缺少同点位的时间序列。')
@@ -46,8 +50,13 @@ test('observation to archived outcome persists with real feedback and exports', 
   await page.getByRole('button', { name: '保存并加入论证板', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('加入论证板')
   await page.getByRole('tab', { name: /研究论证板/ }).click()
+  await expect(page).toHaveURL(/\/inquiry\?.*tab=board/)
+  await expect(page.getByRole('tab', { name: /研究论证板/ })).toHaveAttribute('aria-selected', 'true')
   await expect(page.locator('.journey-nav a.active')).toHaveCount(1)
-  await expect(page.locator('.journey-nav a.active')).toContainText('组织解释')
+  await expect(page.locator('.journey-nav a.active')).toContainText('专题探究')
+  await page.goto('/archive?tab=board')
+  await expect(page).toHaveURL(/\/inquiry\?.*tab=board/)
+  await expect(page.getByRole('tab', { name: /研究论证板/ })).toHaveAttribute('aria-selected', 'true')
   await expect(page.locator('.argument-item')).toHaveCount(1)
   await expect(page.locator('.argument-details')).toContainText('缺少同点位的时间序列')
   await navigate(page, '成果交流')
@@ -106,7 +115,7 @@ test('spatial teaching diagrams stay labelled and the guide stays explicitly scr
   await page.getByRole('tab', { name: /山地剖面/ }).click()
   await expect(page.locator('.mountain-canvas')).toHaveClass(/profile/)
   await navigate(page, '专题探究')
-  await page.getByRole('tab', { name: /毛竹扩张/ }).click()
+  await page.locator('.topic-grid').getByRole('link', { name: /毛竹扩张/ }).click()
   await expect(page.locator('.draft-inquiry')).toContainText('问题链')
   await expect(page.locator('.resource-card')).toHaveCount(0)
   const data = await (await page.request.get('/api/v1/bootstrap')).json()
@@ -168,7 +177,7 @@ test('six views render with real images and no horizontal overflow', async ({ pa
   if (testInfo.project.name === 'mobile') {
     await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
     await expect(page.locator('.study-sidebar')).toHaveClass(/open/)
-    await page.locator('.journey-nav').getByRole('link', { name: /观察与记录/ }).click()
+    await page.locator('.journey-nav').getByRole('link', { name: /空间探索/ }).click()
     await expect(page.locator('.study-sidebar')).not.toHaveClass(/open/)
     await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
     await page.locator('.sidebar-next').click()

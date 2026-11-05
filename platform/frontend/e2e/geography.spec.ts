@@ -69,7 +69,7 @@ test('sample selection, notes, bookmarks and archive links restore the same less
   await page.locator('.tm-page-footer [data-action="note"]').click()
   await expect(editor.getByLabel('我的观察', { exact: true })).toHaveValue(/1500 m 样点气温/)
   await editor.getByRole('button', { name: '取消', exact: true }).click()
-  await page.locator('.lesson-tabs a').last().click()
+  await page.locator('.module-subnav').getByRole('link', { name: '星球植被图鉴', exact: true }).click()
   await expect(page.locator('.atlas-frame')).toBeVisible()
 })
 
@@ -192,10 +192,10 @@ test('switching lessons repeatedly releases the previous renderer and preserves 
   page.on('pageerror', error => errors.push(error.message))
   await openLesson(page, 'SO01')
   for (let index = 0; index < 3; index++) {
-    await page.locator('.lesson-tabs a').last().click()
+    await page.locator('.module-subnav').getByRole('link', { name: '星球植被图鉴', exact: true }).click()
     await expect(page.locator('.atlas-loading')).toHaveCount(0)
     await expect(page.locator('[data-tianmu-root]')).toHaveCount(0)
-    await page.locator('.lesson-tabs a').first().click()
+    await page.locator('.module-subnav').getByRole('link', { name: '垂直地带性', exact: true }).click()
     await expect(page.locator('.tm-page-heading h2')).toBeVisible()
     await expect(page.locator('.atlas-frame')).toHaveCount(0)
     await expect(page.locator('[data-tianmu-root]')).toHaveCount(1)

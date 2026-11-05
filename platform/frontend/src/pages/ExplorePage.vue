@@ -8,6 +8,7 @@ import { useUnsaved } from '../useUnsaved'
 import ObservationForm from '../components/ObservationForm.vue'
 import LocalPanorama from '../components/LocalPanorama.vue'
 import SpatialWorkbench from '../components/SpatialWorkbench.vue'
+import ModuleSubnav from '../components/ModuleSubnav.vue'
 import { localState } from '../localState'
 import type { PanoramaSample, PanoramaHotspot } from '../types'
 
@@ -60,10 +61,11 @@ async function collect() {
 </script>
 
 <template>
-  <div class="page-heading"><div><span class="eyebrow">SPATIAL EXPLORATION</span><h1>空间探索</h1></div><div class="explore-course-links"><RouterLink to="/geography/tianmu" class="button secondary">地带性探究<ArrowRight :size="16" /></RouterLink><RouterLink to="/inquiry" class="button secondary">专题探究<ArrowRight :size="16" /></RouterLink></div></div>
+  <div class="page-heading"><div><span class="eyebrow">MODULE 02 · SPATIAL EXPLORATION</span><h1>空间探索</h1><p>在实景、全景、沙盘与剖面之间切换，把观察变成可以回到原处的记录。</p></div></div>
+  <ModuleSubnav />
   <div class="explore-layout">
     <section class="explore-main">
-      <div class="tab-bar" role="tablist" aria-label="空间视图"><button role="tab" :aria-selected="mode === 'terrain'" :class="{ active: mode === 'terrain' }" @click="setMode('terrain')"><Mountain :size="17" />数字沙盘</button><button role="tab" :aria-selected="mode === 'profile'" :class="{ active: mode === 'profile' }" @click="setMode('profile')"><Route :size="17" />山地剖面</button><button role="tab" :aria-selected="mode === 'panorama'" :class="{ active: mode === 'panorama' }" @click="setMode('panorama')"><Maximize2 :size="17" />360° 全景</button><button role="tab" :aria-selected="mode === 'photo'" :class="{ active: mode === 'photo' }" @click="setMode('photo')"><Image :size="17" />实景观察</button></div>
+      <div class="tab-bar" role="tablist" aria-label="空间视图"><button role="tab" :aria-selected="mode === 'photo'" :class="{ active: mode === 'photo' }" @click="setMode('photo')"><Image :size="17" />实景观察</button><button role="tab" :aria-selected="mode === 'panorama'" :class="{ active: mode === 'panorama' }" @click="setMode('panorama')"><Maximize2 :size="17" />360° 全景</button><button role="tab" :aria-selected="mode === 'terrain'" :class="{ active: mode === 'terrain' }" @click="setMode('terrain')"><Mountain :size="17" />数字沙盘</button><button role="tab" :aria-selected="mode === 'profile'" :class="{ active: mode === 'profile' }" @click="setMode('profile')"><Route :size="17" />山地剖面</button></div>
       <template v-if="mode === 'photo'">
         <div class="photo-toolbar"><div><span class="status-tag green">素材 {{ node.code }}</span><h2>{{ node.title }}</h2></div><div class="toolbar-actions"><button class="icon-button" :class="{ 'is-active': comparing }" :aria-pressed="comparing" title="并排对比照片" aria-label="并排对比照片" @click="comparing = !comparing"><ArrowLeftRight :size="18" /></button><button class="icon-button" title="放大照片" aria-label="放大照片" @click="zoom?.showModal()"><Maximize2 :size="18" /></button></div></div>
         <div class="photo-viewer" :class="{ comparing }">

@@ -5,7 +5,7 @@ export const router = createRouter({
   history: createWebHistory(),
   scrollBehavior: () => ({ top: 0 }),
   routes: [
-    { path: '/', component: () => import('./pages/OverviewPage.vue'), meta: { title: '项目总览' } },
+    { path: '/', component: () => import('./pages/OverviewPage.vue'), meta: { title: '课程入口' } },
     { path: '/explore', component: () => import('./pages/ExplorePage.vue'), meta: { title: '空间探索' } },
     { path: '/inquiry', component: () => import('./pages/InquiryPage.vue'), meta: { title: '专题探究' } },
     { path: '/archive', component: () => import('./pages/ArchivePage.vue'), meta: { title: '科考档案馆' } },
@@ -20,8 +20,15 @@ export const router = createRouter({
   ],
 })
 
-router.beforeEach(to => { if (demoMode && to.query.demo !== '1') return { ...to, query: { ...to.query, demo: '1' } } })
+router.beforeEach(to => {
+  const tab = to.path === '/archive' ? String(to.query.tab) : ''
+  if (tab === 'workbench' || tab === 'board') {
+    const { tab: _tab, ...rest } = to.query
+    return { path: '/inquiry', query: demoMode && rest.demo !== '1' ? { ...rest, tab, demo: '1' } : { ...rest, tab } }
+  }
+  if (demoMode && to.query.demo !== '1') return { ...to, query: { ...to.query, demo: '1' } }
+})
 
 router.afterEach((to) => {
-  document.title = `${to.meta.title || '项目总览'} · 天目·寻境`
+  document.title = `${to.meta.title || '课程入口'} · 天目·寻境`
 })

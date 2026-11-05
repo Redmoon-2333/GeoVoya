@@ -1,7 +1,6 @@
-.lesson-tabs { display: flex; flex-wrap: wrap; gap: 8px 28px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
-.lesson-tabs > a { display: flex; gap: 9px; align-items: center; padding: 12px 2px 14px; border-bottom: 3px solid transparent; font-weight: 600; color: #62776c; }
-.lesson-tabs > a[aria-current="page"] { color: var(--green); border-color: var(--green); }
-.lesson-tab-detail { display: block; font-size: 11px; font-weight: 400; margin-top: 1px; }
+.module-subnav { display: flex; flex-wrap: wrap; gap: 8px 26px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+.module-subnav > a { display: flex; gap: 8px; align-items: center; padding: 12px 2px 14px; border-bottom: 3px solid transparent; font-weight: 600; font-size: 13px; color: #62776c; }
+.module-subnav > a[aria-current="page"] { color: var(--green); border-color: var(--green); }
 .lesson-status { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; min-height: 180px; color: var(--muted); }
 .tianmu-lesson { min-width: 0; }
 .tianmu-lesson[data-tianmu-root] { min-height: 0; font-size: 14px; background: transparent; }
@@ -18,7 +17,7 @@
 .atlas-workspace { position: relative; min-width: 0; background: #060e1b; }
 .atlas-toolbar { height: 42px; padding: 0 12px 0 16px; display: flex; align-items: center; justify-content: space-between; color: #dceae4; background: #10232a; }
 .atlas-toolbar .icon-button { color: #dceae4; }
-.atlas-frame { display: block; width: 100%; height: 720px; max-height: none; border: 0; }
+.atlas-frame { display: block; width: 100%; height: clamp(420px, 62vh, 720px); max-height: none; border: 0; }
 .atlas-loading { position: absolute; inset: 42px 0 0; display: flex; gap: 12px; align-items: center; justify-content: center; background: #060e1b; color: #dceae4; pointer-events: none; }
 .atlas-workspace:fullscreen { display: flex; flex-direction: column; width: 100%; height: 100%; }
 .atlas-workspace:fullscreen .atlas-frame { height: auto; flex: 1; min-height: 0; }
@@ -30,20 +29,18 @@
 .geography-entry svg { color: var(--green); }
 .geography-records .inline-empty { flex-wrap: wrap; }
 .geography-records .inline-empty .text-link { margin-left: auto; }
-.explore-course-links { display: flex; gap: 10px; flex-wrap: wrap; }
 @media (max-width: 1150px) {
   .tianmu-lesson[data-tianmu-root] .tm-layout { grid-template-columns: minmax(0, 1fr); }
   .tianmu-lesson[data-tianmu-root] .tm-aside { position: static; }
 }
 @media (max-width: 760px) {
-  .lesson-tabs { gap: 8px 16px; }
-  .lesson-tabs > a { font-size: 13px; padding-bottom: 11px; }
-  .lesson-tab-detail { font-size: 10px; }
-  .atlas-frame { height: 720px; }
+  .module-subnav { gap: 8px 16px; }
+  .module-subnav > a { font-size: 12px; padding-bottom: 11px; }
+  .atlas-frame { height: clamp(420px, 62vh, 720px); }
   .geography-entry { grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .tianmu-lesson[data-tianmu-root] .tm-section-nav { padding: 9px 0; }
   .tianmu-lesson[data-tianmu-root] .tm-embedded-tools { width: 100%; margin: 4px 0 0; }
-  .tianmu-lesson[data-tianmu-root] .tm-embedded-tools .tm-button { font-size: 11px; }
+  .tianmu-lesson[data-tianmu-root] .tm-embedded-tools .tm-button { font-size: 12px; }
   .tianmu-lesson[data-tianmu-root] .tm-section-tab { font-size: 12px; padding: 9px 8px; }
   .tianmu-lesson[data-tianmu-root] .tm-subnav { flex-wrap: wrap; }
   .tianmu-lesson[data-tianmu-root] .tm-page-footer { flex-wrap: wrap; gap: 8px; }

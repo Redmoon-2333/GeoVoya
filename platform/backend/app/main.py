@@ -147,14 +147,14 @@ def create_app(data_dir: Path | None = None) -> FastAPI:
                     item["observed"] and item["meaning"] and item["missing"] for item in analyses
                 ),
                 "description": "写清观察、含义和仍需补充的资料",
-                "href": "/archive?tab=workbench",
+                "href": "/inquiry?tab=workbench",
             },
             {
                 "id": "argue",
                 "title": "组织解释",
                 "done": bool(board),
                 "description": "把分析加入论证板，保留局限",
-                "href": "/archive?tab=board",
+                "href": "/inquiry?tab=board",
             },
             {
                 "id": "create",
