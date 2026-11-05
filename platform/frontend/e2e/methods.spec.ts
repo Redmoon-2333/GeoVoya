@@ -24,6 +24,7 @@ test('all package questions grade correctly, complete the default route and pers
   expect(await page.locator('.method-option input').first().evaluate(el => el.getBoundingClientRect().width)).toBe(17)
   expect(await page.locator('.method-option').first().evaluate(el => el.getBoundingClientRect().height)).toBeLessThan(120)
   await expect(page.getByRole('button', { name: /完成入门学习后解锁图鉴/ })).toBeDisabled()
+  if (!await page.locator('.method-task-list').evaluate(el => (el as HTMLDetailsElement).open)) await page.locator('.method-task-list > summary').click()
   for (const id of methods.default_route) {
     const q = methods.questions.find(q => q.question_id === id)!
     await page.locator('.method-steps').getByRole('button', { name: new RegExp(q.prompt.replace(/[？。]/g, '.')) }).click()
@@ -39,6 +40,7 @@ test('all package questions grade correctly, complete the default route and pers
   await page.keyboard.press('Escape')
   await expect(page.locator('#method-card-title')).toBeVisible()
   await page.keyboard.press('Escape')
+  await page.locator('.method-cases > summary').click()
   for (const route of methods.case_tabs) {
     await page.locator('.methods-tabs').getByRole('button', { name: route.name, exact: true }).click()
     for (const id of route.questions) {
@@ -58,7 +60,8 @@ test('all package questions grade correctly, complete the default route and pers
   const download = page.waitForEvent('download')
   await page.getByRole('button', { name: '导出学习记录', exact: true }).click()
   expect(await readFile((await (await download).path())!, 'utf8')).toContain('已完成')
-  await page.goto('/feedback?demo=1'); await expect(page.locator('.common-feedback').first()).toContainText('10 / 10')
+  await page.goto('/feedback?demo=1'); await expect(page.locator('.process-counts')).toContainText('入门题 10 / 10')
+  await expect(page.locator('.feedback-summary')).toContainText('基础任务')
   await page.screenshot({ path: info.outputPath('method-progress.png'), fullPage: true })
   expect(errors).toEqual([])
 })
@@ -76,6 +79,7 @@ test('wrong answers reveal guidance, multi-choice requires exact matches, labels
   await expect(page.locator('.method-image-dialog')).toBeVisible()
   await expect(page.locator('.method-image-dialog')).toContainText('Luis Miguel')
   await page.keyboard.press('Escape')
+  if (!await page.locator('.method-task-list').evaluate(el => (el as HTMLDetailsElement).open)) await page.locator('.method-task-list > summary').click()
   await page.locator('.method-steps button').nth(3).click()
   await page.locator('.method-option input').nth(1).check()
   await page.getByRole('button', { name: '检查答案', exact: true }).click()

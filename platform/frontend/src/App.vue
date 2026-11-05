@@ -10,14 +10,15 @@ import { notice } from './notice'
 import GuidePanel from './components/GuidePanel.vue'
 import OnboardingTour from './components/OnboardingTour.vue'
 import { focusIfActive } from './focus'
-import { studyModules, studyTools, useStudyModules } from './modules'
+import { rememberStudyLocation, studyModules, studyTools, useStudyModules } from './modules'
 import { start } from './onboarding'
 
 const store = useFieldworkStore()
 const route = useRoute()
 const sidebarOpen = ref(false)
-const sidebar = ref<HTMLElement>(), menuButton = ref<HTMLButtonElement>(), nav = ref<HTMLElement>()
+const sidebar = ref<HTMLElement>(), menuButton = ref<HTMLButtonElement>()
 const { modules, completed, next } = useStudyModules()
+const activeModule = computed(() => modules.value.find(item => item.matches(route.path)))
 watch(sidebarOpen, async open => { await nextTick(); if (open) requestAnimationFrame(() => { if (sidebarOpen.value) focusIfActive(sidebar.value?.querySelector<HTMLAnchorElement>('a')) }); else focusIfActive(menuButton.value) })
 function trapNavigation(event: KeyboardEvent) {
   if (!sidebarOpen.value) return
@@ -30,12 +31,11 @@ function trapNavigation(event: KeyboardEvent) {
   if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
   if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
 }
-const isHome = computed(() => route.path === '/')
 watch(() => route.fullPath, async () => {
   await nextTick()
+  rememberStudyLocation(route.fullPath)
   if (sidebarOpen.value) sidebarOpen.value = false
-  if (window.matchMedia('(max-width: 760px)').matches) nav.value?.querySelector<HTMLElement>('a.selected')?.scrollIntoView({ inline: 'center', block: 'nearest' })
-})
+}, { immediate: true })
 onMounted(() => { store.initialize(); document.addEventListener('keydown', trapNavigation) })
 onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
 </script>
@@ -52,12 +52,7 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
         <span><strong>天目<span class="brand-dot">·</span>寻境</strong><small>西天目山自然地理研学</small></span>
       </RouterLink>
     </div>
-    <nav ref="nav" class="main-nav" aria-label="主要导航">
-      <RouterLink to="/" :class="{ selected: isHome }" :aria-current="isHome ? 'page' : undefined"><Compass :size="16" /><span>课程入口</span></RouterLink>
-      <RouterLink v-for="item in studyModules" :key="item.id" :to="item.path" :class="{ selected: item.matches(route.path) }" :aria-current="item.matches(route.path) ? 'page' : undefined">
-        <component :is="item.icon" :size="16" /><span class="nav-number" aria-hidden="true">{{ item.number }}</span><span>{{ item.title }}</span>
-      </RouterLink>
-    </nav>
+    <span class="mobile-current-stage"><component :is="activeModule?.icon || Compass" :size="15" />{{ activeModule ? `${activeModule.number} ${activeModule.title}` : String(route.meta.title || '课程入口') }}</span>
     <div class="header-account"><div class="guide-header-slot"><GuidePanel /></div></div>
   </header>
 
@@ -72,20 +67,21 @@ onBeforeUnmount(() => document.removeEventListener('keydown', trapNavigation))
       <div class="sidebar-heading"><span>研学路线</span><button class="icon-button mobile-menu" aria-label="收起研学导航" @click="sidebarOpen = false"><PanelLeftClose :size="18" /></button></div>
       <div class="course-label"><span class="tiny-label">FIELD STUDY / 01</span><h2>西天目山<br />自然地理考察</h2><span class="sidebar-course-tag">高中地理 · 个人研学</span></div>
       <nav class="journey-nav" aria-label="研学流程">
-        <RouterLink v-for="item in modules" :key="item.id" :to="item.path"
-          :class="{ active: item.matches(route.path), complete: item.done }"
+        <RouterLink v-for="item in modules" :key="item.id" :to="item.target"
+          :class="{ active: item.matches(route.path), complete: item.done, recommended: next?.id === item.id }"
+          :aria-current="item.matches(route.path) ? 'step' : undefined"
           @click="sidebarOpen = false">
           <span class="journey-number"><Check v-if="item.done" :size="15" /><template v-else>{{ item.number }}</template></span>
-          <span>{{ item.title }}</span><ChevronRight :size="14" class="journey-arrow" />
+          <span class="journey-link-copy"><strong>{{ item.title }}</strong><small>{{ item.stateLabel }}</small></span><ChevronRight :size="14" class="journey-arrow" />
         </RouterLink>
       </nav>
       <div class="journey-progress">
-        <div><span>研学进度</span><strong>{{ completed }}<small> / {{ studyModules.length }}</small></strong></div>
-        <progress :value="completed" :max="studyModules.length" aria-label="已完成的研学环节" />
-        <p>按已保存的学习材料更新</p>
+        <div><span>基础任务</span><strong>{{ completed }}<small> / {{ studyModules.length }}</small></strong></div>
+        <progress :value="completed" :max="studyModules.length" aria-label="已完成的基础学习任务" />
+        <p>按已保存的学习产出更新</p>
       </div>
-      <RouterLink v-if="next" :to="next.path" class="sidebar-next" @click="sidebarOpen = false">
-        <span>下一步</span><strong>{{ next.title }}<ArrowRight :size="16" /></strong>
+      <RouterLink v-if="next" :to="next.target" class="sidebar-next" @click="sidebarOpen = false">
+        <span>建议继续</span><strong>{{ next.title }}<ArrowRight :size="16" /></strong>
       </RouterLink>
       <div class="sidebar-tools">
         <span class="tiny-label">工具</span>

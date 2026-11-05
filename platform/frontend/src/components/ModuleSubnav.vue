@@ -12,6 +12,6 @@ const links = [
 
 <template>
   <nav class="module-subnav" aria-label="空间探索">
-    <RouterLink v-for="item in links" :key="item.path" :to="item.path" :aria-current="route.path === item.path ? 'page' : undefined"><component :is="item.icon" :size="17" />{{ item.title }}</RouterLink>
+    <RouterLink v-for="item in links" :key="item.path" :to="item.path" :class="{ optional: item.path === '/geography/atlas' }" :aria-current="route.path === item.path ? 'page' : undefined"><component :is="item.icon" :size="17" />{{ item.title }}</RouterLink>
   </nav>
 </template>

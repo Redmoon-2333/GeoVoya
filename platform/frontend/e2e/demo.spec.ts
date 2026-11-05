@@ -3,9 +3,9 @@ import { readFile } from 'node:fs/promises'
 
 async function visit(page: Page, url: string) { await page.goto(`${url}${url.includes('?') ? '&' : '?'}demo=1`); await expect(page.locator('.main-content h1').first()).toBeVisible() }
 async function navigate(page: Page, title: string) {
-  const moduleLink = page.locator('.main-nav').getByRole('link', { name: title, exact: true })
-  if (await moduleLink.count()) { await moduleLink.click(); return }
   if ((await page.viewportSize())!.width <= 760) await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
+  const moduleLink = page.locator('.journey-nav').getByRole('link', { name: new RegExp(title) })
+  if (await moduleLink.count()) { await moduleLink.click(); return }
   await page.locator('.sidebar-tools').getByRole('link', { name: title, exact: true }).click()
 }
 
@@ -35,10 +35,8 @@ test('demo observation, evidence, outcome, revision, attachment and export survi
   await page.locator('#observation-fact').fill('画面中部可见倒木与地表植被。')
   await page.getByRole('button', { name: '保存观察', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('观察记录已保存')
-  await page.getByRole('button', { name: '收藏这份资料', exact: true }).click()
-  await navigate(page, '科考档案馆')
-  await expect(page).toHaveURL(/demo=1/)
-  await page.getByRole('link', { name: '分析资料', exact: true }).click()
+  await page.getByRole('button', { name: '用这份资料分析问题', exact: true }).click()
+  await expect(page).toHaveURL(/inquiry.*tab=workbench.*demo=1/)
   await page.locator('#analysis-observed').fill('画面中部可见倒木。')
   await page.locator('#analysis-meaning').fill('可描述局部地表覆盖。')
   await page.locator('#analysis-missing').fill('缺少时间序列与健康样点。')
@@ -71,7 +69,7 @@ test('demo observation, evidence, outcome, revision, attachment and export survi
   const content = await readFile((await (await exported).path())!, 'utf8')
   expect(content).toContain('林下观察与进一步调查'); expect(content).toContain('IMG_20260820_111143.jpg')
   await navigate(page, '学习反馈')
-  await expect(page.locator('.feedback-summary')).toContainText('已有 5 个环节')
+  await expect(page.locator('.feedback-summary')).toContainText('个基础任务')
   await page.locator('#reflection-text').fill('我需要更多同地点的时间资料。')
   await page.getByRole('button', { name: '保存反思', exact: true }).click()
   await page.reload()

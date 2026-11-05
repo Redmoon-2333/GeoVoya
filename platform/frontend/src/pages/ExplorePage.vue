@@ -9,6 +9,7 @@ import ObservationForm from '../components/ObservationForm.vue'
 import LocalPanorama from '../components/LocalPanorama.vue'
 import SpatialWorkbench from '../components/SpatialWorkbench.vue'
 import ModuleSubnav from '../components/ModuleSubnav.vue'
+import ExplorationTasks from '../components/ExplorationTasks.vue'
 import { localState } from '../localState'
 import type { PanoramaSample, PanoramaHotspot } from '../types'
 
@@ -63,6 +64,7 @@ async function collect() {
 <template>
   <div class="page-heading"><div><span class="eyebrow">MODULE 02 · SPATIAL EXPLORATION</span><h1>空间探索</h1><p>在实景、全景、沙盘与剖面之间切换，把观察变成可以回到原处的记录。</p></div></div>
   <ModuleSubnav />
+  <ExplorationTasks />
   <div class="explore-layout">
     <section class="explore-main">
       <div class="tab-bar" role="tablist" aria-label="空间视图"><button role="tab" :aria-selected="mode === 'photo'" :class="{ active: mode === 'photo' }" @click="setMode('photo')"><Image :size="17" />实景观察</button><button role="tab" :aria-selected="mode === 'panorama'" :class="{ active: mode === 'panorama' }" @click="setMode('panorama')"><Maximize2 :size="17" />360° 全景</button><button role="tab" :aria-selected="mode === 'terrain'" :class="{ active: mode === 'terrain' }" @click="setMode('terrain')"><Mountain :size="17" />数字沙盘</button><button role="tab" :aria-selected="mode === 'profile'" :class="{ active: mode === 'profile' }" @click="setMode('profile')"><Route :size="17" />山地剖面</button></div>

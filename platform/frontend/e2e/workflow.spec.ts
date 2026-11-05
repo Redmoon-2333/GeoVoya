@@ -2,9 +2,9 @@ import { test, expect, type Page } from '@playwright/test'
 import { readFile } from 'node:fs/promises'
 
 async function navigate(page: Page, title: string) {
-  const moduleLink = page.locator('.main-nav').getByRole('link', { name: title, exact: true })
-  if (await moduleLink.count()) { await moduleLink.click(); return }
   if ((await page.viewportSize())!.width <= 760) await page.getByRole('button', { name: '打开研学导航', exact: true }).click()
+  const moduleLink = page.locator('.journey-nav').getByRole('link', { name: new RegExp(title) })
+  if (await moduleLink.count()) { await moduleLink.click(); return }
   await page.locator('.sidebar-tools').getByRole('link', { name: title, exact: true }).click()
 }
 
@@ -18,6 +18,7 @@ test('observation to archived outcome persists with real feedback and exports', 
   await page.locator('#observation-question').fill('需要同一采集点的长期比较。')
   await page.getByRole('button', { name: '保存观察', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('观察记录已保存')
+  await expect(page.locator('.journey-nav')).toContainText('空间探索进行中')
   await page.reload()
   await expect(page.locator('#observation-fact')).toHaveValue('测试记录：照片中可见倒木与地表植物。')
   await page.getByRole('button', { name: '收藏这份资料', exact: true }).click()
@@ -34,10 +35,14 @@ test('observation to archived outcome persists with real feedback and exports', 
   await expect(page.locator('.photo-viewer figure')).toHaveCount(2)
   await page.getByLabel('选择对比照片').selectOption('photo-canopy')
   await expect(page.locator('.photo-viewer figure').nth(1).locator('img')).toHaveAttribute('alt', '仰视林冠')
+  await page.getByRole('button', { name: '用这份资料分析问题', exact: true }).click()
+  await expect(page).toHaveURL(/\/inquiry\?.*tab=workbench.*resource=/)
+  await expect(page.locator('#analysis-observed')).toBeVisible()
   await navigate(page, '科考档案馆')
   await expect(page.locator('.sidebar-tools a[aria-current="page"]')).toHaveCount(1)
   await expect(page.locator('.sidebar-tools a[aria-current="page"]')).toContainText('科考档案馆')
-  await page.getByRole('link', { name: '分析资料', exact: true }).click()
+  await expect(page.locator('.resource-card')).toContainText('等待分析')
+  await navigate(page, '专题探究')
   await expect(page).toHaveURL(/\/inquiry\?.*tab=workbench/)
   await expect(page.getByRole('tab', { name: '证据工作台', exact: true })).toHaveAttribute('aria-selected', 'true')
   await expect(page.locator('.journey-nav a.active')).toHaveCount(1)
@@ -81,7 +86,7 @@ test('observation to archived outcome persists with real feedback and exports', 
   expect(exported).toContain('测试事实：画面可见倒木与地表植物。')
   expect(exported).toContain('IMG_20260820_111143.jpg')
   await navigate(page, '学习反馈')
-  await expect(page.locator('.feedback-summary')).toContainText('已有 5 个环节')
+  await expect(page.locator('.feedback-summary')).toContainText('个基础任务')
   await page.locator('#reflection-text').fill('测试反思：我的解释需要时间序列和对照。')
   await page.getByRole('button', { name: '保存反思', exact: true }).click()
   await expect(page.getByRole('status')).toContainText('学习反思已保存')
@@ -115,6 +120,7 @@ test('spatial teaching diagrams stay labelled and the guide stays explicitly scr
   await page.getByRole('tab', { name: /山地剖面/ }).click()
   await expect(page.locator('.mountain-canvas')).toHaveClass(/profile/)
   await navigate(page, '专题探究')
+  await page.locator('.topic-picker > summary').click()
   await page.locator('.topic-grid').getByRole('link', { name: /毛竹扩张/ }).click()
   await expect(page.locator('.draft-inquiry')).toContainText('问题链')
   await expect(page.locator('.resource-card')).toHaveCount(0)

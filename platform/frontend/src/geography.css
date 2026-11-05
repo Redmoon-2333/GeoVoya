@@ -1,15 +1,28 @@
 .module-subnav { display: flex; flex-wrap: wrap; gap: 8px 26px; border-bottom: 1px solid var(--line); margin-bottom: 22px; }
 .module-subnav > a { display: flex; gap: 8px; align-items: center; padding: 12px 2px 14px; border-bottom: 3px solid transparent; font-weight: 600; font-size: 13px; color: #62776c; }
 .module-subnav > a[aria-current="page"] { color: var(--green); border-color: var(--green); }
+.module-subnav > a.optional:not([aria-current="page"]) { color: #77827b; font-weight: 450; }
 .lesson-status { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; min-height: 180px; color: var(--muted); }
 .tianmu-lesson { min-width: 0; }
 .tianmu-lesson[data-tianmu-root] { min-height: 0; font-size: 14px; background: transparent; }
 .geography-header .guide-launcher { position: static; width: 36px; height: 36px; padding: 0; justify-content: center; box-shadow: none; }
 .geography-header .guide-launcher > span { display: none; }
 .tianmu-lesson[data-tianmu-root].tm-embedded .tm-wrap { max-width: none; padding: 0; }
-.tianmu-lesson[data-tianmu-root] .tm-section-nav { position: static; flex-wrap: wrap; gap: 5px; }
-.tianmu-lesson[data-tianmu-root] .tm-embedded-tools { margin-left: auto; flex-wrap: wrap; }
-.tianmu-lesson[data-tianmu-root] .tm-layout { grid-template-columns: minmax(200px, .72fr) minmax(0, 1.7fr); gap: 18px; }
+.tianmu-lesson[data-tianmu-root].tm-embedded .tm-section-nav,
+.tianmu-lesson[data-tianmu-root].tm-embedded .tm-subnav,
+.tianmu-lesson[data-tianmu-root].tm-embedded .tm-topic-switch { display: none; }
+.lesson-navigation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin: 20px 0 16px; }
+.lesson-navigation nav { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; font-size: 12px; color: #63776a; }
+.lesson-navigation nav a { padding: 6px 3px; border-bottom: 2px solid transparent; }
+.lesson-navigation nav a[aria-current="step"] { color: var(--green); border-color: var(--green); font-weight: 600; }
+.lesson-tools { display: flex; align-items: center; gap: 5px; }
+.exploration-tasks { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 0 0 18px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+.exploration-tasks > strong { display: flex; flex-direction: column; font-size: 12px; font-weight: 600; }
+.exploration-tasks > strong > span { font-size: 10px; font-weight: 400; color: var(--muted); }
+.exploration-tasks a { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #426d55; }
+.exploration-tasks a > span { display: flex; flex-direction: column; }
+.exploration-tasks small { color: var(--muted); font-size: 10px; }
+.tianmu-lesson[data-tianmu-root].tm-embedded .tm-layout { grid-template-columns: minmax(200px, .72fr) minmax(0, 1.7fr); gap: 18px; }
 .tianmu-lesson[data-tianmu-root] .tm-topic-switch { flex-wrap: wrap; }
 .tianmu-lesson[data-tianmu-root] .tm-main { min-width: 0; }
 .tianmu-lesson[data-tianmu-root] button, .tianmu-lesson[data-tianmu-root] input, .tianmu-lesson[data-tianmu-root] textarea { letter-spacing: 0; }
@@ -30,18 +43,24 @@
 .geography-records .inline-empty { flex-wrap: wrap; }
 .geography-records .inline-empty .text-link { margin-left: auto; }
 @media (max-width: 1150px) {
-  .tianmu-lesson[data-tianmu-root] .tm-layout { grid-template-columns: minmax(0, 1fr); }
+  .tianmu-lesson[data-tianmu-root].tm-embedded .tm-layout { grid-template-columns: minmax(0, 1fr); }
   .tianmu-lesson[data-tianmu-root] .tm-aside { position: static; }
+}
+@media (min-width: 701px) and (max-width: 1150px) {
+  .tianmu-lesson[data-tianmu-root] .tm-aside { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 0 18px; }
+  .tianmu-lesson[data-tianmu-root] .tm-aside-head,
+  .tianmu-lesson[data-tianmu-root] .tm-aside-note { grid-column: 1 / -1; }
+  .tianmu-lesson[data-tianmu-root] .tm-mountain { grid-column: 1; grid-row: 3 / 6; min-height: 140px; }
+  .tianmu-lesson[data-tianmu-root] .tm-band-list,
+  .tianmu-lesson[data-tianmu-root] .tm-side-study { grid-column: 2; }
+  .tianmu-lesson[data-tianmu-root] .tm-side-caption { grid-column: 1 / -1; }
 }
 @media (max-width: 760px) {
   .module-subnav { gap: 8px 16px; }
   .module-subnav > a { font-size: 12px; padding-bottom: 11px; }
   .atlas-frame { height: clamp(420px, 62vh, 720px); }
   .geography-entry { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .tianmu-lesson[data-tianmu-root] .tm-section-nav { padding: 9px 0; }
-  .tianmu-lesson[data-tianmu-root] .tm-embedded-tools { width: 100%; margin: 4px 0 0; }
-  .tianmu-lesson[data-tianmu-root] .tm-embedded-tools .tm-button { font-size: 12px; }
-  .tianmu-lesson[data-tianmu-root] .tm-section-tab { font-size: 12px; padding: 9px 8px; }
-  .tianmu-lesson[data-tianmu-root] .tm-subnav { flex-wrap: wrap; }
+  .exploration-tasks { gap: 12px 18px; }
+  .exploration-tasks > strong { width: 100%; flex-direction: row; align-items: baseline; gap: 10px; }
   .tianmu-lesson[data-tianmu-root] .tm-page-footer { flex-wrap: wrap; gap: 8px; }
 }

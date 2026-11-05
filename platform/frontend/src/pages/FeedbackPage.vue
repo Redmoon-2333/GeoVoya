@@ -1,20 +1,14 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { ArrowRight, Check, ClipboardCheck, Download, NotebookPen, Save } from 'lucide-vue-next'
+import { ArrowRight, Check, Download, NotebookPen, Save } from 'lucide-vue-next'
 import { useFieldworkStore } from '../stores/fieldwork'
 import { request } from '../api'
 import { notify, reportError } from '../notice'
 import { useUnsaved } from '../useUnsaved'
-import { localState } from '../localState'
-import { methods, type MethodProgress } from '../course/methods'
 import { useStudyModules } from '../modules'
 
 const store = useFieldworkStore()
-const { modules, completed, status } = useStudyModules()
-const bandNotes = localState<Record<string, string>>('band-notes', {})
-const bandAttempts = localState<number>('band-attempts', 0)
-const bandCheck = localState<boolean | null>('band-last-check', null)
-const methodProgress = localState<MethodProgress>('methods-v3', { visited_card_ids: [], completed_question_ids: [], attempt_count: {} })
+const { modules, completed, currentTask, methodCount, observationDone, noteDone, lessonNotes } = useStudyModules()
 const text = ref(store.data?.reflection?.text || '')
 const baseline = ref(text.value)
 const dirty = computed(() => text.value !== baseline.value)
@@ -36,12 +30,45 @@ async function save() {
 </script>
 
 <template>
-  <div class="page-heading"><div><span class="eyebrow">MODULE 05 · LEARNING REFLECTION</span><h1>学习反馈</h1></div><a href="/api/v1/report/export" class="button secondary" download><Download :size="16" />导出过程记录</a></div>
-  <section class="section-band module-progress"><div class="section-heading"><div><span class="eyebrow">STUDY ROUTE</span><h2>五个板块的进度</h2></div><span class="muted small">{{ completed }} / 5 已完成</span></div><div class="module-progress-list"><RouterLink v-for="item in modules" :key="item.id" :to="item.path" :class="{ done: item.done }"><span class="journey-number"><Check v-if="item.done" :size="15" /><template v-else>{{ item.number }}</template></span><div><h3>{{ item.title }}</h3><p>{{ item.task }}</p></div><span class="status-tag" :class="{ green: item.done }">{{ status(item.id) }}</span><ArrowRight :size="17" /></RouterLink></div></section>
-  <div class="feedback-summary"><span class="feedback-icon"><ClipboardCheck :size="30" /></span><div><span class="eyebrow">MY LEARNING JOURNEY</span><h2>已有 <strong>{{ store.feedback?.completed_steps }}</strong> 个环节留下学习材料</h2></div><div class="feedback-total"><strong>{{ store.feedback?.completed_steps }}<small> / 5</small></strong><span>环节已记录</span></div></div>
-  <section class="common-feedback"><div><h2>望闻问切 · 方法学习</h2><p>入门任务 {{ methods.default_route.filter(id => methodProgress.completed_question_ids.includes(id)).length }} / {{ methods.default_route.length }} · 已阅读 {{ methodProgress.visited_card_ids.length }} 张知识卡</p></div><RouterLink to="/methods" class="text-link">回到方法学习<ArrowRight :size="16"/></RouterLink></section>
-  <section class="common-feedback"><div><span class="eyebrow">COMMON FIELD STUDY</span><h2>共同考察 · 垂直地带性</h2><p>{{ Object.values(bandNotes).filter(n => n.trim()).length }} 个海拔带留有笔记 · 带谱检查 {{ bandAttempts }} 次</p></div><span class="status-tag" :class="{ green: bandCheck === true, amber: bandCheck === false }">{{ bandCheck === true ? '最近提交顺序正确' : bandCheck === false ? '带谱待修正' : '待提交检查' }}</span><RouterLink to="/explore?view=profile" class="text-link">回到带谱<ArrowRight :size="16"/></RouterLink></section>
-  <section class="section-band"><div class="section-heading"><h2>证据链</h2><span class="muted small">依据已保存材料更新</span></div><div class="feedback-steps"><RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href" :class="{ done: step.done }"><span class="path-index"><Check v-if="step.done" :size="17" /><template v-else>{{ index + 1 }}</template></span><div><h3>{{ step.title }}</h3><p>{{ step.description }}</p></div><span class="status-tag" :class="{ green: step.done }">{{ step.done ? '已有记录' : '待补充' }}</span><ArrowRight :size="17" /></RouterLink></div></section>
-  <div class="feedback-content"><section class="section-band dimension-section"><div class="section-heading"><h2>学习维度回看</h2></div><div v-for="item in store.feedback?.dimensions.filter(item => item.title !== '合作探究')" :key="item.title" class="dimension-row"><div><h3>{{ item.title }}</h3><p>{{ item.note }}</p></div><span class="status-tag">{{ item.status }}</span></div></section></div>
-  <section class="section-band reflection-section"><form @submit.prevent="save"><div class="section-heading"><div class="section-title"><NotebookPen :size="21" /><h2>我的学习反思</h2></div><span v-if="dirty" class="status-tag amber">未保存</span></div><label class="reflection-prompt" for="reflection-text">哪一份证据改变了你的想法？还有什么问题值得继续调查？</label><textarea id="reflection-text" v-model="text" rows="5" maxlength="5000" :disabled="saving" placeholder="回看自己的观察、解释与变化……" /><p v-if="saveError" class="form-error" role="alert">{{ saveError }} 输入已保留，可再次保存。</p><div class="form-actions"><button type="submit" class="button primary" :disabled="saving"><Save :size="16" />保存反思</button><span class="muted small">{{ text.length }} / 5000</span></div></form></section>
+  <div class="page-heading"><div><span class="eyebrow">MODULE 05 · LEARNING REFLECTION</span><h1>学习反馈</h1><p>回看记录、证据与判断变化，决定下一步还要查什么。</p></div><a href="/api/v1/report/export" class="button secondary" download><Download :size="16" />导出过程记录</a></div>
+
+  <section class="feedback-summary" aria-label="基础任务进度">
+    <div><span class="eyebrow">STUDY ROUTE</span><h2>已完成 <strong>{{ completed }}</strong> / 5 个基础任务</h2><p>这些状态只表示学习产出已保存，不是能力评分。</p></div>
+    <progress :value="completed" max="5" aria-label="已完成的基础学习任务" />
+    <RouterLink v-if="completed < 5" :to="currentTask.target" class="button secondary">{{ currentTask.title }}<ArrowRight :size="16" /></RouterLink>
+  </section>
+
+  <section class="section-band reflection-section">
+    <form @submit.prevent="save">
+      <div class="section-heading"><div class="section-title"><NotebookPen :size="21" /><h2>我的学习反思</h2></div><span v-if="dirty" class="status-tag amber">未保存</span></div>
+      <label class="reflection-prompt" for="reflection-text">哪一份证据改变了你的想法？还有什么问题值得继续调查？</label>
+      <textarea id="reflection-text" v-model="text" rows="5" maxlength="5000" :disabled="saving" placeholder="回看自己的观察、解释与变化……" />
+      <p v-if="saveError" class="form-error" role="alert">{{ saveError }} 输入已保留，可再次保存。</p>
+      <div class="form-actions"><button type="submit" class="button primary" :disabled="saving || !text.trim()"><Save :size="16" />保存反思</button><span class="muted small">{{ text.length }} / 5000</span></div>
+    </form>
+  </section>
+
+  <section class="section-band module-progress" aria-labelledby="feedback-route-title">
+    <div class="section-heading"><div><span class="eyebrow">YOUR WORK</span><h2 id="feedback-route-title">五步学习产出</h2></div></div>
+    <div class="module-progress-list">
+      <RouterLink v-for="item in modules" :key="item.id" :to="item.target" :class="{ done: item.done, recommended: item.id === currentTask.id && completed < 5 }">
+        <span class="journey-number"><Check v-if="item.done" :size="15" /><template v-else>{{ item.number }}</template></span>
+        <div><h3>{{ item.title }}</h3><p>{{ item.task }}</p><small v-if="item.id === 'explore'">实景观察：{{ observationDone ? '已保存' : '待记录' }} · 课程笔记：{{ noteDone ? '已保存' : '待记录' }}</small><small v-else>产出：{{ item.output }}</small></div>
+        <span class="status-tag" :class="{ green: item.done }">{{ item.stateLabel }}</span><ArrowRight :size="17" />
+      </RouterLink>
+    </div>
+  </section>
+
+  <section v-if="lessonNotes.length" class="section-band lesson-recap">
+    <div class="section-heading"><h2>地带性课程笔记</h2><RouterLink to="/archive" class="text-link">全部课程记录<ArrowRight :size="16" /></RouterLink></div>
+    <RouterLink v-for="note in lessonNotes" :key="note.id" :to="`/geography/tianmu?page=${note.id}`" class="note-row"><NotebookPen :size="19" /><div><h3>{{ note.title }}</h3><p>{{ note.text }}</p></div><ArrowRight :size="16" /></RouterLink>
+  </section>
+
+  <details class="process-details">
+    <summary>证据整理过程与记录明细</summary>
+    <p class="muted small">回看观察、收藏、分析与引用的保存情况。</p>
+    <div class="feedback-steps"><RouterLink v-for="(step, index) in store.feedback?.steps" :key="step.id" :to="step.href" :class="{ done: step.done }"><span class="path-index"><Check v-if="step.done" :size="17" /><template v-else>{{ index + 1 }}</template></span><div><h3>{{ step.title }}</h3><p>{{ step.description }}</p></div><span class="status-tag" :class="{ green: step.done }">{{ step.done ? '已有记录' : '待补充' }}</span><ArrowRight :size="17" /></RouterLink></div>
+    <div class="process-counts"><span>观察 {{ store.feedback?.counts.observations || 0 }}</span><span>收藏 {{ store.feedback?.counts.favorites || 0 }}</span><span>证据分析 {{ store.feedback?.counts.analyses || 0 }}</span><span>论证板 {{ store.feedback?.counts.board || 0 }}</span><span>成果 {{ store.feedback?.counts.artifacts || 0 }}</span><span>入门题 {{ methodCount }} / 10</span></div>
+    <div class="dimension-list"><div v-for="item in store.feedback?.dimensions.filter(item => item.title !== '合作探究')" :key="item.title"><h3>{{ item.title }}</h3><p>{{ item.note }}</p><span class="status-tag">{{ item.status }}</span></div></div>
+  </details>
 </template>

@@ -3,7 +3,7 @@ import { demoMode } from './demo'
 
 export const router = createRouter({
   history: createWebHistory(),
-  scrollBehavior: () => ({ top: 0 }),
+  scrollBehavior: to => to.hash ? { el: to.hash, top: 86 } : { top: 0 },
   routes: [
     { path: '/', component: () => import('./pages/OverviewPage.vue'), meta: { title: '课程入口' } },
     { path: '/explore', component: () => import('./pages/ExplorePage.vue'), meta: { title: '空间探索' } },

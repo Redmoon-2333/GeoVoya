@@ -140,7 +140,6 @@ async function goNext() {
     return
   }
   finish()
-  await router.push('/methods')
 }
 
 const spotlightStyle = computed(() => rect.value ? {
@@ -257,7 +256,7 @@ onBeforeUnmount(() => {
         <button class="button subtle tour-prev" :disabled="isFirst" @click="goPrev"><ArrowLeft :size="16" />上一步</button>
         <button class="text-link tour-skip" @click="close">跳过引导</button>
         <button class="button primary tour-next" @click="goNext">
-          {{ isLast ? '开始学习' : '我知道了，下一步' }}
+          {{ isLast ? '完成引导' : '我知道了，下一步' }}
           <component :is="isLast ? BookOpenCheck : ArrowRight" :size="16" />
         </button>
       </div>

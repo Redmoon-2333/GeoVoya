@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import { CheckCircle2, NotebookPen, Save } from 'lucide-vue-next'
+import { useRoute, useRouter } from 'vue-router'
+import { ArrowRight, CheckCircle2, NotebookPen, Save, Search } from 'lucide-vue-next'
 import { useFieldworkStore } from '../stores/fieldwork'
 import { formatDate } from '../api'
 import { notify, reportError } from '../notice'
@@ -8,10 +9,13 @@ import { notify, reportError } from '../notice'
 const props = defineProps<{ nodeId: string }>()
 const emit = defineEmits<{ dirty: [value: boolean] }>()
 const store = useFieldworkStore()
+const route = useRoute()
+const router = useRouter()
 const fact = ref('')
 const evidence = ref('')
 const question = ref('')
 const saving = ref(false)
+const analyzing = ref(false)
 const saveError = ref('')
 const baseline = ref('')
 const saved = computed(() => store.observations.find((item) => item.node_id === props.nodeId))
@@ -41,6 +45,21 @@ async function save() {
     saving.value = false
   }
 }
+
+async function continueAnalysis() {
+  const resourceId = store.node(props.nodeId).resource_id
+  analyzing.value = true
+  try {
+    if (!store.isFavorite(resourceId)) await store.collect(resourceId)
+    notify('资料已准备好，可以继续整理证据。')
+    const questionId = store.theme?.questions.some(item => item.id === route.query.question) ? String(route.query.question) : 'symptoms'
+    await router.push({ path: '/inquiry', query: { tab: 'workbench', resource: resourceId, question: questionId } })
+  } catch (cause) {
+    reportError(cause)
+  } finally {
+    analyzing.value = false
+  }
+}
 </script>
 
 <template>
@@ -56,7 +75,10 @@ async function save() {
     <textarea id="observation-question" v-model="question" rows="3" maxlength="4000" placeholder="哪些还不能确定？想进一步比较什么？" />
     </fieldset>
     <p v-if="saveError" class="form-error" role="alert">{{ saveError }} 输入已保留，可再次保存。</p>
-    <button class="button primary full" type="submit" :disabled="saving || !fact.trim()"><Save :size="16" />{{ saving ? '保存中…' : '保存观察' }}</button>
+    <button class="button full" :class="saved && !dirty ? 'secondary' : 'primary'" type="submit" :disabled="saving || !fact.trim()"><Save :size="16" />{{ saving ? '保存中…' : '保存观察' }}</button>
     <p class="save-caption"><CheckCircle2 :size="14" /><span>{{ saved ? `上次保存 ${formatDate(saved.updated_at)}` : '保存后可在档案馆中回看' }}</span></p>
+    <button v-if="saved && !dirty" class="button primary full analysis-next" type="button" :disabled="analyzing" @click="continueAnalysis">
+      <Search :size="16" />{{ analyzing ? '正在准备资料…' : '用这份资料分析问题' }}<ArrowRight :size="16" />
+    </button>
   </form>
 </template>
